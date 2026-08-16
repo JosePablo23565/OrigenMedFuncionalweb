@@ -7,11 +7,16 @@
   height: 550px;
   display: flex;
   align-items: center;
-  background-image: url('/Imagen de Tony Hero (1).webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   overflow: hidden;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .overlay {
@@ -20,11 +25,12 @@
   background: 
     linear-gradient(to bottom, rgba(0, 30, 50, 0.5) 0%, transparent 15%),
     linear-gradient(to right, rgba(0, 30, 50, 0.7) 0%, rgba(0, 30, 50, 0.4) 50%, transparent 100%);
+  z-index: 1;
 }
 
 .content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 500px;
   padding: 0 64px;
 }
@@ -79,7 +85,10 @@
   .hero {
     height: 70vh;
     min-height: 450px;
-    background-position: center 30%;
+  }
+
+  .image {
+    object-position: center 30%;
   }
 
   .content {

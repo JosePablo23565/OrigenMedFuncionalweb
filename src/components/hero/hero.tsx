@@ -6,6 +6,12 @@ const Hero = () => {
 
   return (
     <section id="inicio" className={styles.hero}>
+      <img 
+        src="/Imagen de Tony Hero (1).webp" 
+        alt="Medicina natural y funcional" 
+        className={styles.image}
+        fetchPriority="high"
+      />
       <div className={styles.overlay}></div>
       <div className={styles.content}>
         <h1 className={styles.title}>
