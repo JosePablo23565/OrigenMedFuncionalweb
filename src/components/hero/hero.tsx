@@ -11,6 +11,7 @@ const Hero = () => {
         alt="Medicina natural y funcional" 
         className={styles.image}
         fetchPriority="high"
+        loading="eager"
       />
       <div className={styles.overlay}></div>
       <div className={styles.content}>

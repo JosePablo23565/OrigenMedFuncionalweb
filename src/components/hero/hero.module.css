@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  background-color: #1a2a35;
 }
 
 .image {
