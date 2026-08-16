@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <section id="inicio" className={styles.hero}>
       <img 
-        src="/Imagen de Tony Hero (1).webp" 
+        src="/Imagen de Tony Hero mejorada (1).jpg" 
         alt="Medicina natural y funcional" 
         className={styles.image}
         fetchPriority="high"
