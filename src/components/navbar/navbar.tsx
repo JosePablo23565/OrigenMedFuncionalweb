@@ -1,18 +1,28 @@
 import { useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import logo from '../../assets/logo.png';
+import mobileLogo from '../../assets/mobilelogo.png';
 import styles from './navbar.module.css';
 
 const Navbar = () => {
   const [menuAbierto, setMenuAbierto] = useState(false);
+  const [serviciosAbierto, setServiciosAbierto] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+
+  const servicios = [
+    { label: t.footer.service1, href: '#servicios' },
+    { label: t.footer.service2, href: '#servicios' },
+    { label: t.footer.service3, href: '#servicios' },
+  ];
 
   return (
     <header className={styles.navbar}>
       <div className={styles.container}>
-        {/* Hamburguesa (solo móvil) */}
-        <button 
+        {/* Hamburguesa */}
+        <button
           className={`${styles.hamburger} ${menuAbierto ? styles.open : ''}`}
           onClick={() => setMenuAbierto(!menuAbierto)}
+          aria-label="Menú"
         >
           <span className={styles.bar}></span>
           <span className={styles.bar}></span>
@@ -21,29 +31,20 @@ const Navbar = () => {
 
         {/* Logo */}
         <div className={styles.logo}>
-          <span className={styles.logoText}>
-            {t.hero.title} <span className={styles.funcional}>{t.hero.accent}</span>
-          </span>
+          <img src={logo} alt="Origen Med Funcional" className={styles.logoImg} />
         </div>
-
-        {/* Menú (escritorio) */}
-        <nav className={styles.nav}>
-          <a href="#inicio">{t.nav.inicio}</a>
-          <a href="#servicios">{t.nav.servicios}</a>
-          <a href="#ubicacion">{t.nav.ubicacion}</a>
-        </nav>
 
         {/* ES/EN + Agendar */}
         <div className={styles.actions}>
           <div className={styles.idioma}>
-            <button 
+            <button
               className={`${styles.idiomaBtn} ${language === 'es' ? styles.active : ''}`}
               onClick={() => setLanguage('es')}
             >
               ES
             </button>
             <span className={styles.separador}>/</span>
-            <button 
+            <button
               className={`${styles.idiomaBtn} ${language === 'en' ? styles.active : ''}`}
               onClick={() => setLanguage('en')}
             >
@@ -55,14 +56,85 @@ const Navbar = () => {
             {t.nav.agendar}
           </a>
         </div>
-
-        {/* Menú móvil */}
-        <div className={`${styles.mobileNav} ${menuAbierto ? styles.active : ''}`}>
-          <a href="#inicio" onClick={() => setMenuAbierto(false)}>{t.nav.inicio}</a>
-          <a href="#servicios" onClick={() => setMenuAbierto(false)}>{t.nav.servicios}</a>
-          <a href="#ubicacion" onClick={() => setMenuAbierto(false)}>{t.nav.ubicacion}</a>
-        </div>
       </div>
+
+      {/* Overlay */}
+      <div
+        className={`${styles.overlay} ${menuAbierto ? styles.active : ''}`}
+        onClick={() => setMenuAbierto(false)}
+      />
+
+      {/* Panel lateral */}
+      <aside className={`${styles.sidePanel} ${menuAbierto ? styles.active : ''}`}>
+        {/* Header del panel */}
+        <div className={styles.sidePanelHeader}>
+          <a href="#inicio" className={styles.sideLogo} onClick={() => setMenuAbierto(false)}>
+            <img src={mobileLogo} alt="Origen Med Funcional" />
+          </a>
+          <button
+            className={styles.panelClose}
+            onClick={() => setMenuAbierto(false)}
+            aria-label="Cerrar menú"
+          >
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+
+        {/* Navegación */}
+        <nav className={styles.sideNav}>
+          <a href="#inicio" onClick={() => setMenuAbierto(false)} className={`${styles.sideNavLink} ${styles.activeLink}`}>
+            {t.nav.inicio}
+          </a>
+
+          {/* Servicios (acordeón) */}
+          <div className={`${styles.menuGroup} ${serviciosAbierto ? styles.groupOpen : ''}`}>
+            <button
+              className={styles.menuGroupTitle}
+              onClick={() => setServiciosAbierto(!serviciosAbierto)}
+            >
+              <span className={styles.menuGroupLabel}>
+                {t.footer.servicesTitle}
+                <em>{servicios.length}</em>
+              </span>
+              <svg
+                className={styles.menuArrow}
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+              >
+                <path
+                  d="M3.5 5.25L7 8.75L10.5 5.25"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            <div className={styles.menuGroupItems}>
+              <div className={styles.menuGroupItemsInner}>
+                {servicios.map((item, i) => (
+                  <a key={i} href={item.href} onClick={() => setMenuAbierto(false)}>
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.menuDivider} />
+
+          <a href="#ubicacion" onClick={() => setMenuAbierto(false)} className={styles.sideNavLink}>
+            {t.nav.ubicacion}
+          </a>
+
+          <a href="#cita" onClick={() => setMenuAbierto(false)} className={styles.sideNavCta}>
+            {t.nav.agendarCita}
+          </a>
+        </nav>
+      </aside>
     </header>
   );
 };

@@ -1,0 +1,109 @@
+/* ============================================
+   FAQ SECTION
+   ============================================ */
+.faq {
+  background: #F4F5F1;
+  padding: 80px 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.title {
+  color: #6A6950;
+  font-size: 2.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.item {
+  border-bottom: 1px solid rgba(106, 105, 80, 0.15);
+}
+
+.item:first-child {
+  border-top: 1px solid rgba(106, 105, 80, 0.15);
+}
+
+/* ============================================
+   QUESTION BUTTON
+   ============================================ */
+.question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  padding: 20px 0;
+  cursor: pointer;
+  text-align: left;
+  color: #38392E;
+  font-size: 1.05rem;
+  font-weight: 500;
+  font-family: inherit;
+  transition: color 0.2s;
+}
+
+.question:hover {
+  color: #6A6950;
+}
+
+.arrow {
+  color: #3B8595;
+  font-size: 1.4rem;
+  font-weight: 300;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.arrow.open {
+  transform: rotate(90deg);
+}
+
+/* ============================================
+   ANSWER
+   ============================================ */
+.answer {
+  padding: 0 0 20px;
+}
+
+.answer p {
+  color: #5a5c4a;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ============================================
+   MÓVIL
+   ============================================ */
+@media (max-width: 768px) {
+  .faq {
+    padding: 56px 0;
+  }
+
+  .container {
+    padding: 0 24px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+    margin-bottom: 32px;
+  }
+
+  .question {
+    font-size: 0.95rem;
+    padding: 16px 0;
+  }
+}

@@ -2,67 +2,76 @@
    NAVBAR
    ============================================ */
 .navbar {
-  background: transparent;
-  padding: 18px 0;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 50;
+  z-index: 1000;
+  background-color: #6A6950;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0;
 }
 
 .container {
   width: 100%;
-  padding: 0 48px;
+  padding: 12px 40px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  gap: 6px;
+  box-sizing: border-box;
 }
 
 /* ============================================
-   HAMBURGUESA (solo móvil)
+   HAMBURGUESA
    ============================================ */
 .hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
   position: relative;
-  width: 26px;
-  height: 26px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .hamburger .bar {
-  width: 26px;
-  height: 3px;
-  background-color: white;
+  width: 22px;
+  height: 2px;
+  background-color: #ffffff;
   position: absolute;
-  left: 0;
-  transition: top 300ms 350ms ease,
-              transform 300ms 50ms ease,
-              opacity 0ms 300ms;
+  left: 50%;
+  transform: translateX(-50%);
+  transition:
+    top 300ms 350ms ease,
+    transform 300ms 50ms ease,
+    opacity 0ms 300ms;
 }
 
 .hamburger .bar:nth-child(1) {
-  top: 4px;
+  top: 12px;
 }
 
 .hamburger .bar:nth-child(2) {
-  top: 11px;
-}
-
-.hamburger .bar:nth-child(3) {
   top: 19px;
 }
 
+.hamburger .bar:nth-child(3) {
+  top: 26px;
+}
+
 .hamburger.open .bar:nth-child(1) {
-  top: 11px;
-  transform: rotate(45deg);
-  transition: top 300ms 50ms ease,
-              transform 300ms 350ms ease;
+  top: 19px;
+  transform: translateX(-50%) rotate(45deg);
+  transition:
+    top 300ms 50ms ease,
+    transform 300ms 350ms ease;
 }
 
 .hamburger.open .bar:nth-child(2) {
@@ -71,10 +80,11 @@
 }
 
 .hamburger.open .bar:nth-child(3) {
-  top: 11px;
-  transform: rotate(-45deg);
-  transition: top 300ms 50ms ease,
-              transform 300ms 350ms ease;
+  top: 19px;
+  transform: translateX(-50%) rotate(-45deg);
+  transition:
+    top 300ms 50ms ease,
+    transform 300ms 350ms ease;
 }
 
 /* ============================================
@@ -84,36 +94,11 @@
   flex-shrink: 0;
 }
 
-.logoText {
-  color: white;
-  font-size: 1.3rem;
-  font-weight: 600;
-}
-
-.funcional {
-  font-weight: 300;
-  color: #D4DDE2;
-}
-
-/* ============================================
-   MENÚ ESCRITORIO
-   ============================================ */
-.nav {
-  display: flex;
-  gap: 32px;
-  margin: 0 auto;
-}
-
-.nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: opacity 0.2s;
-}
-
-.nav a:hover {
-  opacity: 0.8;
+.logoImg {
+  display: block;
+  height: 32px;
+  width: auto;
+  object-fit: contain;
 }
 
 /* ============================================
@@ -122,175 +107,472 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  margin-left: auto;
 }
 
 .idioma {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 2px;
-  color: white;
-  font-size: 0.75rem;
-  background: rgba(255,255,255,0.12);
+  color: #ffffff;
+  font-size: 0.7rem;
+  background: rgba(255, 255, 255, 0.12);
   padding: 5px 10px;
   border-radius: 6px;
+  box-sizing: border-box;
+  white-space: nowrap;
 }
 
 .idiomaBtn {
   background: none;
   border: none;
-  color: #D4DDE2;
-  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.7rem;
   cursor: pointer;
   padding: 2px 5px;
   transition: color 0.2s;
 }
 
 .idiomaBtn:hover {
-  color: white;
+  color: #ffffff;
 }
 
 .idiomaBtn.active {
-  color: white;
+  color: #ffffff;
   font-weight: 600;
 }
 
 .separador {
-  color: rgba(255,255,255,0.4);
-  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.65rem;
 }
 
 .agendar {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: #3B8595;
   color: #ffffff;
   padding: 8px 20px;
-  border-radius: 8px;
+  border-radius: 25px;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 0.85rem;
+  font-weight: 600;
+  font-size: 0.8rem;
   white-space: nowrap;
-  transition: background 0.2s, transform 0.2s;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .agendar:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-1px);
+  background: #2F6F7E;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(59, 133, 149, 0.35);
 }
 
 /* ============================================
-   MENÚ MÓVIL (desplegable)
+   OVERLAY
    ============================================ */
-.mobileNav {
+.overlay {
   display: none;
-  flex-direction: column;
-  background: rgba(0, 30, 50, 0.95);
-  padding: 20px 48px;
-  gap: 16px;
-  position: absolute;
-  top: 100%;
-  left: 0;
+  position: fixed;
+  inset: 0;
   width: 100%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  height: 100%;
+  background: rgba(45, 46, 36, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1001;
 }
 
-.mobileNav.active {
+.overlay.active {
+  display: block;
+}
+
+/* ============================================
+   PANEL LATERAL
+   ============================================ */
+.sidePanel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 100vh;
+  background: #ffffff;
+  color: #302e2e;
+  z-index: 1002;
+  transform: translateX(-100%);
+  transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
-.mobileNav a {
-  color: white;
+.sidePanel.active {
+  transform: translateX(0);
+}
+
+/* ============================================
+   HEADER DEL PANEL
+   ============================================ */
+.sidePanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.sideLogo {
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
-  font-size: 1.05rem;
-  font-weight: 500;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
-  transition: opacity 0.2s;
 }
 
-.mobileNav a:hover {
-  opacity: 0.8;
+.sideLogo img {
+  display: block;
+  width: 128px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Botón cerrar (X) */
+.panelClose {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 200ms ease;
+}
+
+.panelClose:hover {
+  background: rgba(106, 105, 80, 0.08);
+}
+
+.panelClose span {
+  position: absolute;
+  width: 18px;
+  height: 1.5px;
+  background: #3b8595;
+  border-radius: 1px;
+}
+
+.panelClose span:first-child {
+  transform: rotate(45deg);
+}
+
+.panelClose span:last-child {
+  transform: rotate(-45deg);
+}
+
+/* ============================================
+   NAVEGACIÓN DEL PANEL
+   ============================================ */
+.sideNav {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 20px 40px;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+/* Enlaces principales */
+.sideNavLink {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 14px;
+  color: #302e2e;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 12px;
+  box-sizing: border-box;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.sideNavLink:hover {
+  background: rgba(106, 105, 80, 0.06);
+}
+
+/* Estado activo / destacado */
+.activeLink {
+  background: rgba(106, 105, 80, 0.08);
+  font-weight: 600;
+}
+
+/* ============================================
+   ACORDEÓN: SERVICIOS
+   ============================================ */
+.menuGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuGroupTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 14px;
+  color: #6a6950;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  box-sizing: border-box;
+  border-radius: 12px;
+  transition: background 200ms ease;
+}
+
+.menuGroupTitle:hover {
+  background: rgba(106, 105, 80, 0.05);
+}
+
+.menuGroupLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6a6950;
+}
+
+.menuGroupLabel em {
+  color: rgba(106, 105, 80, 0.55);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.menuArrow {
+  color: #6a6950;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 250ms ease;
+}
+
+.groupOpen .menuArrow {
+  transform: rotate(180deg);
+}
+
+/* Items colapsables con animación suave */
+.menuGroupItems {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.groupOpen .menuGroupItems {
+  grid-template-rows: 1fr;
+}
+
+.menuGroupItemsInner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.menuGroupItems a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 14px 0 30px;
+  color: #302e2e;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.35;
+  border-radius: 10px;
+  margin: 1px 0;
+  box-sizing: border-box;
+  transition: background 200ms ease;
+}
+
+.menuGroupItems a:hover {
+  background: rgba(106, 105, 80, 0.06);
+}
+
+/* ============================================
+   SEPARADOR
+   ============================================ */
+.menuDivider {
+  width: 100%;
+  height: 1px;
+  margin: 10px 14px;
+  padding: 0;
+  background: rgba(106, 105, 80, 0.12);
+  max-width: calc(100% - 28px);
+}
+
+/* ============================================
+   CTA DENTRO DEL PANEL
+   ============================================ */
+.sideNavCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  margin-top: 16px;
+  padding: 0 14px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #302e2e;
+  border-radius: 12px;
+  box-sizing: border-box;
+  transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+
+.sideNavCta:hover {
+  background: #1f1e1e;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -6px rgba(48, 46, 46, 0.5);
 }
 
 /* ============================================
    MÓVIL
    ============================================ */
 @media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-
-  .nav {
-    display: none;
-  }
-
   .container {
-    padding: 0 24px;
-  }
-
-  .logo {
-    flex: 1;
-    text-align: left;
-  }
-
-  .logoText {
-    font-size: 1.1rem;
-  }
-
-  .funcional {
-    display: none;
-  }
-
-  .idioma {
-    font-size: 0.7rem;
-    padding: 4px 8px;
-  }
-
-  .idiomaBtn {
-    font-size: 0.7rem;
-  }
-
-  .agendar {
-    padding: 7px 16px;
-    font-size: 0.8rem;
-  }
-
-  .mobileNav {
-    padding: 16px 24px;
-  }
-}
-
-@media (max-width: 400px) {
-  .container {
+    min-height: 72px;
     padding: 0 16px;
   }
 
-  .logoText {
-    font-size: 0.95rem;
-  }
-
-  .idioma {
-    font-size: 0.65rem;
-    padding: 3px 6px;
-  }
-
-  .idiomaBtn {
-    font-size: 0.65rem;
-  }
-
-  .agendar {
-    padding: 6px 14px;
-    font-size: 0.75rem;
+  .hamburger {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .hamburger .bar {
-    width: 22px;
-    height: 3px;
+    width: 24px;
   }
 
-  .mobileNav {
-    padding: 12px 16px;
+  .hamburger .bar:nth-child(1) {
+    top: 13px;
+  }
+
+  .hamburger .bar:nth-child(2) {
+    top: 20px;
+  }
+
+  .hamburger .bar:nth-child(3) {
+    top: 27px;
+  }
+
+  .hamburger.open .bar:nth-child(1),
+  .hamburger.open .bar:nth-child(3) {
+    top: 20px;
+  }
+
+  .logoImg {
+    width: 112px;
+    max-height: 38px;
+  }
+
+  .idioma {
+    gap: 0;
+    width: 64px;
+    height: 44px;
+    min-width: 64px;
+    min-height: 44px;
+    padding: 0;
+    margin: 0;
+    font-size: 11px;
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 7px;
+  }
+
+  .idiomaBtn {
+    font-size: 11px;
+    line-height: 1;
+    padding: 0 4px;
+  }
+
+  .separador {
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  .agendar {
+    display: none;
+  }
+
+  .sidePanel {
+    width: min(320px, 86vw);
+  }
+
+  .sidePanelHeader {
+    height: 72px;
+    padding: 0 20px;
+  }
+
+  .sideLogo img {
+    height: 36px;
+  }
+
+  .sideNav {
+    padding: 8px 16px 32px;
+  }
+}
+
+/* ============================================
+   MÓVIL PEQUEÑO
+   ============================================ */
+@media (max-width: 400px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .logoImg {
+    width: 105px;
+    max-height: 36px;
+  }
+
+  .hamburger .bar {
+    width: 20px;
+  }
+
+  .idioma {
+    width: 60px;
+    min-width: 60px;
+    height: 44px;
+    min-height: 44px;
+    font-size: 10px;
+  }
+
+  .idiomaBtn,
+  .separador {
+    font-size: 10px;
+  }
+
+  .sidePanel {
+    width: 88vw;
+  }
+
+  .sidePanelHeader {
+    padding: 0 16px;
+  }
+
+  .sideNav {
+    padding: 8px 14px 28px;
   }
 }

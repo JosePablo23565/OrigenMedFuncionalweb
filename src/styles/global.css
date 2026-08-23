@@ -1,5 +1,18 @@
 @import './variables.css';
 
+/* ============================================
+   EXO 2 - FUENTE VARIABLE (pesos 100-900)
+   Declarada pero aún sin aplicar. Para usarla:
+   font-family: 'Exo 2', sans-serif;
+   ============================================ */
+@font-face {
+  font-family: 'Exo 2';
+  src: url('../assets/fonts/Exo2-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -8,8 +21,18 @@
   box-sizing: border-box;
 }
 
+/* 1. AGREGAR ALTO Y OVERFLOW A HTML Y BODY */
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden; /* Evita scroll horizontal global en móviles */
+}
+
 html {
   scroll-behavior: smooth;
+  /* Garantiza que en iOS Safari los valores de altura no den saltos raros */
+  -webkit-text-size-adjust: 100%; 
 }
 
 body {
@@ -17,9 +40,14 @@ body {
   background-color: var(--bg-primary);
   color: var(--color-text);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-img {
+/* 2. ASEGURAR QUE LAS IMÁGENES NO SE DISTORSIONEN */
+img,
+picture,
+video {
   max-width: 100%;
   display: block;
 }
@@ -40,12 +68,13 @@ ul {
 }
 
 /* ============================================
-   RESET PARA #root - ELIMINA CUALQUIER LIMITE
+   RESET PARA #root
    ============================================ */
 #root {
   max-width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
   width: 100% !important;
-  overflow-x: hidden;
+  /* Es mejor mover overflow-x: hidden a html/body, pero mantener min-height ayuda en React */
+  min-height: 100vh;
 }

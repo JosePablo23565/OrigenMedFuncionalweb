@@ -1,0 +1,151 @@
+/* ============================================
+   HERO BRIDGE - HIGHLIGHTS BANNER
+   ============================================ */
+.bridge {
+  background: #F4F5F1;
+  padding: 4rem 1.5rem 3rem;
+  margin-top: -40px;
+  position: relative;
+  z-index: 10;
+  border-radius: 28px 28px 0 0;
+}
+
+.grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   CARD
+   ============================================ */
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(106, 105, 80, 0.35);
+  border-radius: 12px;
+  padding: 40px 20px 20px;
+  text-align: center;
+  flex: 1 1 160px;
+  max-width: 200px;
+  min-height: 90px;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 20px rgba(106, 105, 80, 0.1);
+}
+
+/* ============================================
+   ICON BADGE - ENMASCARA EL BORDE
+   ============================================ */
+.iconBadge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  background: #F4F5F1;
+  border: 1px solid rgba(106, 105, 80, 0.35);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6A6950;
+  padding: 0 0.6rem;
+}
+
+/* ============================================
+   CARD TEXT
+   ============================================ */
+.cardText {
+  display: block;
+  color: #2D2E24;
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0;
+}
+
+/* ============================================
+   TABLET
+   ============================================ */
+@media (max-width: 1024px) {
+  .grid {
+    gap: 16px;
+  }
+
+  .card {
+    flex: 1 1 150px;
+    max-width: 180px;
+    padding: 36px 16px 18px;
+  }
+}
+
+/* ============================================
+   MÓVIL
+   ============================================ */
+@media (max-width: 768px) {
+  .bridge {
+    padding: 3rem 1.25rem 2.25rem;
+    margin-top: -30px;
+  }
+
+  .grid {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .card {
+    border: none;
+    border-bottom: 1px solid rgba(106, 105, 80, 0.35);
+    border-radius: 0;
+    background: transparent;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.2rem 1rem;
+    max-width: none;
+    width: 100%;
+    min-height: auto;
+    text-align: left;
+  }
+
+  .card:first-child {
+    border-top: 1px solid rgba(106, 105, 80, 0.35);
+  }
+
+  .card:hover {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .iconBadge {
+    position: static !important;
+    transform: none !important;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    margin-right: 1.25rem;
+    width: auto;
+    height: auto;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  .cardText {
+    display: block !important;
+    color: #2D2E24 !important;
+    text-align: left;
+    font-size: 0.95rem;
+    font-weight: 500;
+    flex: 1;
+  }
+}

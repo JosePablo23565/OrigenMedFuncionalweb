@@ -1,0 +1,154 @@
+/* ============================================
+   STATS SECTION
+   ============================================ */
+.stats {
+  background: #F4F5F1;
+  padding: 80px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+/* ============================================
+   LEFT
+   ============================================ */
+.title {
+  color: #38392E;
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  color: #5a5c4a;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.cta {
+  display: inline-block;
+  background: #3B8595;
+  color: #FFFFFF;
+  padding: 14px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(59, 133, 149, 0.3);
+}
+
+.cta:hover {
+  background: #2F6F7E;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(59, 133, 149, 0.4);
+}
+
+/* ============================================
+   RIGHT
+   ============================================ */
+.statCard {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 40px 32px;
+  text-align: center;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(56, 57, 46, 0.06);
+}
+
+.statNumber {
+  display: block;
+  color: #6A6950;
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.statText {
+  color: #5a5c4a;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.testimonial {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 2px 12px rgba(56, 57, 46, 0.06);
+}
+
+.stars {
+  color: #3B8595;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+.quote {
+  color: #38392E;
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.author {
+  color: #8a8c7a;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* ============================================
+   TABLET
+   ============================================ */
+@media (max-width: 1024px) {
+  .grid {
+    gap: 40px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}
+
+/* ============================================
+   MÓVIL
+   ============================================ */
+@media (max-width: 768px) {
+  .stats {
+    padding: 56px 0;
+  }
+
+  .container {
+    padding: 0 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .statNumber {
+    font-size: 2.8rem;
+  }
+}

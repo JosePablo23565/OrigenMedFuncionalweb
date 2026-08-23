@@ -1,19 +1,24 @@
 /* ============================================
-   HERO - FULL WIDTH BACKGROUND
+   HERO - PARSLEY HEALTH STYLE
    ============================================ */
 .hero {
   position: relative;
   width: 100%;
-  height: 550px;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 560px;
   display: flex;
   align-items: center;
   overflow: hidden;
-  background-color: #1a2a35;
+  background-color: #2d2e24;
+  box-sizing: border-box;
 }
 
 .image {
   position: absolute;
   inset: 0;
+  z-index: 0;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -23,110 +28,117 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: 
-    linear-gradient(to bottom, rgba(0, 30, 50, 0.5) 0%, transparent 15%),
-    linear-gradient(to right, rgba(0, 30, 50, 0.7) 0%, rgba(0, 30, 50, 0.4) 50%, transparent 100%);
   z-index: 1;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(45, 46, 36, 0.4) 0%,
+      rgba(45, 46, 36, 0.6) 100%
+    ),
+    linear-gradient(
+      to right,
+      rgba(45, 46, 36, 0.7) 0%,
+      rgba(45, 46, 36, 0.3) 60%,
+      transparent 100%
+    );
 }
 
+/* ============================================
+   TITULAR + CTA SOBRE EL HERO
+   ============================================ */
 .content {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 2;
-  max-width: 500px;
-  padding: 0 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 96px 24px 40px;
+  box-sizing: border-box;
+}
+
+.titleWrap {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title {
-  color: white;
-  font-size: 3rem;
-  font-weight: 600;
-  line-height: 1.15;
-  margin-bottom: 20px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Exo 2', var(--font-family);
+  text-transform: uppercase;
+  font-size: clamp(2.4rem, 10vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
 }
 
-.accent {
-  color: #D4DDE2;
-  font-weight: 300;
+.line {
+  display: block;
+  text-align: center;
+}
+
+.lineMedium {
+  font-weight: 500;
+}
+
+.lineBold {
+  font-weight: 800;
+  transform: translateX(14%);
 }
 
 .subtitle {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 1.1rem;
+  margin: 18px 0 0;
+  max-width: 30ch;
+  color: #ffffff;
+  font-size: 14px;
   font-weight: 400;
-  line-height: 1.7;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  line-height: 1.55;
+  text-align: center;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  margin-top: auto;
+  padding: 14px 48px;
+  background: #3B8595;
+  color: #ffffff;
+  font-family: 'Exo 2', var(--font-family);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+
+.cta:hover {
+  background: #2F6F7E;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px -6px rgba(59, 133, 149, 0.5);
 }
 
 /* ============================================
-   TABLET
-   ============================================ */
-@media (max-width: 1024px) {
-  .hero {
-    height: 500px;
-  }
-
-  .content {
-    padding: 0 48px;
-  }
-
-  .title {
-    font-size: 2.6rem;
-  }
-
-  .subtitle {
-    font-size: 1.05rem;
-  }
-}
-
-/* ============================================
-   MÓVIL
+   MÓVIL - ENCUADRE DEL SUJETO
    ============================================ */
 @media (max-width: 768px) {
-  .hero {
-    height: 70vh;
-    min-height: 450px;
-  }
-
   .image {
-    object-position: center 30%;
-  }
-
-  .content {
-    max-width: 100%;
-    padding: 100px 20px 0;
-  }
-
-  .title {
-    font-size: 1.75rem;
-    line-height: 1.2;
-    margin-bottom: 14px;
-  }
-
-  .subtitle {
-    font-size: 0.875rem;
-    line-height: 1.6;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    object-position: 45% center;
   }
 }
 
-@media (max-width: 400px) {
-  .hero {
-    min-height: 400px;
-  }
-
-  .content {
-    padding: 80px 20px 0;
-  }
-
-  .title {
-    font-size: 1.5rem;
-  }
-
-  .subtitle {
-    font-size: 0.8rem;
+/* ============================================
+   MÓVIL - ENCUADRE DEL SUJETO
+   ============================================ */
+@media (max-width: 768px) {
+  .image {
+    object-position: 45% center;
   }
 }
