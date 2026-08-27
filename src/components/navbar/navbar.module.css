@@ -117,9 +117,9 @@
   justify-content: center;
   gap: 2px;
   color: #ffffff;
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   background: rgba(255, 255, 255, 0.12);
-  padding: 5px 10px;
+  padding: 8px 18px;
   border-radius: 6px;
   box-sizing: border-box;
   white-space: nowrap;
@@ -150,22 +150,7 @@
 }
 
 .agendar {
-  background: #3B8595;
-  color: #ffffff;
-  padding: 8px 20px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  border: none;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-}
-
-.agendar:hover {
-  background: #2F6F7E;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(59, 133, 149, 0.35);
+  display: none;
 }
 
 /* ============================================
@@ -209,6 +194,16 @@
 
 .sidePanel.active {
   transform: translateX(0);
+}
+
+/* ============================================
+   SOLO DESKTOP: MENÚ MÁS COMPACTO
+   No afecta móvil.
+   ============================================ */
+@media (min-width: 769px) {
+  .sidePanel {
+    width: 300px;
+  }
 }
 
 /* ============================================
@@ -449,7 +444,7 @@
 /* ============================================
    MÓVIL
    ============================================ */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .container {
     min-height: 72px;
     padding: 0 16px;

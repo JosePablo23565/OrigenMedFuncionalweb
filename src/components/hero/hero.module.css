@@ -1,144 +1,278 @@
 /* ============================================
-   HERO - PARSLEY HEALTH STYLE
+   HERO - ORIGEN MEDICINA FUNCIONAL
    ============================================ */
 .hero {
   position: relative;
   width: 100%;
-  height: 100vh;
-  height: 100svh;
-  min-height: 560px;
-  display: flex;
-  align-items: center;
   overflow: hidden;
-  background-color: #2d2e24;
-  box-sizing: border-box;
+  background-color: #302E2E;
+}
+
+/* ---- Imagen: absolute, full cover ---- */
+.heroImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
 .image {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
 
-.overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(45, 46, 36, 0.4) 0%,
-      rgba(45, 46, 36, 0.6) 100%
-    ),
-    linear-gradient(
-      to right,
-      rgba(45, 46, 36, 0.7) 0%,
-      rgba(45, 46, 36, 0.3) 60%,
-      transparent 100%
-    );
-}
-
 /* ============================================
-   TITULAR + CTA SOBRE EL HERO
+   DESKTOP + TABLET (≥768px)
    ============================================ */
-.content {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 96px 24px 40px;
-  box-sizing: border-box;
-}
+@media (min-width: 768px) {
+  .hero {
+    min-height: 480px;
+    height: 68vh;
+    max-height: 620px;
+  }
 
-.titleWrap {
-  margin: auto 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .heroImage {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
 
-.title {
-  margin: 0;
-  color: #ffffff;
-  font-family: 'Exo 2', var(--font-family);
-  text-transform: uppercase;
-  font-size: clamp(2.4rem, 10vw, 4.5rem);
-  line-height: 1.05;
-  letter-spacing: 0.03em;
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
-}
-
-.line {
-  display: block;
-  text-align: center;
-}
-
-.lineMedium {
-  font-weight: 500;
-}
-
-.lineBold {
-  font-weight: 800;
-  transform: translateX(14%);
-}
-
-.subtitle {
-  margin: 18px 0 0;
-  max-width: 30ch;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.55;
-  text-align: center;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
-}
-
-.cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 52px;
-  margin-top: auto;
-  padding: 14px 48px;
-  background: #3B8595;
-  color: #ffffff;
-  font-family: 'Exo 2', var(--font-family);
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 12px;
-  transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
-}
-
-.cta:hover {
-  background: #2F6F7E;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 22px -6px rgba(59, 133, 149, 0.5);
-}
-
-/* ============================================
-   MÓVIL - ENCUADRE DEL SUJETO
-   ============================================ */
-@media (max-width: 768px) {
   .image {
-    object-position: 45% center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    /* Se mantiene exactamente como lo tenías */
+    object-position: -350% center;
+  }
+
+  .content {
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: 10;
+
+    /*
+      El bloque oscuro ocupa menos espacio que antes.
+      Esto permite que la foto tenga mayor protagonismo.
+    */
+    width: 40%;
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+
+    /*
+      17vw separa el contenido del lado izquierdo,
+      similar a la composición de referencia.
+    */
+    padding: 0 4vw 0 17vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    background: #302E2E;
+
+    /*
+      Curva superior derecha grande.
+      Primer 420px: ancho de la curva.
+      Segundo 360px: altura de la curva.
+    */
+    border-radius: 0 420px 0 0 / 0 360px 0 0;
+  }
+
+  .accentBar {
+    width: 56px;
+    height: 6px;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    background: #3B8595;
+  }
+
+  .title {
+    max-width: 390px;
+    margin: 0;
+
+    color: #ffffff;
+    font-family: 'Exo 2', var(--font-family);
+    font-size: clamp(2.3rem, 3.5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+
+  .line {
+    display: block;
+  }
+
+  .lineMedium,
+  .lineBold {
+    font-weight: 700;
+  }
+
+  .subtitle {
+    max-width: 34ch;
+    margin: 20px 0 0;
+
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 32px;
+    padding: 13px 28px;
+
+    background: #ffffff;
+    color: #302E2E;
+
+    font-family: 'Exo 2', var(--font-family);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 999px;
+
+    transition:
+      background 200ms ease,
+      transform 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+  .cta:hover {
+    background: #f8f8f8;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
   }
 }
 
 /* ============================================
-   MÓVIL - ENCUADRE DEL SUJETO
+   MOBILE: Apilado responsivo (≤767px)
    ============================================ */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
+  .hero {
+    min-height: 100vh;
+    height: 100vh;
+  }
+
+  .heroImage {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    min-height: 280px;
+  }
+
   .image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     object-position: 45% center;
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    margin-top: -36px;
+    padding: 40px 24px 48px;
+    box-sizing: border-box;
+
+    background: #302E2E;
+
+    clip-path: polygon(
+      0% 10%,
+      20% 6%,
+      45% 2%,
+      70% 0%,
+      88% 0%,
+      100% 0%,
+      100% 100%,
+      0% 100%
+    );
+  }
+
+  .accentBar {
+    width: 40px;
+    height: 4px;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    background: #3B8595;
+  }
+
+  .title {
+    margin: 0;
+
+    color: #ffffff;
+    font-family: 'Exo 2', var(--font-family);
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .line {
+    display: block;
+  }
+
+  .lineMedium {
+    font-weight: 400;
+  }
+
+  .lineBold {
+    font-weight: 800;
+  }
+
+  .subtitle {
+    max-width: 28ch;
+    margin: 16px 0 0;
+
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 28px;
+    padding: 14px 32px;
+
+    background: #ffffff;
+    color: #302E2E;
+
+    font-family: 'Exo 2', var(--font-family);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 999px;
+
+    transition:
+      background 200ms ease,
+      transform 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+  .cta:hover {
+    background: #f5f5f5;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
   }
 }
