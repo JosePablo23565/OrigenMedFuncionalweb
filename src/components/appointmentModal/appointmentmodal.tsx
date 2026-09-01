@@ -94,16 +94,15 @@ const GoogleIcon = () => (
 );
 
 const AppointmentModal = () => {
-  const { isModalOpen, closeModal, openBookingModal } = useModal();
+  const { isModalOpen, closeModal } = useModal();
   const { user, signIn, signUp, signInWithGoogle } = useAuth();
   const { t } = useLanguage();
 
   useEffect(() => {
     if (isModalOpen && user) {
       closeModal();
-      openBookingModal();
     }
-  }, [isModalOpen, user, closeModal, openBookingModal]);
+  }, [isModalOpen, user, closeModal]);
 
   const [mode, setMode] = useState<"signup" | "login">("login");
   const [showPassword, setShowPassword] = useState(false);
@@ -120,36 +119,26 @@ const AppointmentModal = () => {
     setEmail("");
     setPassword("");
     setShowPassword(false);
-    setLoading(false);
     setErrorMessage("");
     setSuccessMessage("");
   };
 
   const handleClose = () => {
     resetForm();
-    setMode("login");
     closeModal();
   };
 
   const toggleMode = () => {
-    setMode((currentMode) =>
-      currentMode === "signup" ? "login" : "signup"
-    );
-    setPassword("");
-    setErrorMessage("");
-    setSuccessMessage("");
+    resetForm();
+    setMode((prev) => (prev === "signup" ? "login" : "signup"));
   };
 
   const togglePassword = () => {
-    setShowPassword((currentValue) => !currentValue);
+    setShowPassword((prev) => !prev);
   };
 
-  const getAuthErrorMessage = (error: unknown) => {
-    if (typeof error === "string") return error;
-    if (error && typeof error === "object" && "message" in error) {
-      return String(error.message);
-    }
-    return "No fue posible completar la acción. Inténtalo nuevamente.";
+  const getAuthErrorMessage = (error: string) => {
+    return error;
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -190,8 +179,7 @@ const AppointmentModal = () => {
         setSuccessMessage("Cuenta creada exitosamente.");
         setTimeout(() => {
           handleClose();
-          openBookingModal();
-        }, 1000);
+        }, 800);
         return;
       }
 
@@ -204,9 +192,8 @@ const AppointmentModal = () => {
       }
 
       handleClose();
-      openBookingModal();
     } catch (error) {
-      setErrorMessage(getAuthErrorMessage(error));
+      setErrorMessage(getAuthErrorMessage(error as string));
       setLoading(false);
     }
   };

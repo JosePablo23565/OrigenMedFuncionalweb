@@ -10,50 +10,53 @@ const Navbar = () => {
   const { language, setLanguage } = useLanguage();
 
   return (
-    <header className={styles.navbar}>
-      <div className={styles.container}>
-        {/* Hamburguesa */}
-        <button
-          className={`${styles.hamburger} ${menuAbierto ? styles.open : ''}`}
-          onClick={() => setMenuAbierto(!menuAbierto)}
-          aria-label="Menú"
-        >
-          <span className={styles.bar}></span>
-          <span className={styles.bar}></span>
-          <span className={styles.bar}></span>
-        </button>
+    <>
+      <header className={styles.navbar}>
+        <div className={styles.container}>
+          {/* Hamburguesa */}
+          <button
+            className={`${styles.hamburger} ${menuAbierto ? styles.open : ''}`}
+            onClick={() => setMenuAbierto(!menuAbierto)}
+            aria-label="Menú"
+          >
+            <span className={styles.bar}></span>
+            <span className={styles.bar}></span>
+            <span className={styles.bar}></span>
+          </button>
 
-        {/* Logo */}
-        <div className={styles.logo}>
-          <img src={logo} alt="Origen Med Funcional" className={styles.logoImg} />
-        </div>
+          {/* Logo */}
+          <div className={styles.logo}>
+            <img src={logo} alt="Origen Med Funcional" className={styles.logoImg} />
+          </div>
 
-        {/* Selector de idioma ES / EN */}
-        <div className={styles.actions}>
-          <div className={styles.idioma}>
-            <button
-              type="button"
-              className={`${styles.idiomaBtn} ${language === 'es' ? styles.active : ''}`}
-              onClick={() => setLanguage('es')}
-            >
-              ES
-            </button>
-            <span className={styles.separador}>/</span>
-            <button
-              type="button"
-              className={`${styles.idiomaBtn} ${language === 'en' ? styles.active : ''}`}
-              onClick={() => setLanguage('en')}
-            >
-              EN
-            </button>
+          {/* Selector de idioma ES / EN */}
+          <div className={styles.actions}>
+            <div className={styles.idioma}>
+              <button
+                type="button"
+                className={`${styles.idiomaBtn} ${language === 'es' ? styles.active : ''}`}
+                onClick={() => setLanguage('es')}
+              >
+                ES
+              </button>
+              <span className={styles.separador}>/</span>
+              <button
+                type="button"
+                className={`${styles.idiomaBtn} ${language === 'en' ? styles.active : ''}`}
+                onClick={() => setLanguage('en')}
+              >
+                EN
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Overlay */}
+      {/* Overlay con desenfoque de fondo */}
       <div
         className={`${styles.overlay} ${menuAbierto ? styles.active : ''}`}
         onClick={() => setMenuAbierto(false)}
+        aria-hidden="true"
       />
 
       {/* Panel lateral */}
@@ -62,7 +65,7 @@ const Navbar = () => {
         onClose={() => setMenuAbierto(false)}
         mobileLogo={mobileLogo}
       />
-    </header>
+    </>
   );
 };
 
