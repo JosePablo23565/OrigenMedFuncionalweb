@@ -237,39 +237,54 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
 
         {/* Zona de Acción Principal (Agendar Cita y Cerrar sesión / Iniciar Sesión) */}
         <div className={styles.mainCtaSection}>
-          <button
-            type="button"
-            onClick={() => {
-              openBookingModal();
-              onClose();
-            }}
-            className={styles.sideNavCta}
-          >
-            {t.nav.agendarCita}
-          </button>
-
           {user ? (
-            <button
-              type="button"
-              onClick={async () => {
-                await signOut();
-                onClose();
-              }}
-              className={styles.signOutActionBtn}
-            >
-              {language === 'en' ? 'Log Out' : 'Cerrar sesión'}
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  openBookingModal();
+                  onClose();
+                }}
+                className={styles.sideNavCta}
+              >
+                {t.nav.agendarCita}
+              </button>
+
+              <button
+                type="button"
+                onClick={async () => {
+                  await signOut();
+                  onClose();
+                }}
+                className={styles.signOutActionBtn}
+              >
+                {language === 'en' ? 'Log Out' : 'Cerrar sesión'}
+              </button>
+            </>
           ) : (
-            <button
-              type="button"
-              onClick={() => {
-                openModal();
-                onClose();
-              }}
-              className={styles.authActionBtn}
-            >
-              {language === 'en' ? 'Log In / Sign Up' : 'Iniciar Sesión / Registro'}
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  openModal();
+                  onClose();
+                }}
+                className={styles.authActionBtn}
+              >
+                {language === 'en' ? 'Log In / Sign Up' : 'Iniciar Sesión / Registro'}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  openBookingModal();
+                  onClose();
+                }}
+                className={styles.sideNavCta}
+              >
+                {t.nav.agendarCita}
+              </button>
+            </>
           )}
         </div>
       </nav>
