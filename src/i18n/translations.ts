@@ -5,12 +5,15 @@ export interface TranslationKeys {
     ubicacion: string;
     agendar: string;
     agendarCita: string;
+    nuestroEquipo: string;
   };
   hero: {
     title: string;
     accent: string;
     subtitle: string;
     cta1: string;
+    officeHoursLine1: string;
+    officeHoursLine2: string;
   };
   highlights: {
     item1: string;
@@ -21,8 +24,6 @@ export interface TranslationKeys {
     item1: string;
     item2: string;
     item3: string;
-    item4: string;
-    item5: string;
   };
   stats: {
     title: string;
@@ -93,15 +94,101 @@ export interface TranslationKeys {
     q5Question: string;
     q5Answer: string;
   };
-  footer: {
-    tagline: string;
-    navTitle: string;
-    servicesTitle: string;
-    service1: string;
-    service2: string;
-    service3: string;
-    contactTitle: string;
-    rights: string;
+footer: {
+      tagline: string;
+      navTitle: string;
+      servicesTitle: string;
+      service1: string;
+      service2: string;
+      service3: string;
+      consultasTitle: string;
+      procedimientosTitle: string;
+      consulta1: string;
+      consulta2: string;
+      procedimiento1: string;
+      procedimiento2: string;
+      procedimiento3: string;
+      procedimiento4: string;
+      procedimiento5: string;
+      procedimiento6: string;
+      contactTitle: string;
+      rights: string;
+    };
+  modal: {
+    signupTitle: string;
+    loginTitle: string;
+    signupSubtitle: string;
+    loginSubtitle: string;
+    name: string;
+    namePlaceholder: string;
+    email: string;
+    emailPlaceholder: string;
+    password: string;
+    passwordPlaceholder: string;
+    signupBtn: string;
+    loginBtn: string;
+    hasAccount: string;
+    noAccount: string;
+    loginLink: string;
+    signupLink: string;
+    or: string;
+    googleBtn: string;
+    terms: string;
+    termsLink: string;
+  };
+  booking: {
+    modalTitle: string;
+    stepService: string;
+    stepDateTime: string;
+    stepDetails: string;
+    stepSuccess: string;
+    serviceTitle: string;
+    serviceSubtitle: string;
+    categoryAll: string;
+    categoryConsultations: string;
+    categoryProcedures: string;
+    services: {
+      functionalMedicine: { title: string; desc: string; duration: string };
+      generalMedicine: { title: string; desc: string; duration: string };
+      ivTherapy: { title: string; desc: string; duration: string };
+      earCleaning: { title: string; desc: string; duration: string };
+      sutureRemoval: { title: string; desc: string; duration: string };
+      implanon: { title: string; desc: string; duration: string };
+      cauterization: { title: string; desc: string; duration: string };
+      minorSurgery: { title: string; desc: string; duration: string };
+    };
+    dateTimeTitle: string;
+    dateTimeSubtitle: string;
+    selectDate: string;
+    selectTime: string;
+    selectedDate: string;
+    selectedTime: string;
+    noSlotsAvailable: string;
+    detailsTitle: string;
+    detailsSubtitle: string;
+    summaryTitle: string;
+    fullName: string;
+    fullNamePlaceholder: string;
+    email: string;
+    emailPlaceholder: string;
+    phone: string;
+    phonePlaceholder: string;
+    notes: string;
+    notesPlaceholder: string;
+    privacyNotice: string;
+    btnNext: string;
+    btnBack: string;
+    btnConfirm: string;
+    successTitle: string;
+    successSubtitle: string;
+    appointmentSummary: string;
+    serviceLabel: string;
+    dateTimeLabel: string;
+    patientLabel: string;
+    calendarBtn: string;
+    whatsappBtn: string;
+    closeBtn: string;
+    locale: string;
   };
 }
 
@@ -112,13 +199,16 @@ export const translations: Record<Language, TranslationKeys> = {
       servicios: 'Servicios',
       ubicacion: 'Ubicación',
       agendar: 'Agendar',
-      agendarCita: 'Agendar una cita',
+      agendarCita: 'Agendar Cita',
+      nuestroEquipo: 'Nuestro equipo',
     },
     hero: {
       title: 'Medicina',
       accent: 'Funcional',
       subtitle: 'Un enfoque diferente para entender la salud.',
       cta1: 'Agendar Cita',
+      officeHoursLine1: 'Horario de atención',
+      officeHoursLine2: 'Lun–Vie · 5:00 p. m. – 8:00 p. m.',
     },
     highlights: {
       item1: 'Atención Personalizada',
@@ -128,9 +218,7 @@ export const translations: Record<Language, TranslationKeys> = {
     heroBridge: {
       item1: 'Atención 100% Personalizada',
       item2: 'Medicina de Causa Raíz',
-      item3: 'Estudios de Laboratorio Avanzados',
-      item4: 'Consultas Presenciales y Online',
-      item5: 'Enfoque Integral y Preventivo',
+      item3: 'Enfoque Integral y Preventivo',
     },
     stats: {
       title: 'Cuidado médico que entrega resultados',
@@ -208,8 +296,126 @@ export const translations: Record<Language, TranslationKeys> = {
       service1: 'Consulta Integral',
       service2: 'Revisión de Laboratorio',
       service3: 'Acompañamiento Continuo',
+      consultasTitle: 'Consultas Médicas',
+      procedimientosTitle: 'Procedimientos Médicos',
+      consulta1: 'Medicina General',
+      consulta2: 'Medicina Funcional',
+      procedimiento1: 'Lavado de Oído',
+      procedimiento2: 'Retiro de Puntos',
+      procedimiento3: 'Aplicación y Retiro de Implanon',
+      procedimiento4: 'Sueroterapia',
+      procedimiento5: 'Cauterización',
+      procedimiento6: 'Cirugía Menor',
       contactTitle: 'Contacto',
       rights: 'Todos los derechos reservados.',
+    },
+    modal: {
+      signupTitle: 'Crear Cuenta',
+      loginTitle: 'Iniciar Sesión',
+      signupSubtitle: 'Completa tus datos para comenzar.',
+      loginSubtitle: 'Ingresa tus credenciales para acceder.',
+      name: 'Nombre completo',
+      namePlaceholder: 'Juan Pérez',
+      email: 'Correo electrónico',
+      emailPlaceholder: 'correo@ejemplo.com',
+      password: 'Contraseña',
+      passwordPlaceholder: 'Ingresa tu contraseña',
+      signupBtn: 'Crear Cuenta',
+      loginBtn: 'Iniciar Sesión',
+      hasAccount: '¿Ya tienes una cuenta?',
+      noAccount: '¿No tienes una cuenta?',
+      loginLink: 'Iniciar Sesión',
+      signupLink: 'Crear Cuenta',
+      or: 'O',
+      googleBtn: 'Continuar con Google',
+      terms: 'Al crear una cuenta aceptas nuestros',
+      termsLink: 'Términos y Condiciones',
+    },
+    booking: {
+      modalTitle: 'Agendar cita',
+      stepService: 'Servicio',
+      stepDateTime: 'Fecha y Hora',
+      stepDetails: 'Confirmación',
+      stepSuccess: 'Cita Lista',
+      serviceTitle: 'Selecciona tu Servicio',
+      serviceSubtitle: 'Elige la consulta o procedimiento médico que necesitas.',
+      categoryAll: 'Todos los servicios',
+      categoryConsultations: 'Consulta Médica',
+      categoryProcedures: 'Procedimientos',
+      services: {
+        functionalMedicine: {
+          title: 'Medicina Funcional',
+          desc: 'Evaluación integral y profunda de causa raíz para condiciones crónicas y bienestar.',
+          duration: '60 - 90 min',
+        },
+        generalMedicine: {
+          title: 'Medicina General',
+          desc: 'Consulta médica general, chequeo de salud, diagnóstico oportuno y prescripción.',
+          duration: '30 - 45 min',
+        },
+        ivTherapy: {
+          title: 'Sueroterapia / Terapia IV',
+          desc: 'Infusiones personalizadas de vitaminas, minerales y antioxidantes de alta absorción.',
+          duration: '45 - 60 min',
+        },
+        earCleaning: {
+          title: 'Lavado de Oído',
+          desc: 'Procedimiento seguro e indoloro de limpieza ótica y remoción de tapones.',
+          duration: '20 - 30 min',
+        },
+        sutureRemoval: {
+          title: 'Retiro de Puntos',
+          desc: 'Retiro profesional de suturas o grapas con valoración de la cicatrización.',
+          duration: '15 - 20 min',
+        },
+        implanon: {
+          title: 'Implanon (Colocación o Retiro)',
+          desc: 'Aplicación o extracción de implante anticonceptivo subdérmico con técnica estéril.',
+          duration: '30 min',
+        },
+        cauterization: {
+          title: 'Cauterización',
+          desc: 'Tratamiento menor seguro para lesiones dérmicas y pequeñas verrugas o puntos.',
+          duration: '30 min',
+        },
+        minorSurgery: {
+          title: 'Cirugía Menor',
+          desc: 'Procedimientos quirúrgicos ambulatorios bajo anestesia local.',
+          duration: '45 - 60 min',
+        },
+      },
+      dateTimeTitle: 'Selecciona Fecha y Horario',
+      dateTimeSubtitle: 'Elige el día y la hora que mejor se adapten a tu agenda.',
+      selectDate: 'Fecha de la consulta',
+      selectTime: 'Horarios disponibles',
+      selectedDate: 'Fecha seleccionada',
+      selectedTime: 'Hora seleccionada',
+      noSlotsAvailable: 'No hay horarios disponibles para esta fecha. Por favor selecciona otro día.',
+      detailsTitle: 'Tus Datos de Contacto',
+      detailsSubtitle: 'Revisa el resumen y completa tus datos para confirmar tu cita.',
+      summaryTitle: 'Resumen de tu Cita',
+      fullName: 'Nombre completo',
+      fullNamePlaceholder: '',
+      email: 'Correo electrónico',
+      emailPlaceholder: '',
+      phone: 'Teléfono',
+      phonePlaceholder: '',
+      notes: 'Motivo de consulta o notas (opcional)',
+      notesPlaceholder: '',
+      privacyNotice: 'Tus datos médicos y personales están protegidos con confidencialidad absoluta.',
+      btnNext: 'Continuar',
+      btnBack: 'Volver',
+      btnConfirm: 'Agendar Cita',
+      successTitle: '¡Cita Agendada con Éxito!',
+      successSubtitle: 'Hemos reservado tu espacio. Te enviaremos los detalles y recordatorios a tu correo y WhatsApp.',
+      appointmentSummary: 'Detalles de tu cita',
+      serviceLabel: 'Servicio',
+      dateTimeLabel: 'Fecha y Horario',
+      patientLabel: 'Paciente',
+      calendarBtn: 'Agregar a Google Calendar',
+      whatsappBtn: 'Escribir por WhatsApp',
+      closeBtn: 'Listo, Finalizar',
+      locale: 'es-ES',
     },
   },
   en: {
@@ -218,13 +424,16 @@ export const translations: Record<Language, TranslationKeys> = {
       servicios: 'Services',
       ubicacion: 'Location',
       agendar: 'Book',
-      agendarCita: 'Book an appointment',
+      agendarCita: 'Book Appointment',
+      nuestroEquipo: 'Our team',
     },
     hero: {
       title: 'Functional',
       accent: 'Medicine',
       subtitle: 'A different approach to understanding health.',
       cta1: 'Book Appointment',
+      officeHoursLine1: 'Office hours',
+      officeHoursLine2: 'Mon–Fri · 5:00 p.m. – 8:00 p.m.',
     },
     highlights: {
       item1: 'Personalized Care',
@@ -234,9 +443,7 @@ export const translations: Record<Language, TranslationKeys> = {
     heroBridge: {
       item1: '100% Personalized Care',
       item2: 'Root Cause Medicine',
-      item3: 'Advanced Lab Testing',
-      item4: 'In-Person & Online Visits',
-      item5: 'Holistic & Preventive Approach',
+      item3: 'Holistic & Preventive Approach',
     },
     stats: {
       title: 'Medical care that delivers results',
@@ -314,8 +521,126 @@ export const translations: Record<Language, TranslationKeys> = {
       service1: 'Complete Care',
       service2: 'Lab Review',
       service3: 'Ongoing Support',
+      consultasTitle: 'Medical Consultations',
+      procedimientosTitle: 'Medical Procedures',
+      consulta1: 'General Medicine',
+      consulta2: 'Functional Medicine',
+      procedimiento1: 'Ear Cleaning',
+      procedimiento2: 'Suture Removal',
+      procedimiento3: 'Implanon Insertion and Removal',
+      procedimiento4: 'IV Therapy',
+      procedimiento5: 'Cauterization',
+      procedimiento6: 'Minor Surgery',
       contactTitle: 'Contact',
       rights: 'All rights reserved.',
+    },
+    modal: {
+      signupTitle: 'Create Account',
+      loginTitle: 'Log In',
+      signupSubtitle: 'Fill in your details to get started.',
+      loginSubtitle: 'Enter your credentials to log in.',
+      name: 'Full name',
+      namePlaceholder: 'John Doe',
+      email: 'Email',
+      emailPlaceholder: 'you@example.com',
+      password: 'Password',
+      passwordPlaceholder: 'Enter your password',
+      signupBtn: 'Create Account',
+      loginBtn: 'Log In',
+      hasAccount: 'Already have an account?',
+      noAccount: "Don't have an account?",
+      loginLink: 'Log In',
+      signupLink: 'Sign Up',
+      or: 'Or',
+      googleBtn: 'Continue with Google',
+      terms: 'By signing up you agree to our',
+      termsLink: 'Terms & Conditions',
+    },
+    booking: {
+      modalTitle: 'Schedule Appointment',
+      stepService: 'Service',
+      stepDateTime: 'Date & Time',
+      stepDetails: 'Confirmation',
+      stepSuccess: 'Appointment Ready',
+      serviceTitle: 'Select Your Service',
+      serviceSubtitle: 'Choose the medical consultation or procedure you need.',
+      categoryAll: 'All Services',
+      categoryConsultations: 'Medical Consultations',
+      categoryProcedures: 'Procedures',
+      services: {
+        functionalMedicine: {
+          title: 'Functional Medicine',
+          desc: 'Comprehensive root-cause evaluation for chronic conditions and overall wellness.',
+          duration: '60 - 90 min',
+        },
+        generalMedicine: {
+          title: 'General Medicine',
+          desc: 'General clinical consultation, health checkups, timely diagnosis, and prescriptions.',
+          duration: '30 - 45 min',
+        },
+        ivTherapy: {
+          title: 'IV Therapy / Suerotherapy',
+          desc: 'Custom infusions of vitamins, minerals, and high-absorption antioxidants.',
+          duration: '45 - 60 min',
+        },
+        earCleaning: {
+          title: 'Ear Cleaning',
+          desc: 'Safe, gentle, and painless ear irrigation and cerumen removal.',
+          duration: '20 - 30 min',
+        },
+        sutureRemoval: {
+          title: 'Suture Removal',
+          desc: 'Professional removal of stitches or surgical staples with healing evaluation.',
+          duration: '15 - 20 min',
+        },
+        implanon: {
+          title: 'Implanon (Insertion or Removal)',
+          desc: 'Safe placement or extraction of contraceptive subdermal implant using sterile technique.',
+          duration: '30 min',
+        },
+        cauterization: {
+          title: 'Cauterization',
+          desc: 'Safe minor dermatological procedure for small skin lesions and tags.',
+          duration: '30 min',
+        },
+        minorSurgery: {
+          title: 'Minor Surgery',
+          desc: 'Outpatient surgical procedures performed under local anesthesia.',
+          duration: '45 - 60 min',
+        },
+      },
+      dateTimeTitle: 'Select Date and Time',
+      dateTimeSubtitle: 'Pick the day and time that best fits your schedule.',
+      selectDate: 'Appointment date',
+      selectTime: 'Available times',
+      selectedDate: 'Selected date',
+      selectedTime: 'Selected time',
+      noSlotsAvailable: 'No available slots for this date. Please select another day.',
+      detailsTitle: 'Your Contact Information',
+      detailsSubtitle: 'Review the appointment summary and enter your contact details.',
+      summaryTitle: 'Appointment Summary',
+      fullName: 'Full name',
+      fullNamePlaceholder: '',
+      email: 'Email address',
+      emailPlaceholder: '',
+      phone: 'Phone',
+      phonePlaceholder: '',
+      notes: 'Reason for visit or notes (optional)',
+      notesPlaceholder: '',
+      privacyNotice: 'Your medical and personal information is strictly protected and kept confidential.',
+      btnNext: 'Continue',
+      btnBack: 'Back',
+      btnConfirm: 'Book Appointment',
+      successTitle: 'Appointment Booked Successfully!',
+      successSubtitle: 'We have reserved your slot. We will send all confirmation details and reminders to your email and WhatsApp.',
+      appointmentSummary: 'Appointment Details',
+      serviceLabel: 'Service',
+      dateTimeLabel: 'Date & Time',
+      patientLabel: 'Patient',
+      calendarBtn: 'Add to Google Calendar',
+      whatsappBtn: 'Message on WhatsApp',
+      closeBtn: 'Done, Close',
+      locale: 'en-US',
     },
   },
 };

@@ -1,52 +1,64 @@
 /* ============================================
    NAVBAR
    ============================================ */
+
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
+  padding: 0;
   background-color: #6A6950;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 0;
 }
 
 .container {
   width: 100%;
-  padding: 12px 40px;
+  padding: 12px 32px;
+
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 16px;
+
   box-sizing: border-box;
 }
 
 /* ============================================
    HAMBURGUESA
    ============================================ */
+
 .hamburger {
-  display: flex;
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  padding: 0;
+  margin: 0;
+
+  display: inline-flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   background: none;
   border: none;
   cursor: pointer;
-  position: relative;
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  min-height: 40px;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .hamburger .bar {
-  width: 22px;
-  height: 2px;
-  background-color: #ffffff;
   position: absolute;
   left: 50%;
+
+  width: 22px;
+  height: 2px;
+
+  background-color: #ffffff;
+
   transform: translateX(-50%);
   transition:
     top 300ms 350ms ease,
@@ -55,20 +67,21 @@
 }
 
 .hamburger .bar:nth-child(1) {
-  top: 12px;
+  top: 13px;
 }
 
 .hamburger .bar:nth-child(2) {
-  top: 19px;
+  top: 20px;
 }
 
 .hamburger .bar:nth-child(3) {
-  top: 26px;
+  top: 27px;
 }
 
 .hamburger.open .bar:nth-child(1) {
-  top: 19px;
+  top: 20px;
   transform: translateX(-50%) rotate(45deg);
+
   transition:
     top 300ms 50ms ease,
     transform 300ms 350ms ease;
@@ -80,8 +93,9 @@
 }
 
 .hamburger.open .bar:nth-child(3) {
-  top: 19px;
+  top: 20px;
   transform: translateX(-50%) rotate(-45deg);
+
   transition:
     top 300ms 50ms ease,
     transform 300ms 350ms ease;
@@ -90,82 +104,88 @@
 /* ============================================
    LOGO
    ============================================ */
+
 .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  line-height: 1;
 }
 
 .logoImg {
   display: block;
-  height: 32px;
   width: auto;
+  height: 36px;
+  max-width: 165px;
   object-fit: contain;
 }
 
 /* ============================================
-   IDIOMA + AGENDAR
+   IDIOMA
    ============================================ */
+
 .actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 .idioma {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 2px;
-  color: #ffffff;
-  font-size: 0.85rem;
+  color: white;
+  font-size: 0.75rem;
   background: rgba(255, 255, 255, 0.12);
-  padding: 8px 18px;
+  padding: 5px 10px;
   border-radius: 6px;
-  box-sizing: border-box;
-  white-space: nowrap;
 }
 
 .idiomaBtn {
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.7rem;
+  color: #D4DDE2;
+  font-size: 0.75rem;
   cursor: pointer;
   padding: 2px 5px;
   transition: color 0.2s;
+  font-family: inherit;
 }
 
 .idiomaBtn:hover {
-  color: #ffffff;
+  color: white;
 }
 
 .idiomaBtn.active {
-  color: #ffffff;
+  color: white;
   font-weight: 600;
 }
 
 .separador {
   color: rgba(255, 255, 255, 0.4);
-  font-size: 0.65rem;
-}
-
-.agendar {
-  display: none;
+  font-size: 0.7rem;
 }
 
 /* ============================================
    OVERLAY
    ============================================ */
+
 .overlay {
-  display: none;
   position: fixed;
   inset: 0;
+  z-index: 1001;
+
+  display: none;
   width: 100%;
   height: 100%;
+
   background: rgba(45, 46, 36, 0.45);
+
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  z-index: 1001;
 }
 
 .overlay.active {
@@ -173,281 +193,15 @@
 }
 
 /* ============================================
-   PANEL LATERAL
+   DESKTOP: NAVBAR EQUILIBRADA
+   Solo desde 768px en adelante.
    ============================================ */
-.sidePanel {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 320px;
-  height: 100vh;
-  background: #ffffff;
-  color: #302e2e;
-  z-index: 1002;
-  transform: translateX(-100%);
-  transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  box-sizing: border-box;
-}
 
-.sidePanel.active {
-  transform: translateX(0);
-}
-
-/* ============================================
-   SOLO DESKTOP: MENÚ MÁS COMPACTO
-   No afecta móvil.
-   ============================================ */
-@media (min-width: 769px) {
-  .sidePanel {
-    width: 300px;
-  }
-}
-
-/* ============================================
-   HEADER DEL PANEL
-   ============================================ */
-.sidePanelHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 80px;
-  padding: 0 24px;
-  box-sizing: border-box;
-  flex-shrink: 0;
-}
-
-.sideLogo {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.sideLogo img {
-  display: block;
-  width: 128px;
-  height: auto;
-  object-fit: contain;
-}
-
-/* Botón cerrar (X) */
-.panelClose {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background 200ms ease;
-}
-
-.panelClose:hover {
-  background: rgba(106, 105, 80, 0.08);
-}
-
-.panelClose span {
-  position: absolute;
-  width: 18px;
-  height: 1.5px;
-  background: #3b8595;
-  border-radius: 1px;
-}
-
-.panelClose span:first-child {
-  transform: rotate(45deg);
-}
-
-.panelClose span:last-child {
-  transform: rotate(-45deg);
-}
-
-/* ============================================
-   NAVEGACIÓN DEL PANEL
-   ============================================ */
-.sideNav {
-  display: flex;
-  flex-direction: column;
-  padding: 12px 20px 40px;
-  box-sizing: border-box;
-  flex: 1;
-}
-
-/* Enlaces principales */
-.sideNavLink {
-  display: flex;
-  align-items: center;
-  min-height: 52px;
-  padding: 0 14px;
-  color: #302e2e;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-  border-radius: 12px;
-  box-sizing: border-box;
-  transition: background 200ms ease, color 200ms ease;
-}
-
-.sideNavLink:hover {
-  background: rgba(106, 105, 80, 0.06);
-}
-
-/* Estado activo / destacado */
-.activeLink {
-  background: rgba(106, 105, 80, 0.08);
-  font-weight: 600;
-}
-
-/* ============================================
-   ACORDEÓN: SERVICIOS
-   ============================================ */
-.menuGroup {
-  display: flex;
-  flex-direction: column;
-}
-
-.menuGroupTitle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  min-height: 52px;
-  padding: 0 14px;
-  color: #6a6950;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  font-family: inherit;
-  box-sizing: border-box;
-  border-radius: 12px;
-  transition: background 200ms ease;
-}
-
-.menuGroupTitle:hover {
-  background: rgba(106, 105, 80, 0.05);
-}
-
-.menuGroupLabel {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #6a6950;
-}
-
-.menuGroupLabel em {
-  color: rgba(106, 105, 80, 0.55);
-  font-size: 0.68rem;
-  font-style: normal;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-}
-
-.menuArrow {
-  color: #6a6950;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 250ms ease;
-}
-
-.groupOpen .menuArrow {
-  transform: rotate(180deg);
-}
-
-/* Items colapsables con animación suave */
-.menuGroupItems {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 300ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.groupOpen .menuGroupItems {
-  grid-template-rows: 1fr;
-}
-
-.menuGroupItemsInner {
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.menuGroupItems a {
-  display: flex;
-  align-items: center;
-  min-height: 48px;
-  padding: 0 14px 0 30px;
-  color: #302e2e;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.35;
-  border-radius: 10px;
-  margin: 1px 0;
-  box-sizing: border-box;
-  transition: background 200ms ease;
-}
-
-.menuGroupItems a:hover {
-  background: rgba(106, 105, 80, 0.06);
-}
-
-/* ============================================
-   SEPARADOR
-   ============================================ */
-.menuDivider {
-  width: 100%;
-  height: 1px;
-  margin: 10px 14px;
-  padding: 0;
-  background: rgba(106, 105, 80, 0.12);
-  max-width: calc(100% - 28px);
-}
-
-/* ============================================
-   CTA DENTRO DEL PANEL
-   ============================================ */
-.sideNavCta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 50px;
-  margin-top: 16px;
-  padding: 0 14px;
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 600;
-  background: #302e2e;
-  border-radius: 12px;
-  box-sizing: border-box;
-  transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
-}
-
-.sideNavCta:hover {
-  background: #1f1e1e;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px -6px rgba(48, 46, 46, 0.5);
-}
-
-/* ============================================
-   MÓVIL
-   ============================================ */
-@media (max-width: 767px) {
+@media (min-width: 768px) {
   .container {
-    min-height: 72px;
-    padding: 0 16px;
+    min-height: 80px;
+    padding: 0 44px;
+    gap: 18px;
   }
 
   .hamburger {
@@ -459,115 +213,153 @@
 
   .hamburger .bar {
     width: 24px;
+    height: 2px;
   }
 
   .hamburger .bar:nth-child(1) {
-    top: 13px;
+    top: 14px;
   }
 
   .hamburger .bar:nth-child(2) {
-    top: 20px;
+    top: 21px;
   }
 
   .hamburger .bar:nth-child(3) {
-    top: 27px;
+    top: 28px;
   }
 
   .hamburger.open .bar:nth-child(1),
   .hamburger.open .bar:nth-child(3) {
-    top: 20px;
+    top: 21px;
   }
 
   .logoImg {
-    width: 112px;
-    max-height: 38px;
+    width: auto;
+    height: 38px;
+    max-width: 175px;
+  }
+
+  .actions {
+    gap: 12px;
   }
 
   .idioma {
-    gap: 0;
-    width: 64px;
-    height: 44px;
-    min-width: 64px;
-    min-height: 44px;
-    padding: 0;
-    margin: 0;
-    font-size: 11px;
-    background: rgba(255, 255, 255, 0.16);
-    border-radius: 7px;
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 6px;
   }
 
   .idiomaBtn {
-    font-size: 11px;
-    line-height: 1;
-    padding: 0 4px;
+    font-size: 0.75rem;
+  }
+}
+
+/* ============================================
+   MÓVIL
+   ============================================ */
+
+@media (max-width: 767px) {
+  .container {
+    min-height: 68px;
+    padding: 0 16px;
+    gap: 14px;
   }
 
-  .separador {
-    font-size: 11px;
-    line-height: 1;
+  .hamburger {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
   }
 
-  .agendar {
-    display: none;
+  .hamburger .bar {
+    width: 22px;
   }
 
-  .sidePanel {
-    width: min(320px, 86vw);
+  .hamburger .bar:nth-child(1) {
+    top: 12px;
   }
 
-  .sidePanelHeader {
-    height: 72px;
-    padding: 0 20px;
+  .hamburger .bar:nth-child(2) {
+    top: 19px;
   }
 
-  .sideLogo img {
-    height: 36px;
+  .hamburger .bar:nth-child(3) {
+    top: 26px;
   }
 
-  .sideNav {
-    padding: 8px 16px 32px;
+  .hamburger.open .bar:nth-child(1),
+  .hamburger.open .bar:nth-child(3) {
+    top: 19px;
+  }
+
+  .logoImg {
+    width: auto;
+    height: 33px;
+    max-width: 145px;
+  }
+
+  .idioma {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+
+  .idiomaBtn {
+    font-size: 0.7rem;
   }
 }
 
 /* ============================================
    MÓVIL PEQUEÑO
    ============================================ */
+
 @media (max-width: 400px) {
   .container {
-    padding: 0 12px;
+    min-height: 62px;
+    padding: 0 10px;
+    gap: 10px;
   }
 
   .logoImg {
-    width: 105px;
-    max-height: 36px;
+    width: auto;
+    height: 29px;
+    max-width: 125px;
+  }
+
+  .hamburger {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
   }
 
   .hamburger .bar {
     width: 20px;
   }
 
+  .hamburger .bar:nth-child(1) {
+    top: 11px;
+  }
+
+  .hamburger .bar:nth-child(2) {
+    top: 18px;
+  }
+
+  .hamburger .bar:nth-child(3) {
+    top: 25px;
+  }
+
+  .hamburger.open .bar:nth-child(1),
+  .hamburger.open .bar:nth-child(3) {
+    top: 18px;
+  }
+
   .idioma {
-    width: 60px;
-    min-width: 60px;
-    height: 44px;
-    min-height: 44px;
-    font-size: 10px;
+    font-size: 0.65rem;
+    padding: 3px 6px;
   }
 
-  .idiomaBtn,
-  .separador {
-    font-size: 10px;
-  }
-
-  .sidePanel {
-    width: 88vw;
-  }
-
-  .sidePanelHeader {
-    padding: 0 16px;
-  }
-
-  .sideNav {
-    padding: 8px 14px 28px;
+  .idiomaBtn {
+    font-size: 0.65rem;
   }
 }

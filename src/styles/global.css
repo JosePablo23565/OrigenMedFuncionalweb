@@ -21,12 +21,19 @@
   box-sizing: border-box;
 }
 
-/* 1. AGREGAR ALTO Y OVERFLOW A HTML Y BODY */
 html,
 body {
   width: 100%;
   min-height: 100%;
   overflow-x: hidden; /* Evita scroll horizontal global en móviles */
+}
+
+/* Bloqueo total de scroll cuando un modal está abierto */
+html.modal-open,
+body.modal-open {
+  overflow: hidden !important;
+  height: 100% !important;
+  touch-action: none !important;
 }
 
 html {
@@ -65,6 +72,24 @@ ul {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
+}
+
+/* ============================================
+   SOBREESCRIBIR AUTOCOMPLETADO AZUL DEL NAVEGADOR
+   ============================================ */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #302E2E !important;
+  box-shadow: 0 0 0 1000px #ffffff inset !important;
+  caret-color: #302E2E !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /* ============================================

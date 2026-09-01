@@ -1,0 +1,371 @@
+/* ============================================
+   APPOINTMENT MODAL
+   ============================================ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(48, 46, 46, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   MODAL CONTAINER
+   ============================================ */
+.modal {
+  position: relative;
+  background: #fff;
+  border-radius: 20px;
+  padding: 2.5rem 2rem 2rem;
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.3s ease;
+}
+
+/* ============================================
+   TOP NAVIGATION BUTTONS
+   ============================================ */
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6A6950;
+  padding: 4px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.closeBtn:hover {
+  background: rgba(106, 105, 80, 0.1);
+}
+
+.backBtn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6A6950;
+  padding: 4px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.backBtn:hover {
+  background: rgba(106, 105, 80, 0.1);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #302E2E;
+  margin: 0 0 0.35rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #6A6950;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ============================================
+   FORM
+   ============================================ */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #302E2E;
+}
+
+.input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgba(106, 105, 80, 0.3);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: var(--font-family);
+  color: #302E2E;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #302E2E !important;
+  box-shadow: 0 0 0 1000px #ffffff inset !important;
+  caret-color: #302E2E !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.input::placeholder {
+  color: #999;
+}
+
+.input:focus {
+  border-color: #6A6950;
+  box-shadow: 0 0 0 3px rgba(106, 105, 80, 0.15);
+}
+
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   ERROR / SUCCESS MESSAGES
+   ============================================ */
+.error {
+  font-size: 0.8rem;
+  color: #c0392b;
+  margin: -0.25rem 0 0;
+  line-height: 1.3;
+}
+
+.success {
+  font-size: 0.8rem;
+  color: #27ae60;
+  margin: -0.25rem 0 0;
+  line-height: 1.3;
+}
+
+/* ============================================
+   PASSWORD FIELD
+   ============================================ */
+.passwordWrapper {
+  position: relative;
+}
+
+.passwordWrapper .input {
+  padding-right: 2.75rem;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6A6950;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.passwordToggle:hover {
+  color: #302E2E;
+}
+
+.passwordToggle:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   SUBMIT BUTTON
+   ============================================ */
+.submitBtn {
+  width: 100%;
+  padding: 0.75rem;
+  background: #6A6950;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+  margin-top: 0.25rem;
+}
+
+.submitBtn:hover {
+  background: #57563f;
+  transform: translateY(-1px);
+}
+
+.submitBtn:active {
+  transform: translateY(0);
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ============================================
+   TOGGLE MODE
+   ============================================ */
+.toggleText {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #6A6950;
+  margin-top: 1.25rem;
+}
+
+.toggleLink {
+  background: none;
+  border: none;
+  color: #3B8595;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: var(--font-family);
+  text-decoration: underline;
+  padding: 0;
+}
+
+.toggleLink:hover {
+  color: #2f6d7a;
+}
+
+.toggleLink:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   DIVIDER
+   ============================================ */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(106, 105, 80, 0.25);
+}
+
+.dividerText {
+  font-size: 0.75rem;
+  color: #6A6950;
+}
+
+/* ============================================
+   GOOGLE BUTTON
+   ============================================ */
+.googleBtn {
+  width: 100%;
+  padding: 0.7rem;
+  background: #fff;
+  color: #302E2E;
+  border: 1px solid rgba(106, 105, 80, 0.3);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: var(--font-family);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.googleBtn:hover {
+  background: #f5f5f5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.googleBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   TERMS
+   ============================================ */
+.terms {
+  text-align: center;
+  font-size: 0.7rem;
+  color: #6A6950;
+  margin-top: 0.75rem;
+  line-height: 1.4;
+}
+
+.termsLink {
+  color: #3B8595;
+  text-decoration: underline;
+}
+
+.termsLink:hover {
+  color: #2f6d7a;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 480px) {
+  .modal {
+    padding: 2rem 1.25rem 1.5rem;
+    border-radius: 16px;
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+}

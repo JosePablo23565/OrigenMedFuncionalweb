@@ -1,0 +1,478 @@
+/* ============================================
+   PANEL LATERAL
+   ============================================ */
+
+.sidePanel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1002;
+
+  width: 320px;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+
+  color: #302e2e;
+  background: #ffffff;
+
+  transform: translate3d(-100%, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+  transition: transform 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  box-sizing: border-box;
+}
+
+.sidePanel.active {
+  transform: translate3d(0, 0, 0);
+}
+
+/* ============================================
+   MÓVIL: Animación más fluida
+   ============================================ */
+
+@media (max-width: 767px) {
+  .sidePanel {
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.33, 0.66, 0.66, 1);
+  }
+}
+
+/* ============================================
+   HEADER DEL PANEL (PERFIL / CUENTA)
+   ============================================ */
+
+.sidePanelHeader {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 20px 18px;
+  border-bottom: 1px solid rgba(106, 105, 80, 0.12);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.profileRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.avatarWrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatarLogo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(106, 105, 80, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(106, 105, 80, 0.18);
+  color: #6A6950;
+  flex-shrink: 0;
+}
+
+.userIconSvg {
+  width: 20px;
+  height: 20px;
+  color: #6A6950;
+  display: block;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.profileName {
+  font-family: 'Exo 2', var(--font-family);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #302E2E;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.profileSub {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #6A6950;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================
+   BOTÓN CERRAR
+   ============================================ */
+
+.panelClose {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 200ms ease;
+}
+
+.panelClose:hover {
+  background: rgba(106, 105, 80, 0.08);
+}
+
+.panelClose span {
+  position: absolute;
+  width: 18px;
+  height: 1.5px;
+  background: #302e2e;
+  border-radius: 1px;
+}
+
+.panelClose span:first-child {
+  transform: rotate(45deg);
+}
+
+.panelClose span:last-child {
+  transform: rotate(-45deg);
+}
+
+/* ============================================
+   NAVEGACIÓN DEL PANEL
+   ============================================ */
+
+.sideNav {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 18px 16px 24px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.navSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sectionSpacer {
+  height: 22px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.sideNavLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  color: #302e2e;
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-family: inherit;
+  text-decoration: none;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.sideNavLink:hover {
+  background: rgba(106, 105, 80, 0.06);
+}
+
+.navLabel {
+  flex: 1;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.appointmentBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: #6A6950;
+  border-radius: 10px;
+  padding: 0 6px;
+}
+
+.activeLink {
+  background: rgba(106, 105, 80, 0.08);
+  font-weight: 600;
+}
+
+/* ============================================
+   ACORDEÓN: SERVICIOS
+   ============================================ */
+
+.menuGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuGroupTitle {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #302e2e;
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-family: inherit;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.menuGroupTitle:hover {
+  background: rgba(106, 105, 80, 0.06);
+}
+
+.menuArrow {
+  flex-shrink: 0;
+  color: #6A6950;
+  transition: transform 250ms ease;
+}
+
+.groupOpen .menuArrow {
+  transform: rotate(90deg);
+}
+
+.menuGroupItems {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.groupOpen .menuGroupItems {
+  grid-template-rows: 1fr;
+}
+
+.menuGroupItemsInner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0 6px 14px;
+}
+
+.menuGroupItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  color: #6A6950;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: inherit;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.menuGroupItem:hover {
+  background: rgba(106, 105, 80, 0.06);
+  color: #302e2e;
+}
+
+/* ============================================
+   SEPARADOR
+   ============================================ */
+
+.menuDivider {
+  width: 100%;
+  max-width: calc(100% - 24px);
+  height: 1px;
+  margin: 10px 12px;
+  padding: 0;
+  background: rgba(106, 105, 80, 0.12);
+}
+
+/* ============================================
+   ZONA PRINCIPAL DE ACCIÓN (CTA)
+   ============================================ */
+
+.mainCtaSection {
+  margin-top: auto;
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sideNavCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  margin: 0;
+  padding: 0 14px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-family);
+  text-decoration: none;
+  background: #302e2e;
+  border: none;
+  border-radius: 12px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.sideNavCta:hover {
+  background: #1f1e1e;
+  box-shadow: 0 8px 20px -6px rgba(48, 46, 46, 0.5);
+  transform: translateY(-1px);
+}
+
+.authActionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 46px;
+  margin: 0;
+  padding: 0 14px;
+  background: transparent;
+  border: 1px solid rgba(106, 105, 80, 0.25);
+  border-radius: 12px;
+  color: #6A6950;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-family);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.authActionBtn:hover {
+  background: rgba(106, 105, 80, 0.08);
+  border-color: #6A6950;
+  color: #302E2E;
+}
+
+.signOutActionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 46px;
+  margin: 0;
+  padding: 0 14px;
+  background: transparent;
+  border: 1px solid rgba(192, 57, 43, 0.25);
+  border-radius: 12px;
+  color: #c0392b;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-family);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.signOutActionBtn:hover {
+  background: rgba(192, 57, 43, 0.08);
+  border-color: #c0392b;
+  color: #a93226;
+}
+
+.btnIcon {
+  flex-shrink: 0;
+}
+
+/* ============================================
+   DESKTOP: PANEL MÁS ESTRECHO
+   ============================================ */
+
+@media (min-width: 768px) {
+  .sidePanel {
+    width: 325px;
+  }
+}
+
+/* ============================================
+   MÓVIL
+   ============================================ */
+
+@media (max-width: 767px) {
+  .sidePanel {
+    width: min(320px, 86vw);
+  }
+
+  .sidePanelHeader {
+    padding: 28px 18px 16px;
+  }
+
+  .sideLogo img {
+    height: 34px;
+    width: auto;
+  }
+
+  .sideNav {
+    padding: 8px 16px 36px;
+  }
+}
+
+/* ============================================
+   MÓVIL PEQUEÑO
+   ============================================ */
+
+@media (max-width: 400px) {
+  .sidePanel {
+    width: 88vw;
+  }
+
+  .sidePanelHeader {
+    padding: 24px 16px 14px;
+  }
+
+  .sideNav {
+    padding: 8px 14px 30px;
+  }
+}
