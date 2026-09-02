@@ -28,12 +28,17 @@ body {
   overflow-x: hidden; /* Evita scroll horizontal global en móviles */
 }
 
-/* Bloqueo total de scroll cuando un modal está abierto */
-html.modal-open,
+/* Bloqueo suave de scroll del fondo cuando un modal está abierto */
 body.modal-open {
-  overflow: hidden !important;
-  height: 100% !important;
-  touch-action: none !important;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* Previene el zoom automático de iOS en campos de formulario */
+input,
+select,
+textarea {
+  font-size: 16px !important;
 }
 
 html {

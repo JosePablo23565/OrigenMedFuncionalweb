@@ -15,7 +15,6 @@
   padding: 1rem;
   animation: fadeIn 0.25s ease-out;
   overscroll-behavior: contain;
-  touch-action: none;
 }
 
 @keyframes fadeIn {
@@ -816,24 +815,39 @@
    ============================================ */
 @media (max-width: 768px) {
   .overlay {
-    padding: 1rem 0.75rem;
-    align-items: center;
+    padding: 0;
+    align-items: flex-end;
     justify-content: center;
   }
 
   .modal {
-    max-height: 92vh;
-    border-radius: 20px;
+    width: 100%;
     max-width: 100%;
-    margin: auto 0;
+    height: 92dvh;
+    max-height: 92dvh;
+    min-height: 92dvh;
+    border-radius: 24px 24px 0 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .modalSuccess {
+    height: 92dvh;
+    min-height: 92dvh;
   }
 
   .topBar {
-    padding: 0.85rem 1rem 0.75rem;
+    padding: 0.95rem 1.15rem 0.85rem;
   }
 
   .stepContent {
-    padding: 1.25rem 1.15rem 1.35rem;
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding: 1.15rem 1.15rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
   }
 
   .title {
@@ -861,12 +875,18 @@
 
   .stepFooter {
     padding-top: 0.95rem;
+    margin-top: auto;
   }
 
   .primaryBtn {
     width: 100%;
-    padding: 0.8rem 1.25rem;
-    font-size: 0.92rem;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .input,
+  .textarea {
+    font-size: 16px !important;
   }
 }
 
