@@ -6,7 +6,7 @@ import { useLanguage } from '../../i18n/LanguageContext';
 import { getUserAppointments, type Appointment } from '../../lib/appointments';
 import styles from './MyAppointmentsModal.module.css';
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 3;
 
 const MyAppointmentsModal = () => {
   const { isMyAppointmentsOpen, closeMyAppointments, openBookingModal } = useModal();
