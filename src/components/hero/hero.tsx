@@ -1,10 +1,20 @@
 import { useLanguage } from '../../i18n/LanguageContext';
 import { useModal } from '../../context/ModalContext';
+import { useAuth } from '../../context/AuthContext';
 import styles from './hero.module.css';
 
 const Hero = () => {
   const { t } = useLanguage();
-  const { openModal } = useModal();
+  const { openModal, openBookingModal } = useModal();
+  const { user } = useAuth();
+
+  const handleCtaClick = () => {
+    if (user) {
+      openBookingModal();
+    } else {
+      openModal();
+    }
+  };
 
   return (
     <section id="inicio" className={styles.hero}>
@@ -26,7 +36,7 @@ const Hero = () => {
           </span>
         </h1>
         <p className={styles.subtitle}>{t.hero.subtitle}</p>
-        <button onClick={openModal} className={styles.cta}>{t.hero.cta1}</button>
+        <button onClick={handleCtaClick} className={styles.cta}>{t.hero.cta1}</button>
       </div>
     </section>
   );
