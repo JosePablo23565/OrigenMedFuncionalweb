@@ -202,6 +202,13 @@ const AdminDashboard = ({ activeTab, searchQuery, setSearchQuery }: AdminDashboa
     }
   };
 
+  const getWhatsAppUrl = (phone: string) => {
+    const digits = phone.replace(/\D/g, '');
+    // Si tiene 8 dígitos (formato estándar Costa Rica), anteponer código de país 506
+    const fullNumber = digits.length === 8 ? `506${digits}` : digits;
+    return `https://wa.me/${fullNumber}`;
+  };
+
   const getStatusLabel = (status: string) => {
     switch (status) {
       case 'completed':
@@ -516,7 +523,7 @@ const AdminDashboard = ({ activeTab, searchQuery, setSearchQuery }: AdminDashboa
               <div className={styles.modalFooter}>
                 {selectedAppt.patient_phone && (
                   <a
-                    href={`https://wa.me/${selectedAppt.patient_phone.replace(/\D/g, '')}`}
+                    href={getWhatsAppUrl(selectedAppt.patient_phone)}
                     target="_blank"
                     rel="noreferrer"
                     className={styles.modalPrimaryBtn}
