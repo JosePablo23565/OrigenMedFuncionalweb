@@ -29,7 +29,7 @@ interface AdminLoginProps {
 }
 
 const AdminLogin = ({ onLoginSuccess }: AdminLoginProps) => {
-  const { signIn } = useAuth();
+  const { signIn, signOut } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -52,7 +52,11 @@ const AdminLogin = ({ onLoginSuccess }: AdminLoginProps) => {
         return;
       }
 
-      if (!isUserAdmin(email)) {
+      const isAdmin = await isUserAdmin(email);
+      if (!isAdmin) {
+        if (signOut) {
+          await signOut();
+        }
         setError('Acceso denegado. Este correo no cuenta con permisos de administrador.');
         setLoading(false);
         return;

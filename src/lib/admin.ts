@@ -1,17 +1,20 @@
 import { supabase } from './supabase';
 import type { Appointment } from './appointments';
 
-// Authorized Admin Emails (can be extended or checked via DB)
-export const AUTHORIZED_ADMIN_EMAILS = [
-  'pablose19g@gmail.com',
-  'admin@origenmedfuncional.com',
-  'enfermeria@origenmedfuncional.com',
-];
-
-export const isUserAdmin = (email?: string | null): boolean => {
+export const isUserAdmin = async (email?: string | null): Promise<boolean> => {
   if (!email) return false;
-  const normalized = email.toLowerCase().trim();
-  return AUTHORIZED_ADMIN_EMAILS.some((e) => e.toLowerCase() === normalized) || normalized.includes('admin');
+
+  const { data, error } = await supabase
+    .from('admin_users')
+    .select('email')
+    .eq('email', email.toLowerCase().trim())
+    .maybeSingle();
+
+  if (error || !data) {
+    return false;
+  }
+
+  return true;
 };
 
 export const getAllAppointments = async (): Promise<{
