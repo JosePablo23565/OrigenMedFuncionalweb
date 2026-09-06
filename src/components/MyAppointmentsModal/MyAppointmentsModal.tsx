@@ -6,6 +6,26 @@ import { useLanguage } from '../../i18n/LanguageContext';
 import { getUserAppointments, type Appointment } from '../../lib/appointments';
 import styles from './MyAppointmentsModal.module.css';
 
+const BackIcon = ({ size = 20, className }: { size?: number; className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.75}
+    stroke="currentColor"
+    width={size}
+    height={size}
+    className={className}
+    aria-hidden="true"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+    />
+  </svg>
+);
+
 const ITEMS_PER_PAGE = 3;
 
 const MyAppointmentsModal = () => {
@@ -80,6 +100,14 @@ const MyAppointmentsModal = () => {
       >
         {/* Header del modal */}
         <div className={styles.topBar}>
+          <button
+            type="button"
+            className={styles.backBtn}
+            onClick={closeMyAppointments}
+            aria-label={language === 'es' ? 'Volver' : 'Back'}
+          >
+            <BackIcon size={20} />
+          </button>
           <h2 className={styles.topBarTitle}>
             {language === 'es' ? 'Mis Citas' : 'My Appointments'}
           </h2>
@@ -87,7 +115,7 @@ const MyAppointmentsModal = () => {
             type="button"
             className={styles.closeBtn}
             onClick={closeMyAppointments}
-            aria-label="Cerrar modal"
+            aria-label={language === 'es' ? 'Cerrar modal' : 'Close modal'}
           >
             <X size={20} />
           </button>

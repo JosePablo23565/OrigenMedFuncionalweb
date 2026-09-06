@@ -1,0 +1,308 @@
+/* ============================================
+   ADMIN LAYOUT STYLES (INSPIRED BY REFERENCE)
+   ============================================ */
+.adminApp {
+  display: flex;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #f4f4f0;
+  font-family: var(--font-family, 'Inter', sans-serif);
+  color: #302E2E;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  background: #6A6950;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 1.25rem 2rem;
+  box-shadow: 4px 0 25px rgba(0, 0, 0, 0.08);
+  height: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  overflow-y: auto;
+  z-index: 10;
+  border-radius: 0 28px 28px 0; /* Curved right edge like reference */
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.sidebarHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* BACKDROP OVERLAY (GPU-ACCELERATED TRANSITION) */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(48, 46, 46, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.backdropActive {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.closeSidebarBtn {
+  display: none !important;
+}
+
+.closeSidebarBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.brandLogo {
+  height: 46px;
+  max-width: 190px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.92rem;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.activeNavItem {
+  background: #ffffff !important;
+  color: #6A6950 !important;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.sidebarFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.adminProfile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #6A6950;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.adminInfo {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.adminName {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.adminRole {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logoutBtn:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* MAIN CONTENT AREA */
+.mainContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* HEADER BAR (HIDDEN ON DESKTOP / TABLET, ONLY VISIBLE ON MOBILE) */
+.topHeader {
+  display: none;
+  height: 54px;
+  padding: 0 1rem;
+  align-items: center;
+  justify-content: flex-start;
+  background: #6A6950;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.mobileMenuBtn {
+  display: flex;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0.45rem;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  transition: all 0.2s ease;
+}
+
+.mobileMenuBtn:hover,
+.mobileMenuBtn:active {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.contentBody {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+  .adminApp {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 240px;
+    padding: max(1.5rem, env(safe-area-inset-top, 0px)) 1.15rem max(1.75rem, env(safe-area-inset-bottom, 0px));
+    height: 100vh;
+    height: 100dvh;
+    z-index: 1000;
+    transform: translate3d(-100%, 0, 0);
+    border-radius: 0 24px 24px 0;
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.25);
+  }
+
+  .brandText {
+    display: none;
+  }
+
+  .brandLogo {
+    height: 42px;
+    max-width: 170px;
+    object-fit: contain;
+  }
+
+  .mainContainer {
+    height: auto;
+    overflow: visible;
+  }
+
+  .sidebarOpen {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .topHeader {
+    display: flex;
+  }
+
+  .contentBody {
+    padding: 1rem 0.85rem;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 600px) {
+  .topHeader {
+    padding: 0 0.85rem;
+  }
+
+  .headerActions {
+    display: none;
+  }
+
+  .contentBody {
+    padding: 0.85rem 0.75rem;
+  }
+}

@@ -66,9 +66,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 24px;
+  padding: 16px 20px;
   border-bottom: 1px solid rgba(106, 105, 80, 0.12);
   flex-shrink: 0;
+  gap: 12px;
 }
 
 .topBarTitle {
@@ -77,8 +78,11 @@
   font-weight: 700;
   color: #302E2E;
   margin: 0;
+  text-align: center;
+  flex: 1;
 }
 
+.backBtn,
 .closeBtn {
   display: inline-flex;
   align-items: center;
@@ -92,8 +96,10 @@
   cursor: pointer;
   padding: 0;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
+.backBtn:hover,
 .closeBtn:hover {
   background: rgba(106, 105, 80, 0.08);
   color: #000000;

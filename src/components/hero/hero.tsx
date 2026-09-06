@@ -12,7 +12,7 @@ const Hero = () => {
     if (user) {
       openBookingModal();
     } else {
-      openModal();
+      openModal('signup');
     }
   };
 

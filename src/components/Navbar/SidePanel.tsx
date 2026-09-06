@@ -277,7 +277,7 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
               <button
                 type="button"
                 onClick={() => {
-                  openBookingModal();
+                  openModal('signup');
                   onClose();
                 }}
                 className={styles.sideNavCta}

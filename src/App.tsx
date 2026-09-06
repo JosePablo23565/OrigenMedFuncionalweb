@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/hero/hero';
 import HeroBridge from './components/herobridge/herobridge';
@@ -10,8 +11,21 @@ import Footer from './components/footer/footer';
 import AppointmentModal from './components/appointmentModal/appointmentmodal';
 import BookingModal from './components/BookingModal/BookingModal';
 import MyAppointmentsModal from './components/MyAppointmentsModal/MyAppointmentsModal';
+import AdminPage from './components/Admin/AdminPage';
 
 function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handlePopState = () => setCurrentPath(window.location.pathname);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  if (currentPath.startsWith('/admin')) {
+    return <AdminPage />;
+  }
+
   return (
     <>
       <Navbar />

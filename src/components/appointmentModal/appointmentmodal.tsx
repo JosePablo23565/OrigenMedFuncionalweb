@@ -94,7 +94,7 @@ const GoogleIcon = () => (
 );
 
 const AppointmentModal = () => {
-  const { isModalOpen, closeModal } = useModal();
+  const { isModalOpen, closeModal, modalMode } = useModal();
   const { user, signIn, signUp, signInWithGoogle, signInWithGoogleIdToken } = useAuth();
   const { t, language } = useLanguage();
 
@@ -105,6 +105,14 @@ const AppointmentModal = () => {
       closeModal();
     }
   }, [isModalOpen, user, closeModal]);
+
+  const [mode, setMode] = useState<"signup" | "login">("login");
+
+  useEffect(() => {
+    if (isModalOpen && modalMode) {
+      setMode(modalMode);
+    }
+  }, [isModalOpen, modalMode]);
 
   useEffect(() => {
     if (!isModalOpen) return;
@@ -165,7 +173,6 @@ const AppointmentModal = () => {
     return () => clearInterval(interval);
   }, [isModalOpen, signInWithGoogleIdToken]);
 
-  const [mode, setMode] = useState<"signup" | "login">("login");
   const [showPassword, setShowPassword] = useState(false);
 
   const [email, setEmail] = useState("");

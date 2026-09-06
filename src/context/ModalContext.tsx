@@ -2,7 +2,8 @@ import { createContext, useContext, useState, useCallback, type ReactNode } from
 
 interface ModalContextType {
   isModalOpen: boolean;
-  openModal: () => void;
+  modalMode: 'login' | 'signup';
+  openModal: (mode?: 'login' | 'signup') => void;
   closeModal: () => void;
   isBookingModalOpen: boolean;
   openBookingModal: () => void;
@@ -16,10 +17,14 @@ const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<'login' | 'signup'>('login');
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isMyAppointmentsOpen, setIsMyAppointmentsOpen] = useState(false);
 
-  const openModal = useCallback(() => setIsModalOpen(true), []);
+  const openModal = useCallback((mode: 'login' | 'signup' = 'login') => {
+    setModalMode(mode);
+    setIsModalOpen(true);
+  }, []);
   const closeModal = useCallback(() => setIsModalOpen(false), []);
   const openBookingModal = useCallback(() => setIsBookingModalOpen(true), []);
   const closeBookingModal = useCallback(() => setIsBookingModalOpen(false), []);
@@ -30,6 +35,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
     <ModalContext.Provider
       value={{
         isModalOpen,
+        modalMode,
         openModal,
         closeModal,
         isBookingModalOpen,
