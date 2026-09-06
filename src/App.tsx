@@ -22,7 +22,11 @@ function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  if (currentPath.startsWith('/admin')) {
+  const hostname = window.location.hostname.toLowerCase();
+  const isSubdomainAdmin = hostname.startsWith('paneladmin.') || hostname === 'paneladmin.origenmedfuncional.com';
+  const isAdminPath = currentPath.startsWith('/admin');
+
+  if (isSubdomainAdmin || isAdminPath) {
     return <AdminPage />;
   }
 

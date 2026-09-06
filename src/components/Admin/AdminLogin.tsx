@@ -65,17 +65,20 @@ const AdminLogin = ({ onLoginSuccess }: AdminLoginProps) => {
     }
   };
 
+  const isSubdomain = typeof window !== 'undefined' && window.location.hostname.toLowerCase().startsWith('paneladmin.');
+  const returnHomeUrl = isSubdomain ? 'https://origenmedfuncional.com' : '/';
+
   return (
     <div className={styles.overlay}>
       <div className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="admin-login-title">
         <div className={styles.topBar}>
-          <a href="/" className={styles.navIconBtn} aria-label="Volver al inicio" title="Volver al inicio">
+          <a href={returnHomeUrl} className={styles.navIconBtn} aria-label="Volver al inicio" title="Volver al inicio">
             <BackIcon size={20} />
           </a>
           <h1 id="admin-login-title" className={styles.topBarTitle}>
             Acceso Administrativo
           </h1>
-          <a href="/" className={styles.navIconBtn} aria-label="Cerrar" title="Cerrar">
+          <a href={returnHomeUrl} className={styles.navIconBtn} aria-label="Cerrar" title="Cerrar">
             <X size={20} />
           </a>
         </div>
