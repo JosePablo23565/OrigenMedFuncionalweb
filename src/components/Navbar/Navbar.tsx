@@ -25,9 +25,20 @@ const Navbar = () => {
           </button>
 
           {/* Logo */}
-          <div className={styles.logo}>
+          <a
+            href="/"
+            onClick={(e) => {
+              if (window.location.pathname !== '/') {
+                e.preventDefault();
+                window.history.pushState({}, '', '/');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }
+            }}
+            className={styles.logo}
+            aria-label="Ir al inicio"
+          >
             <img src={logo} alt="Origen Med Funcional" className={styles.logoImg} />
-          </div>
+          </a>
 
           {/* Selector de idioma ES / EN */}
           <div className={styles.actions}>

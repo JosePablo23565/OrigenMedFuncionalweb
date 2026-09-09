@@ -126,3 +126,24 @@ export const getBookedSlotsForDate = async (
   }
 };
 
+export const cancelAppointment = async (
+  appointmentId: string
+): Promise<{ error: string | null }> => {
+  try {
+    const { error } = await supabase
+      .from('appointments')
+      .update({ status: 'cancelled' })
+      .eq('id', appointmentId);
+
+    if (error) {
+      console.error('Error cancelling appointment in Supabase:', error);
+      return { error: error.message };
+    }
+
+    return { error: null };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Error al cancelar la cita.';
+    return { error: message };
+  }
+};
+

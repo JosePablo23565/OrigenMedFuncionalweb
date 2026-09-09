@@ -11,6 +11,7 @@ import Footer from './components/footer/footer';
 import AppointmentModal from './components/appointmentModal/appointmentmodal';
 import BookingModal from './components/BookingModal/BookingModal';
 import MyAppointmentsModal from './components/MyAppointmentsModal/MyAppointmentsModal';
+import MyAppointmentsPage from './components/MyAppointments/MyAppointmentsPage';
 import AdminPage from './components/Admin/AdminPage';
 
 function App() {
@@ -28,6 +29,18 @@ function App() {
 
   if (isSubdomainAdmin || isAdminPath) {
     return <AdminPage />;
+  }
+
+  if (currentPath.startsWith('/mis-citas')) {
+    return (
+      <>
+        <Navbar />
+        <MyAppointmentsPage />
+        <Footer />
+        <AppointmentModal />
+        <BookingModal />
+      </>
+    );
   }
 
   return (

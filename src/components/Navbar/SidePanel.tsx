@@ -30,7 +30,7 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
   const [openGroup, setOpenGroup] = useState<GroupKey>(null);
   const [appointmentsCount, setAppointmentsCount] = useState<number>(0);
   const { t, language } = useLanguage();
-  const { openModal, openBookingModal, openMyAppointments } = useModal();
+  const { openModal, openBookingModal } = useModal();
   const { user, signOut } = useAuth();
 
   useEffect(() => {
@@ -97,6 +97,19 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
     }
   };
 
+  const handleNavAnchor = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (window.location.pathname !== '/' && href.startsWith('#')) {
+      e.preventDefault();
+      window.history.pushState({}, '', '/' + href);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+    onClose();
+  };
+
   return (
     <aside className={`${styles.sidePanel} ${isOpen ? styles.active : ''}`}>
       {/* Header del panel (Perfil / Cuenta) */}
@@ -140,24 +153,32 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
       <nav className={styles.sideNav}>
         {/* Sección 1: General */}
         <div className={styles.navSection}>
-          <a href="#inicio" onClick={onClose} className={`${styles.sideNavLink} ${styles.activeLink}`}>
+          <a
+            href="/#inicio"
+            onClick={(e) => handleNavAnchor(e, '#inicio')}
+            className={`${styles.sideNavLink} ${window.location.pathname === '/' ? styles.activeLink : ''}`}
+          >
             {t.nav.inicio}
           </a>
 
           {user && (
-            <button
-              type="button"
-              onClick={() => {
-                openMyAppointments();
+            <a
+              href="/mis-citas"
+              onClick={(e) => {
+                e.preventDefault();
+                if (window.location.pathname !== '/mis-citas') {
+                  window.history.pushState({}, '', '/mis-citas');
+                  window.dispatchEvent(new PopStateEvent('popstate'));
+                }
                 onClose();
               }}
-              className={styles.sideNavLink}
+              className={`${styles.sideNavLink} ${window.location.pathname.startsWith('/mis-citas') ? styles.activeLink : ''}`}
             >
               <span>{language === 'en' ? 'Mis Citas' : 'Mis Citas'}</span>
               {appointmentsCount > 0 && (
                 <span className={styles.appointmentBadge}>{appointmentsCount}</span>
               )}
-            </button>
+            </a>
           )}
         </div>
 
@@ -183,7 +204,7 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
                   <a
                     key={i}
                     href={item.href}
-                    onClick={onClose}
+                    onClick={(e) => handleNavAnchor(e, item.href)}
                     className={styles.menuGroupItem}
                   >
                     {item.label}
@@ -210,7 +231,7 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
                   <a
                     key={i}
                     href={item.href}
-                    onClick={onClose}
+                    onClick={(e) => handleNavAnchor(e, item.href)}
                     className={styles.menuGroupItem}
                   >
                     {item.label}
@@ -226,11 +247,19 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
 
         {/* Sección 3: Institucional y Ubicación */}
         <div className={styles.navSection}>
-          <a href="#equipo" onClick={onClose} className={styles.sideNavLink}>
+          <a
+            href="/#equipo"
+            onClick={(e) => handleNavAnchor(e, '#equipo')}
+            className={styles.sideNavLink}
+          >
             {t.nav.nuestroEquipo}
           </a>
 
-          <a href="#ubicacion" onClick={onClose} className={styles.sideNavLink}>
+          <a
+            href="/#ubicacion"
+            onClick={(e) => handleNavAnchor(e, '#ubicacion')}
+            className={styles.sideNavLink}
+          >
             {t.nav.ubicacion}
           </a>
         </div>
