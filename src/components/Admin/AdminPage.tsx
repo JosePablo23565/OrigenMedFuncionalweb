@@ -12,6 +12,7 @@ const AdminPage = () => {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'today' | 'appointments'>('dashboard');
   const [searchQuery, setSearchQuery] = useState('');
   const [forceLoginView, setForceLoginView] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -73,11 +74,17 @@ const AdminPage = () => {
   }
 
   return (
-    <AdminLayout activeTab={activeTab} setActiveTab={setActiveTab}>
+    <AdminLayout
+      activeTab={activeTab}
+      setActiveTab={setActiveTab}
+      mobileOpen={mobileMenuOpen}
+      setMobileOpen={setMobileMenuOpen}
+    >
       <AdminDashboard
         activeTab={activeTab}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        onOpenMobileMenu={() => setMobileMenuOpen(true)}
       />
     </AdminLayout>
   );

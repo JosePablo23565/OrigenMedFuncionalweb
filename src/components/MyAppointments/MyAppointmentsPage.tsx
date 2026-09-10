@@ -262,16 +262,6 @@ const MyAppointmentsPage = () => {
                 )}
               </button>
             </div>
-
-            {/* Botón + Nueva Cita */}
-            <button
-              type="button"
-              className={styles.newBookingBtn}
-              onClick={openBookingModal}
-            >
-              <span className={styles.plusIcon} aria-hidden="true">+</span>
-              <span>{language === 'es' ? 'Nueva Cita' : 'New Appointment'}</span>
-            </button>
           </div>
         )}
 

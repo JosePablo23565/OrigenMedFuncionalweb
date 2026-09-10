@@ -1,5 +1,5 @@
 import { useState, useEffect, type ReactNode } from 'react';
-import { LogOut, Menu } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import fullLogo from '../../assets/logo.png';
 import styles from './AdminLayout.module.css';
@@ -60,14 +60,21 @@ interface AdminLayoutProps {
   children: ReactNode;
   activeTab?: 'dashboard' | 'today' | 'appointments';
   setActiveTab?: (tab: 'dashboard' | 'today' | 'appointments') => void;
+  mobileOpen?: boolean;
+  setMobileOpen?: (open: boolean) => void;
 }
 
 const AdminLayout = ({
   children,
   setActiveTab,
+  mobileOpen: controlledMobileOpen,
+  setMobileOpen: controlledSetMobileOpen,
 }: AdminLayoutProps) => {
   const { user, signOut } = useAuth();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [internalMobileOpen, setInternalMobileOpen] = useState(false);
+
+  const mobileOpen = controlledMobileOpen !== undefined ? controlledMobileOpen : internalMobileOpen;
+  const setMobileOpen = controlledSetMobileOpen || setInternalMobileOpen;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -77,7 +84,7 @@ const AdminLayout = ({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [mobileOpen]);
+  }, [mobileOpen, setMobileOpen]);
 
   useEffect(() => {
     if (mobileOpen) {
@@ -99,7 +106,7 @@ const AdminLayout = ({
 
   return (
     <div className={styles.adminApp}>
-      {/* MOBILE BACKDROP OVERLAY (OPTIMIZED SMOOTH TRANSITION) */}
+      {/* MOBILE BACKDROP OVERLAY */}
       <div
         className={`${styles.backdrop} ${mobileOpen ? styles.backdropActive : ''}`}
         onClick={() => setMobileOpen(false)}
@@ -148,18 +155,6 @@ const AdminLayout = ({
 
       {/* MAIN CONTAINER */}
       <main className={styles.mainContainer}>
-        {/* HEADER BAR (MOBILE ONLY) */}
-        <header className={styles.topHeader}>
-          <button
-            type="button"
-            className={styles.mobileMenuBtn}
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Abrir Menú"
-          >
-            <Menu size={22} />
-          </button>
-        </header>
-
         {/* CONTENT BODY */}
         <div className={styles.contentBody}>{children}</div>
       </main>

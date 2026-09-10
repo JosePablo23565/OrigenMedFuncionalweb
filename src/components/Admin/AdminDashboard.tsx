@@ -3,7 +3,7 @@ import {
   Phone,
   Search,
   X,
-  ListFilter,
+  Filter,
   Check,
   CircleCheck,
   CircleX,
@@ -12,6 +12,7 @@ import {
   CalendarDays,
   History,
   Copy,
+  Menu,
 } from 'lucide-react';
 import { getAllAppointments } from '../../lib/admin';
 import type { Appointment } from '../../lib/appointments';
@@ -53,9 +54,15 @@ interface AdminDashboardProps {
   activeTab: 'dashboard' | 'today' | 'appointments';
   searchQuery: string;
   setSearchQuery: (q: string) => void;
+  onOpenMobileMenu?: () => void;
 }
 
-const AdminDashboard = ({ activeTab, searchQuery, setSearchQuery }: AdminDashboardProps) => {
+const AdminDashboard = ({
+  activeTab,
+  searchQuery,
+  setSearchQuery,
+  onOpenMobileMenu,
+}: AdminDashboardProps) => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedAppt, setSelectedAppt] = useState<Appointment | null>(null);
@@ -224,14 +231,26 @@ const AdminDashboard = ({ activeTab, searchQuery, setSearchQuery }: AdminDashboa
 
   return (
     <div className={styles.dashboard}>
-      {/* SEARCH & FILTER CONTROLS ROW */}
+      {/* SEARCH AND FILTERS CONTROLS ROW */}
       <div className={styles.controlsRow}>
+        {onOpenMobileMenu && (
+          <button
+            type="button"
+            className={styles.mobileHamburgerBtn}
+            onClick={onOpenMobileMenu}
+            aria-label="Abrir Menú"
+            title="Abrir Menú"
+          >
+            <Menu size={20} />
+          </button>
+        )}
+
         <div className={styles.searchBar}>
           <Search size={17} className={styles.searchIcon} />
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="Buscar por paciente, servicio, correo..."
+            placeholder="Buscar por paciente, servicio..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -255,9 +274,9 @@ const AdminDashboard = ({ activeTab, searchQuery, setSearchQuery }: AdminDashboa
             onClick={() => setFilterOpen((prev) => !prev)}
             aria-expanded={filterOpen}
             title="Filtrar citas"
+            aria-label="Filtrar citas"
           >
-            <ListFilter size={17} />
-            <span className={styles.filterBtnText}>Filtrar</span>
+            <Filter size={17} />
             {activeFiltersCount > 0 && (
               <span className={styles.filterBadge}>{activeFiltersCount}</span>
             )}
@@ -340,7 +359,9 @@ const AdminDashboard = ({ activeTab, searchQuery, setSearchQuery }: AdminDashboa
         </div>
       </div>
 
-      <div className={styles.tableContainer}>
+      {/* DASHBOARD BODY */}
+      <div className={styles.dashboardBody}>
+        <div className={styles.tableContainer}>
         <div className={styles.tableWrapper}>
           {loading ? (
             <div className={styles.emptyState}>
@@ -410,6 +431,7 @@ const AdminDashboard = ({ activeTab, searchQuery, setSearchQuery }: AdminDashboa
           )}
         </div>
       </div>
+    </div>
 
       {/* MODAL DETALLE DE CITA AL HACER TAP */}
       {selectedAppt && (
@@ -468,11 +490,11 @@ const AdminDashboard = ({ activeTab, searchQuery, setSearchQuery }: AdminDashboa
                     <button
                       type="button"
                       className={styles.copyBtn}
-                      onClick={() => handleCopy(selectedAppt.patient_phone, 'phone')}
+                      onClick={() => handleCopy(selectedAppt.patient_phone, 'modal-phone')}
                       title="Copiar teléfono"
                       aria-label="Copiar teléfono"
                     >
-                      {copiedField === 'phone' ? (
+                      {copiedField === 'modal-phone' ? (
                         <>
                           <Check size={13} className={styles.copySuccessIcon} />
                           <span className={styles.copyFeedback}>Copiado</span>
@@ -499,11 +521,11 @@ const AdminDashboard = ({ activeTab, searchQuery, setSearchQuery }: AdminDashboa
                     <button
                       type="button"
                       className={styles.copyBtn}
-                      onClick={() => handleCopy(selectedAppt.patient_email, 'email')}
+                      onClick={() => handleCopy(selectedAppt.patient_email, 'modal-email')}
                       title="Copiar correo"
                       aria-label="Copiar correo"
                     >
-                      {copiedField === 'email' ? (
+                      {copiedField === 'modal-email' ? (
                         <>
                           <Check size={13} className={styles.copySuccessIcon} />
                           <span className={styles.copyFeedback}>Copiado</span>
