@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/hero/hero';
 import HeroBridge from './components/herobridge/herobridge';
@@ -8,11 +8,13 @@ import Conditions from './components/conditions/conditions';
 import Pricing from './components/pricing/pricing';
 import FAQ from './components/faq/faq';
 import Footer from './components/footer/footer';
-import AppointmentModal from './components/appointmentModal/appointmentmodal';
-import BookingModal from './components/BookingModal/BookingModal';
-import MyAppointmentsModal from './components/MyAppointmentsModal/MyAppointmentsModal';
-import MyAppointmentsPage from './components/MyAppointments/MyAppointmentsPage';
-import AdminPage from './components/Admin/AdminPage';
+
+// Lazy-loaded routes & modals (loaded on demand, keeping initial bundle tiny)
+const AppointmentModal = lazy(() => import('./components/appointmentModal/appointmentmodal'));
+const BookingModal = lazy(() => import('./components/BookingModal/BookingModal'));
+const MyAppointmentsModal = lazy(() => import('./components/MyAppointmentsModal/MyAppointmentsModal'));
+const MyAppointmentsPage = lazy(() => import('./components/MyAppointments/MyAppointmentsPage'));
+const AdminPage = lazy(() => import('./components/Admin/AdminPage'));
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -28,17 +30,23 @@ function App() {
   const isAdminPath = currentPath.startsWith('/admin');
 
   if (isSubdomainAdmin || isAdminPath) {
-    return <AdminPage />;
+    return (
+      <Suspense fallback={null}>
+        <AdminPage />
+      </Suspense>
+    );
   }
 
   if (currentPath.startsWith('/mis-citas')) {
     return (
       <>
         <Navbar />
-        <MyAppointmentsPage />
+        <Suspense fallback={null}>
+          <MyAppointmentsPage />
+          <AppointmentModal />
+          <BookingModal />
+        </Suspense>
         <Footer />
-        <AppointmentModal />
-        <BookingModal />
       </>
     );
   }
@@ -54,9 +62,11 @@ function App() {
       <Pricing />
       <FAQ />
       <Footer />
-      <AppointmentModal />
-      <BookingModal />
-      <MyAppointmentsModal />
+      <Suspense fallback={null}>
+        <AppointmentModal />
+        <BookingModal />
+        <MyAppointmentsModal />
+      </Suspense>
     </>
   );
 }
