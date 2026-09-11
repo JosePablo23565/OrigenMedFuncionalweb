@@ -16,8 +16,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" />
-    <!-- ===== FONT AWESOME ===== -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!-- Preload Hero image adaptively for instant LCP -->
+    <link rel="preload" as="image" href="/Hero-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/Hero.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high" />
     <!-- ===== GOOGLE IDENTITY SERVICES (GSI) ===== -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>

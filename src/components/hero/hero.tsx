@@ -19,13 +19,16 @@ const Hero = () => {
   return (
     <section id="inicio" className={styles.hero}>
       <div className={styles.heroImage}>
-        <img
-          src="/Hero.webp"
-          alt="Medicina natural y funcional"
-          className={styles.image}
-          fetchPriority="high"
-          loading="eager"
-        />
+        <picture>
+          <source media="(max-width: 768px)" srcSet="/Hero-mobile.webp" type="image/webp" />
+          <img
+            src="/Hero.webp"
+            alt="Medicina natural y funcional"
+            className={styles.image}
+            fetchPriority="high"
+            loading="eager"
+          />
+        </picture>
       </div>
       <div className={styles.content}>
         <h1 className={styles.title}>
