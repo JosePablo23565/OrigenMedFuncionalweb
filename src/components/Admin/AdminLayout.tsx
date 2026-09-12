@@ -56,16 +56,34 @@ const GestionarCitasIcon = ({ size = 19 }: { size?: number }) => (
   </svg>
 );
 
+const HorarioIcon = ({ size = 19 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ flexShrink: 0 }}
+  >
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+
 interface AdminLayoutProps {
   children: ReactNode;
-  activeTab?: 'dashboard' | 'today' | 'appointments';
-  setActiveTab?: (tab: 'dashboard' | 'today' | 'appointments') => void;
+  activeTab?: 'dashboard' | 'today' | 'appointments' | 'schedule';
+  setActiveTab?: (tab: 'dashboard' | 'today' | 'appointments' | 'schedule') => void;
   mobileOpen?: boolean;
   setMobileOpen?: (open: boolean) => void;
 }
 
 const AdminLayout = ({
   children,
+  activeTab = 'dashboard',
   setActiveTab,
   mobileOpen: controlledMobileOpen,
   setMobileOpen: controlledSetMobileOpen,
@@ -125,7 +143,7 @@ const AdminLayout = ({
           <nav className={styles.nav}>
             <button
               type="button"
-              className={`${styles.navItem} ${styles.activeNavItem}`}
+              className={`${styles.navItem} ${activeTab === 'dashboard' ? styles.activeNavItem : ''}`}
               onClick={() => {
                 setActiveTab?.('dashboard');
                 setMobileOpen(false);
@@ -133,6 +151,18 @@ const AdminLayout = ({
             >
               <GestionarCitasIcon size={19} />
               Gestionar Citas
+            </button>
+
+            <button
+              type="button"
+              className={`${styles.navItem} ${activeTab === 'schedule' ? styles.activeNavItem : ''}`}
+              onClick={() => {
+                setActiveTab?.('schedule');
+                setMobileOpen(false);
+              }}
+            >
+              <HorarioIcon size={19} />
+              Horario
             </button>
           </nav>
         </div>

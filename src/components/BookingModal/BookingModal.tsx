@@ -18,6 +18,7 @@ import { useLanguage } from '../../i18n/LanguageContext';
 import { useAuth } from '../../context/AuthContext';
 import { Calendar } from '../Calendar/Calendar';
 import { createAppointment, getBookedSlotsForDate } from '../../lib/appointments';
+import { getScheduleForDate, DEFAULT_SLOTS } from '../../lib/schedule';
 import type { TranslationKeys } from '../../i18n/translations';
 import styles from './BookingModal.module.css';
 
@@ -256,15 +257,6 @@ const SERVICES: ServiceItem[] = [
   { id: 'minorSurgery', category: 'procedimientos', Icon: MinorSurgeryIcon },
 ];
 
-const TIME_SLOTS = [
-  '5:00 PM',
-  '5:30 PM',
-  '6:00 PM',
-  '6:30 PM',
-  '7:00 PM',
-  '7:30 PM',
-];
-
 const BookingModal = () => {
   const { isBookingModalOpen, closeBookingModal } = useModal();
   const { language, t } = useLanguage();
@@ -276,6 +268,8 @@ const BookingModal = () => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [bookedSlots, setBookedSlots] = useState<string[]>([]);
+  const [daySlots, setDaySlots] = useState<string[]>(DEFAULT_SLOTS);
+  const [isDayClosed, setIsDayClosed] = useState<boolean>(false);
   const [loadingSlots, setLoadingSlots] = useState(false);
 
   const [fullName, setFullName] = useState('');
@@ -297,10 +291,12 @@ const BookingModal = () => {
     }
   }, [user]);
 
-  // Fetch booked slots whenever selectedDate changes
+  // Fetch booked slots and schedule whenever selectedDate changes
   useEffect(() => {
     if (!selectedDate) {
       setBookedSlots([]);
+      setDaySlots(DEFAULT_SLOTS);
+      setIsDayClosed(false);
       return;
     }
 
@@ -310,11 +306,23 @@ const BookingModal = () => {
     const dateStr = `${year}-${month}-${day}`;
 
     setLoadingSlots(true);
-    getBookedSlotsForDate(dateStr).then(({ data }) => {
-      const booked = data || [];
-      setBookedSlots(booked);
-      setLoadingSlots(false);
-    });
+    Promise.all([
+      getBookedSlotsForDate(dateStr),
+      getScheduleForDate(dateStr),
+    ])
+      .then(([{ data: booked }, schedule]) => {
+        setBookedSlots(booked || []);
+        setIsDayClosed(Boolean(schedule.isClosed));
+        setDaySlots(schedule.slots || []);
+        setLoadingSlots(false);
+      })
+      .catch((err) => {
+        console.error('Error fetching schedule/slots:', err);
+        setBookedSlots([]);
+        setDaySlots(DEFAULT_SLOTS);
+        setIsDayClosed(false);
+        setLoadingSlots(false);
+      });
   }, [selectedDate]);
 
   // Lock body and html scroll completely when modal is open
@@ -339,6 +347,8 @@ const BookingModal = () => {
     setSelectedDate(undefined);
     setSelectedTime(null);
     setBookedSlots([]);
+    setDaySlots(DEFAULT_SLOTS);
+    setIsDayClosed(false);
     setNotes('');
     setErrors({});
     setIsSubmitting(false);
@@ -636,7 +646,23 @@ const BookingModal = () => {
                   <div className={styles.loadingSlotsNotice}>
                     <span>{language === 'es' ? 'Consultando disponibilidad...' : 'Checking availability...'}</span>
                   </div>
-                ) : selectedDate && TIME_SLOTS.filter((time) => !bookedSlots.includes(time)).length === 0 ? (
+                ) : !selectedDate ? (
+                  <div className={styles.noSlotsNotice}>
+                    <span>
+                      {language === 'es'
+                        ? 'Selecciona una fecha en el calendario para ver los horarios.'
+                        : 'Select a date on the calendar to view available times.'}
+                    </span>
+                  </div>
+                ) : isDayClosed ? (
+                  <div className={styles.noSlotsNotice}>
+                    <span>
+                      {language === 'es'
+                        ? 'La clínica se encuentra cerrada en esta fecha. Por favor selecciona otro día.'
+                        : 'The clinic is closed on this date. Please select another day.'}
+                    </span>
+                  </div>
+                ) : daySlots.filter((time) => !bookedSlots.includes(time)).length === 0 ? (
                   <div className={styles.noSlotsNotice}>
                     <span>
                       {language === 'es'
@@ -646,23 +672,24 @@ const BookingModal = () => {
                   </div>
                 ) : (
                   <div className={styles.timeSlotsGrid}>
-                    {TIME_SLOTS.filter((time) => !selectedDate || !bookedSlots.includes(time)).map((time) => {
-                      const isSelectedTime = selectedTime === time;
-                      return (
-                        <button
-                          key={time}
-                          type="button"
-                          className={`${styles.timeSlotBtn} ${isSelectedTime ? styles.timeSlotActive : ''}`}
-                          onClick={() => {
-                            if (selectedDate) setSelectedTime(time);
-                          }}
-                          disabled={!selectedDate}
-                        >
-                          <span>{time}</span>
-                          {isSelectedTime && <Check size={14} strokeWidth={2.5} />}
-                        </button>
-                      );
-                    })}
+                    {daySlots
+                      .filter((time) => !bookedSlots.includes(time))
+                      .map((time) => {
+                        const isSelectedTime = selectedTime === time;
+                        return (
+                          <button
+                            key={time}
+                            type="button"
+                            className={`${styles.timeSlotBtn} ${isSelectedTime ? styles.timeSlotActive : ''}`}
+                            onClick={() => {
+                              setSelectedTime(time);
+                            }}
+                          >
+                            <span>{time}</span>
+                            {isSelectedTime && <Check size={14} strokeWidth={2.5} />}
+                          </button>
+                        );
+                      })}
                   </div>
                 )}
               </div>

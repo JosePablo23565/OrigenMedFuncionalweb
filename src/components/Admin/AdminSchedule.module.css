@@ -1,0 +1,497 @@
+/* ============================================
+   ADMIN SCHEDULE (GESTIÓN DE HORARIOS)
+   ============================================ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.25rem 2rem 3.5rem;
+  box-sizing: border-box;
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.title {
+  font-family: "Exo 2", var(--font-family, sans-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #302E2E;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #73715e;
+  margin: 0;
+}
+
+/* Alert Notification */
+.alertSuccess {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.25rem;
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  animation: fadeIn 0.25s ease;
+}
+
+.alertError {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.25rem;
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Main Grid Layout */
+.scheduleLayout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+  align-items: stretch;
+}
+
+/* Left: Calendar Card */
+.calendarCard {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(106, 105, 80, 0.14);
+  padding: 1.75rem;
+  box-shadow: 0 4px 16px rgba(48, 46, 46, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+  gap: 1.25rem;
+}
+
+.calendarCardTitle {
+  font-family: "Exo 2", var(--font-family, sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #302E2E;
+  margin: 0;
+}
+
+.calendarWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+}
+
+.calendarLegend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(106, 105, 80, 0.1);
+  font-size: 0.82rem;
+  color: #73715e;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legendDotOpen {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #3B8595;
+}
+
+.legendDotClosed {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ef4444;
+}
+
+/* Right: Editor Card */
+.editorCard {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(106, 105, 80, 0.14);
+  padding: 1.75rem;
+  box-shadow: 0 4px 16px rgba(48, 46, 46, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+  gap: 1.5rem;
+}
+
+.editorHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(106, 105, 80, 0.12);
+}
+
+.selectedDateInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.selectedDateName {
+  font-family: "Exo 2", var(--font-family, sans-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #302E2E;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.selectedDateBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.badgeOpen {
+  background-color: rgba(59, 133, 149, 0.12);
+  color: #2b6774;
+}
+
+.badgeClosed {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+/* Toggle Closed/Open Switch */
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.15rem;
+  background-color: #f7f6f0;
+  border-radius: 12px;
+  border: 1px solid rgba(106, 105, 80, 0.12);
+}
+
+.toggleLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #302E2E;
+}
+
+.switchBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid rgba(106, 105, 80, 0.2);
+  background: #ffffff;
+  color: #302E2E;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.switchBtnActive {
+  background-color: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+}
+
+/* Slots Section */
+.slotsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.slotsSectionTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #302E2E;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.slotsCount {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #73715e;
+}
+
+/* Slots Chips Grid */
+.slotsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 0.75rem;
+}
+
+.slotChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.85rem;
+  background: #faf6ef;
+  border: 1.5px solid #3B8595;
+  color: #1a3c40;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.slotChip:hover {
+  background-color: #f0fdfa;
+}
+
+.slotDeleteBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #8a8870;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  transition: color 0.15s ease;
+}
+
+.slotDeleteBtn:hover {
+  color: #dc2626;
+}
+
+.emptySlotsNotice {
+  padding: 2rem;
+  text-align: center;
+  background: #f7f6f0;
+  border-radius: 12px;
+  color: #73715e;
+  font-size: 0.92rem;
+  border: 1px dashed rgba(106, 105, 80, 0.25);
+}
+
+/* Add Slot Form */
+.addSlotRow {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 0.5rem;
+}
+
+.addSlotInput {
+  padding: 0.55rem 0.85rem;
+  border: 1px solid rgba(106, 105, 80, 0.25);
+  border-radius: 8px;
+  font-size: 0.92rem;
+  color: #302E2E;
+  background: #ffffff;
+  outline: none;
+  font-family: inherit;
+}
+
+.addSlotInput:focus {
+  border-color: #3B8595;
+  box-shadow: 0 0 0 2px rgba(59, 133, 149, 0.15);
+}
+
+.addSlotSelect {
+  padding: 0.55rem 0.65rem;
+  border: 1px solid rgba(106, 105, 80, 0.25);
+  border-radius: 8px;
+  font-size: 0.92rem;
+  color: #302E2E;
+  background: #ffffff;
+  outline: none;
+  cursor: pointer;
+}
+
+.addSlotBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 1rem;
+  background-color: #3B8595;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.addSlotBtn:hover {
+  background-color: #2F6F7E;
+}
+
+/* Preset Quick Buttons */
+.presetRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.presetLabel {
+  font-size: 0.82rem;
+  color: #73715e;
+}
+
+.presetBtn {
+  padding: 0.3rem 0.65rem;
+  background: #f7f6f0;
+  border: 1px solid rgba(106, 105, 80, 0.18);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: #5a5c4a;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.presetBtn:hover {
+  background: #edece4;
+  color: #302E2E;
+}
+
+/* Actions Footer */
+.actionsFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(106, 105, 80, 0.12);
+}
+
+.saveBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background-color: #6A6950;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-family: "Exo 2", var(--font-family, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(106, 105, 80, 0.2);
+  transition: all 0.2s ease;
+}
+
+.saveBtn:hover {
+  background-color: #55543f;
+  transform: translateY(-1px);
+}
+
+.saveBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.weeklyApplyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.15rem;
+  background: #ffffff;
+  color: #3B8595;
+  border: 1px solid rgba(59, 133, 149, 0.35);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.weeklyApplyBtn:hover {
+  background-color: rgba(59, 133, 149, 0.08);
+  border-color: #3B8595;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+  .container {
+    padding: max(1.25rem, env(safe-area-inset-top, 0px)) 1rem 2.5rem;
+    gap: 1.25rem;
+  }
+
+  .scheduleLayout {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .calendarCard {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.25rem;
+  }
+
+  .editorCard {
+    padding: 1.25rem;
+  }
+
+  .actionsFooter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .saveBtn,
+  .weeklyApplyBtn {
+    justify-content: center;
+    width: 100%;
+  }
+}

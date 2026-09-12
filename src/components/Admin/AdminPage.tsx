@@ -4,12 +4,13 @@ import { isUserAdmin } from '../../lib/admin';
 import AdminLogin from './AdminLogin';
 import AdminLayout from './AdminLayout';
 import AdminDashboard from './AdminDashboard';
+import AdminSchedule from './AdminSchedule';
 
 const AdminPage = () => {
   const { user, loading: authLoading } = useAuth();
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [checkingRole, setCheckingRole] = useState(true);
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'today' | 'appointments'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'today' | 'appointments' | 'schedule'>('dashboard');
   const [searchQuery, setSearchQuery] = useState('');
   const [forceLoginView, setForceLoginView] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -80,12 +81,16 @@ const AdminPage = () => {
       mobileOpen={mobileMenuOpen}
       setMobileOpen={setMobileMenuOpen}
     >
-      <AdminDashboard
-        activeTab={activeTab}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        onOpenMobileMenu={() => setMobileMenuOpen(true)}
-      />
+      {activeTab === 'schedule' ? (
+        <AdminSchedule onOpenMobileMenu={() => setMobileMenuOpen(true)} />
+      ) : (
+        <AdminDashboard
+          activeTab={activeTab}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          onOpenMobileMenu={() => setMobileMenuOpen(true)}
+        />
+      )}
     </AdminLayout>
   );
 };
