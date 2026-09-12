@@ -1,4 +1,5 @@
 import { useLanguage } from '../../i18n/LanguageContext';
+import logo from '../../assets/logo.png';
 import styles from './footer.module.css';
 
 const Footer = () => {
@@ -9,9 +10,9 @@ const Footer = () => {
       <div className={styles.container}>
         <div className={styles.grid}>
           <div className={styles.brand}>
-            <span className={styles.logo}>
-              {t.hero.title} <span className={styles.accent}>{t.hero.accent}</span>
-            </span>
+            <a href="#inicio" className={styles.logoLink} aria-label="Origen Inicio">
+              <img src={logo} alt="Origen Med Funcional" className={styles.logoImg} />
+            </a>
             <p className={styles.tagline}>{t.footer.tagline}</p>
           </div>
 
@@ -29,10 +30,17 @@ const Footer = () => {
             <a href="#servicios">{t.footer.service3}</a>
           </div>
 
-          <div className={styles.links}>
+          <div className={`${styles.links} ${styles.contact}`}>
             <h4 className={styles.heading}>{t.footer.contactTitle}</h4>
-            <a href="mailto:hola@origenmed.com">hola@origenmed.com</a>
-            <a href="tel:+521234567890">+52 123 456 7890</a>
+            <a href="mailto:origen.medfuncional@gmail.com" className={styles.contactLink}>origen.medfuncional@gmail.com</a>
+            <a
+              href="https://wa.me/50688775126"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.contactLink}
+            >
+              +506 8877 5126
+            </a>
           </div>
         </div>
 

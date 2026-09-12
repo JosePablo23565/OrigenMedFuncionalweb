@@ -2,8 +2,33 @@ import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { useModal } from '../../context/ModalContext';
-import { getUserAppointments, cancelAppointment, type Appointment } from '../../lib/appointments';
+import {
+  getUserAppointments,
+  cancelAppointment,
+  clearPastAppointments,
+  type Appointment,
+} from '../../lib/appointments';
 import styles from './MyAppointmentsPage.module.css';
+
+const TrashIcon = ({ size = 18, className }: { size?: number; className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.8}
+    stroke="currentColor"
+    width={size}
+    height={size}
+    className={className}
+    aria-hidden="true"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+    />
+  </svg>
+);
 
 const AlertIcon = ({ size = 32 }: { size?: number }) => (
   <svg
@@ -103,6 +128,11 @@ const MyAppointmentsPage = () => {
   const [isCancelling, setIsCancelling] = useState(false);
   const [cancelError, setCancelError] = useState<string | null>(null);
 
+  // Estado para el modal de borrar historial de citas pasadas
+  const [isClearHistoryModalOpen, setIsClearHistoryModalOpen] = useState(false);
+  const [isClearingHistory, setIsClearingHistory] = useState(false);
+  const [clearHistoryError, setClearHistoryError] = useState<string | null>(null);
+
   const fetchAppointments = useCallback(async () => {
     if (!user) {
       setLoading(false);
@@ -197,16 +227,59 @@ const MyAppointmentsPage = () => {
     setAppointmentToCancel(null);
   };
 
+  const handleOpenClearHistoryModal = () => {
+    setIsClearHistoryModalOpen(true);
+    setClearHistoryError(null);
+  };
+
+  const handleCloseClearHistoryModal = () => {
+    if (isClearingHistory) return;
+    setIsClearHistoryModalOpen(false);
+    setClearHistoryError(null);
+  };
+
+  const handleConfirmClearHistory = async () => {
+    if (!user) return;
+    setIsClearingHistory(true);
+    setClearHistoryError(null);
+
+    const { error } = await clearPastAppointments(user.id, user.email);
+
+    if (error) {
+      setClearHistoryError(error);
+      setIsClearingHistory(false);
+      return;
+    }
+
+    // Actualizar estado local: eliminar citas pasadas
+    setAppointments((prev) =>
+      prev.filter((appt) => {
+        const isPast = appt.appointment_date < todayStr;
+        const isFinished = appt.status === 'completed' || appt.status === 'cancelled';
+        return !isPast && !isFinished;
+      })
+    );
+
+    setIsClearingHistory(false);
+    setIsClearHistoryModalOpen(false);
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && appointmentToCancel && !isCancelling) {
-        setAppointmentToCancel(null);
-        setCancelError(null);
+      if (e.key === 'Escape') {
+        if (appointmentToCancel && !isCancelling) {
+          setAppointmentToCancel(null);
+          setCancelError(null);
+        }
+        if (isClearHistoryModalOpen && !isClearingHistory) {
+          setIsClearHistoryModalOpen(false);
+          setClearHistoryError(null);
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [appointmentToCancel, isCancelling]);
+  }, [appointmentToCancel, isCancelling, isClearHistoryModalOpen, isClearingHistory]);
 
   const totalPages = Math.ceil(filteredAppointments.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -231,7 +304,7 @@ const MyAppointmentsPage = () => {
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.container}>
-        {/* Fila de controles: Pestañas minimalistas (Izq) y Acción Nueva Cita (Der) */}
+        {/* Fila de controles: Pestañas minimalistas (Izq) y Acción Borrar Historial (Der) */}
         {user && !loading && (
           <div className={styles.controlsRow}>
             {/* Tab Bar Minimalista con Línea Inferior */}
@@ -262,6 +335,19 @@ const MyAppointmentsPage = () => {
                 )}
               </button>
             </div>
+
+            {/* Icono de papelera en color rojito en la esquina derecha */}
+            {activeTab === 'history' && historyCount > 0 && (
+              <button
+                type="button"
+                className={styles.clearHistoryBtn}
+                onClick={handleOpenClearHistoryModal}
+                title={language === 'es' ? 'Borrar todas las listas anteriores' : 'Clear past appointment history'}
+                aria-label={language === 'es' ? 'Borrar todas las listas anteriores' : 'Clear past appointment history'}
+              >
+                <TrashIcon size={19} />
+              </button>
+            )}
           </div>
         )}
 
@@ -498,6 +584,88 @@ const MyAppointmentsPage = () => {
                   </>
                 ) : (
                   <span>{language === 'es' ? 'Sí, cancelar' : 'Yes, cancel'}</span>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Confirmación para Borrar Historial de Citas Pasadas */}
+      {isClearHistoryModalOpen && (
+        <div
+          className={styles.modalOverlay}
+          onClick={handleCloseClearHistoryModal}
+          role="presentation"
+        >
+          <div
+            className={styles.modalCard}
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="clear-history-modal-title"
+          >
+            <button
+              type="button"
+              className={styles.modalCloseBtn}
+              onClick={handleCloseClearHistoryModal}
+              disabled={isClearingHistory}
+              aria-label={language === 'es' ? 'Cerrar modal' : 'Close modal'}
+            >
+              <CloseIcon size={20} />
+            </button>
+
+            <div className={`${styles.modalIconWrap} ${styles.modalIconWrapDanger}`}>
+              <TrashIcon size={30} />
+            </div>
+
+            <h3 id="clear-history-modal-title" className={styles.modalTitle}>
+              {language === 'es' ? '¿Borrar historial de citas?' : 'Clear Appointment History?'}
+            </h3>
+
+            <p className={styles.modalDesc}>
+              {language === 'es' ? (
+                <>
+                  ¿Estás seguro de que deseas eliminar todas las citas de tu historial de{' '}
+                  <strong>citas pasadas ({historyCount})</strong>? Esta acción no se puede deshacer.
+                </>
+              ) : (
+                <>
+                  Are you sure you want to delete all appointments from your{' '}
+                  <strong>past history ({historyCount})</strong>? This action cannot be undone.
+                </>
+              )}
+            </p>
+
+            {clearHistoryError && (
+              <div className={styles.modalError}>
+                <span>{clearHistoryError}</span>
+              </div>
+            )}
+
+            <div className={styles.modalActions}>
+              <button
+                type="button"
+                className={styles.keepBtn}
+                onClick={handleCloseClearHistoryModal}
+                disabled={isClearingHistory}
+              >
+                {language === 'es' ? 'No, conservar' : 'No, keep'}
+              </button>
+
+              <button
+                type="button"
+                className={styles.confirmCancelBtn}
+                onClick={handleConfirmClearHistory}
+                disabled={isClearingHistory}
+              >
+                {isClearingHistory ? (
+                  <>
+                    <span className={styles.btnSpinner} aria-hidden="true" />
+                    <span>{language === 'es' ? 'Borrando...' : 'Deleting...'}</span>
+                  </>
+                ) : (
+                  <span>{language === 'es' ? 'Sí, borrar todo' : 'Yes, delete all'}</span>
                 )}
               </button>
             </div>

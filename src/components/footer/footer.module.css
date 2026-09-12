@@ -14,7 +14,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr;
   gap: 48px;
   margin-bottom: 48px;
 }
@@ -22,21 +22,32 @@
 /* ============================================
    BRAND
    ============================================ */
-.logo {
-  color: #FFFFFF;
-  font-size: 1.3rem;
-  font-weight: 600;
-  display: block;
-  margin-bottom: 12px;
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.accent {
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.7);
+.logoLink {
+  display: inline-block;
+  width: fit-content;
+  transition: opacity 0.2s ease;
+}
+
+.logoLink:hover {
+  opacity: 0.85;
+}
+
+.logoImg {
+  display: block;
+  width: auto;
+  height: 34px;
+  max-width: 165px;
+  object-fit: contain;
 }
 
 .tagline {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.65);
   font-size: 0.9rem;
   line-height: 1.6;
   max-width: 280px;
@@ -48,27 +59,34 @@
 .links {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .heading {
   color: #FFFFFF;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   margin-bottom: 4px;
 }
 
 .links a {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.65);
   text-decoration: none;
   font-size: 0.9rem;
-  transition: color 0.2s;
+  transition: color 0.2s ease, transform 0.2s ease;
+  width: fit-content;
+  display: inline-block;
 }
 
 .links a:hover {
   color: #FFFFFF;
+  transform: translateX(2px);
+}
+
+.contactLink {
+  word-break: break-all;
 }
 
 /* ============================================
@@ -80,7 +98,7 @@
 }
 
 .copy {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.45);
   font-size: 0.8rem;
   text-align: center;
 }
@@ -91,12 +109,12 @@
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 36px 32px;
   }
 }
 
 /* ============================================
-   MÓVIL
+   MÓVIL (≤768px)
    ============================================ */
 @media (max-width: 768px) {
   .footer {
@@ -108,7 +126,35 @@
   }
 
   .grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 20px;
+    margin-bottom: 36px;
+  }
+
+  .brand {
+    grid-column: 1 / -1;
+    gap: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .logoImg {
+    height: 34px;
+    max-width: 155px;
+  }
+
+  .tagline {
+    display: none;
+  }
+
+  .links a {
+    font-size: 0.88rem;
+    padding: 4px 0;
+  }
+
+  .contact {
+    grid-column: 1 / -1;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 }

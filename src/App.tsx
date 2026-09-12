@@ -3,7 +3,8 @@ import Navbar from './components/Navbar/Navbar';
 import Hero from './components/hero/hero';
 import HeroBridge from './components/herobridge/herobridge';
 import Stats from './components/stats/stats';
-import Experience from './components/experience/experience';
+import Approach from './components/approach/approach';
+import Team from './components/team/team';
 import Conditions from './components/conditions/conditions';
 import Pricing from './components/pricing/pricing';
 import FAQ from './components/faq/faq';
@@ -57,7 +58,8 @@ function App() {
       <Hero />
       <HeroBridge />
       <Stats />
-      <Experience />
+      <Approach />
+      <Team />
       <Conditions />
       <Pricing />
       <FAQ />

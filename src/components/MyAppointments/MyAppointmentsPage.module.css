@@ -87,6 +87,33 @@
   color: #ffffff;
 }
 
+.clearHistoryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 0.65rem;
+  background: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 0.4rem;
+  flex-shrink: 0;
+}
+
+.clearHistoryBtn:hover {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+}
+
+.clearHistoryBtn:active {
+  transform: translateY(0);
+}
+
 .newBookingBtn {
   display: inline-flex;
   align-items: center;
@@ -516,6 +543,11 @@
   justify-content: center;
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
+}
+
+.modalIconWrapDanger {
+  background: #fef2f2;
+  color: #dc2626;
 }
 
 .modalTitle {

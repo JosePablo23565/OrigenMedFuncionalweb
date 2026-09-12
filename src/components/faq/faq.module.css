@@ -60,11 +60,14 @@
 
 .arrow {
   color: #3B8595;
-  font-size: 1.4rem;
-  font-weight: 300;
-  transition: transform 0.3s ease;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
   margin-left: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .arrow.open {

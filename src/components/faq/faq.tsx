@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import styles from './faq.module.css';
 
-const faqKeys = ['q1', 'q2', 'q3', 'q4', 'q5'];
+const faqKeys = ['q1', 'q2'];
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -25,9 +25,20 @@ const FAQ = () => {
                 onClick={() => toggle(i)}
               >
                 <span>{t.faq[`${key}Question` as keyof typeof t.faq]}</span>
-                <span className={`${styles.arrow} ${openIndex === i ? styles.open : ''}`}>
-                  ‹
-                </span>
+                <svg
+                  className={`${styles.arrow} ${openIndex === i ? styles.open : ''}`}
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
               </button>
               {openIndex === i && (
                 <div className={styles.answer}>

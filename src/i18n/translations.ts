@@ -21,9 +21,24 @@ export interface TranslationKeys {
     item3: string;
   };
   heroBridge: {
-    item1: string;
-    item2: string;
-    item3: string;
+    category1: string;
+    title1: string;
+    category2: string;
+    title2: string;
+    category3: string;
+    title3: string;
+    approachTitle: string;
+    approachP1: string;
+    approachP2: string;
+    approachCta: string;
+    item1Title: string;
+    item1Desc: string;
+    item2Title: string;
+    item2Desc: string;
+    item3Title: string;
+    item3Desc: string;
+    item4Title: string;
+    item4Desc: string;
   };
   stats: {
     title: string;
@@ -45,6 +60,14 @@ export interface TranslationKeys {
     step4Text: string;
     step5Title: string;
     step5Text: string;
+  };
+  team: {
+    title: string;
+    viewProfile: string;
+    card1Name: string;
+    card1Specialty: string;
+    card2Name: string;
+    card2Specialty: string;
   };
   conditions: {
     title: string;
@@ -87,12 +110,6 @@ export interface TranslationKeys {
     q1Answer: string;
     q2Question: string;
     q2Answer: string;
-    q3Question: string;
-    q3Answer: string;
-    q4Question: string;
-    q4Answer: string;
-    q5Question: string;
-    q5Answer: string;
   };
 footer: {
       tagline: string;
@@ -216,14 +233,29 @@ export const translations: Record<Language, TranslationKeys> = {
       item3: 'Enfoque Integral',
     },
     heroBridge: {
-      item1: 'Atención 100% Personalizada',
-      item2: 'Medicina de Causa Raíz',
-      item3: 'Enfoque Integral y Preventivo',
+      category1: 'Medicina',
+      title1: 'NATURISTA',
+      category2: 'Medicina',
+      title2: 'FUNCIONAL',
+      category3: 'Medicina',
+      title3: 'PRECISIÓN',
+      approachTitle: 'Un enfoque más completo',
+      approachP1: 'Buscamos comprender a fondo el estado de cada persona para crear planes más precisos y personalizados. Evaluamos factores físicos, emocionales, nutricionales, ambientales y de estilo de vida que pueden influir en la salud, la prevención o la recuperación.',
+      approachP2: 'Para mantener y recuperar la salud, el cuerpo necesita recibir lo que le ayuda a funcionar mejor y eliminar aquello que puede estar afectando su equilibrio. Por eso combinamos diagnóstico, criterio médico, terapias complementarias y seguimiento integral.',
+      approachCta: 'Conocer Más',
+      item1Title: 'Diagnóstico',
+      item1Desc: 'Evaluación clínica profunda y herramientas de laboratorio especializadas para analizar el perfil metabólico, digestivo, hormonal, inmunológico y nutricional.',
+      item2Title: 'Plan personalizado',
+      item2Desc: 'Planes terapéuticos a la medida que integran nutrición clínica, modulación del estilo de vida, suplementación dirigida y prescripción con respaldo científico.',
+      item3Title: 'Terapias',
+      item3Desc: 'Intervenciones orientadas a optimizar la oxigenación, la energía mitocondrial, la regulación inmunológica y la capacidad natural de detoxificación y reparación de tejidos.',
+      item4Title: 'Seguimiento',
+      item4Desc: 'Monitoreo médico continuo y ajuste dinámico del plan para evaluar biomarcadores, consolidar hábitos duraderos y asegurar resultados sostenibles a largo plazo.',
     },
     stats: {
-      title: 'Cuidado médico que entrega resultados',
-      subtitle: 'Colabora con un experto en medicina funcional para descubrir la causa raíz de tus síntomas y finalmente sentirte mejor.',
-      cta: 'Comenzar Ahora',
+      title: '¿Qué es la medicina funcional?',
+      subtitle: 'La medicina funcional es un modelo médico que identifica y resuelve el origen profundo de los desequilibrios de salud mediante intervenciones personalizadas basadas en el metabolismo, la nutrición y el estilo de vida.',
+      cta: 'Conocer Más',
       stat1: 'de nuestros pacientes mejoran o eliminan sus síntomas en el primer año',
       quote: 'Llevaba años buscando respuestas. Origen Med Funcional me dio un plan claro y por fin me siento como yo misma.',
       author: 'María G.',
@@ -240,6 +272,14 @@ export const translations: Record<Language, TranslationKeys> = {
       step4Text: 'Diseñamos un plan de tratamiento único para ti.',
       step5Title: 'Seguimiento Continuo',
       step5Text: 'Te acompañamos en cada paso de tu proceso de sanación.',
+    },
+    team: {
+      title: 'Nuestro equipo',
+      viewProfile: 'Ver perfil',
+      card1Name: 'Dr. Jose Venegas',
+      card1Specialty: 'Médico Funcional',
+      card2Name: 'Enf. Daniela Sequeira',
+      card2Specialty: 'Enfermera',
     },
     conditions: {
       title: 'Síntomas y condiciones que tratamos',
@@ -282,12 +322,6 @@ export const translations: Record<Language, TranslationKeys> = {
       q1Answer: 'La medicina funcional se enfoca en identificar y abordar la causa raíz de las enfermedades, en lugar de solo tratar los síntomas. Utiliza un enfoque integral que considera factores genéticos, ambientales y de estilo de vida.',
       q2Question: '¿Cómo funciona la primera consulta?',
       q2Answer: 'En tu primera consulta, realizamos una evaluación completa de tu historia de salud, estilo de vida y síntomas. Esto nos permite crear un plan de tratamiento personalizado.',
-      q3Question: '¿Cuánto tiempo toma ver resultados?',
-      q3Answer: 'Los tiempos varían según la condición, pero muchos pacientes experimentan mejoras significativas en las primeras 8-12 semanas de seguir su plan personalizado.',
-      q4Question: '¿Ofrecen consultas online?',
-      q4Answer: 'Sí, ofrecemos consultas virtuales para pacientes de todo el país. Nuestro modelo de telemedicina permite la misma calidad de atención que una consulta presencial.',
-      q5Question: '¿Cuánto cuesta el servicio?',
-      q5Answer: 'Ofrecemos opciones de pago flexibles y aceptamos varios seguros. Contáctenos para una consulta gratuita y personalizada sobre precios.',
     },
     footer: {
       tagline: 'Medicina funcional natural para tu bienestar integral.',
@@ -441,14 +475,29 @@ export const translations: Record<Language, TranslationKeys> = {
       item3: 'Holistic Approach',
     },
     heroBridge: {
-      item1: '100% Personalized Care',
-      item2: 'Root Cause Medicine',
-      item3: 'Holistic & Preventive Approach',
+      category1: 'Medicine',
+      title1: 'NATUROPATHIC',
+      category2: 'Medicine',
+      title2: 'FUNCTIONAL',
+      category3: 'Medicine',
+      title3: 'PRECISION',
+      approachTitle: 'A more comprehensive approach',
+      approachP1: 'We seek to thoroughly understand each person’s overall health state to create more precise, personalized plans. We evaluate physical, emotional, nutritional, environmental, and lifestyle factors that influence wellness, prevention, and healing.',
+      approachP2: 'To restore and maintain vibrant health, the body needs what supports its optimal function and must eliminate what disrupts its balance. That is why we combine deep diagnostic tools, medical criteria, complementary therapies, and continuous guidance.',
+      approachCta: 'Learn More',
+      item1Title: 'Diagnosis',
+      item1Desc: 'In-depth clinical evaluation and specialized laboratory testing to analyze metabolic, digestive, hormonal, immunological, and nutritional profiles.',
+      item2Title: 'Personalized Plan',
+      item2Desc: 'Tailored therapeutic protocols integrating clinical nutrition, lifestyle modulation, targeted supplementation, and evidence-based prescriptions.',
+      item3Title: 'Therapies',
+      item3Desc: 'Interventions focused on optimizing oxygenation, mitochondrial energy, immune regulation, and the natural capacity for tissue detoxification and repair.',
+      item4Title: 'Follow-up',
+      item4Desc: 'Continuous medical monitoring and dynamic plan adjustments to evaluate biomarkers, build lasting habits, and ensure sustainable long-term outcomes.',
     },
     stats: {
-      title: 'Medical care that delivers results',
-      subtitle: 'Partner with a functional medicine expert to uncover the root-cause of symptoms and finally feel better.',
-      cta: 'Get Started',
+      title: 'What is functional medicine?',
+      subtitle: 'Functional medicine is a medical model that identifies and resolves the root causes of health imbalances through personalized interventions based on metabolism, nutrition, and lifestyle.',
+      cta: 'Learn More',
       stat1: 'of our patients improve or eliminate their symptoms within the first year',
       quote: 'I had been searching for answers for years. Origen Med Functional gave me a clear plan and I finally feel like myself again.',
       author: 'María G.',
@@ -465,6 +514,14 @@ export const translations: Record<Language, TranslationKeys> = {
       step4Text: 'We design a unique treatment plan for you.',
       step5Title: 'Ongoing Support',
       step5Text: 'We guide you through every step of your healing process.',
+    },
+    team: {
+      title: 'Our team',
+      viewProfile: 'View profile',
+      card1Name: 'Dr. Jose Venegas',
+      card1Specialty: 'Functional Medicine Physician',
+      card2Name: 'Enf. Daniela Sequeira',
+      card2Specialty: 'Nurse',
     },
     conditions: {
       title: 'Symptoms and conditions we treat',
@@ -507,12 +564,6 @@ export const translations: Record<Language, TranslationKeys> = {
       q1Answer: 'Functional medicine focuses on identifying and addressing the root cause of disease, rather than just treating symptoms. It uses a holistic approach that considers genetic, environmental, and lifestyle factors.',
       q2Question: 'How does the first visit work?',
       q2Answer: 'During your first visit, we conduct a comprehensive evaluation of your health history, lifestyle, and symptoms. This allows us to create a personalized treatment plan.',
-      q3Question: 'How long does it take to see results?',
-      q3Answer: 'Timeline varies by condition, but many patients experience significant improvements within the first 8-12 weeks of following their personalized plan.',
-      q4Question: 'Do you offer online consultations?',
-      q4Answer: 'Yes, we offer virtual consultations for patients nationwide. Our telemedicine model delivers the same quality of care as an in-person visit.',
-      q5Question: 'How much does it cost?',
-      q5Answer: 'We offer flexible payment options and accept several insurance plans. Contact us for a free, personalized consultation about pricing.',
     },
     footer: {
       tagline: 'Natural functional medicine for your holistic well-being.',

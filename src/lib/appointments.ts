@@ -147,3 +147,42 @@ export const cancelAppointment = async (
   }
 };
 
+export const clearPastAppointments = async (
+  userId?: string | null,
+  email?: string | null
+): Promise<{ error: string | null }> => {
+  if (!userId && !email) {
+    return { error: 'No se especificó usuario' };
+  }
+
+  try {
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    const today = `${year}-${month}-${day}`;
+
+    let query = supabase.from('appointments').delete();
+
+    if (userId) {
+      query = query.eq('user_id', userId);
+    } else if (email) {
+      query = query.eq('patient_email', email);
+    }
+
+    query = query.or(`appointment_date.lt.${today},status.in.(completed,cancelled)`);
+
+    const { error } = await query;
+
+    if (error) {
+      console.error('Error clearing past appointments in Supabase:', error);
+      return { error: error.message };
+    }
+
+    return { error: null };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Error al borrar el historial de citas.';
+    return { error: message };
+  }
+};
+
