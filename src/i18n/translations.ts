@@ -86,23 +86,21 @@ export interface TranslationKeys {
     heartTitle: string;
     heartText: string;
   };
-  pricing: {
+  location: {
     title: string;
-    subtitle: string;
-    plan1Badge: string;
-    plan1Title: string;
-    plan1Desc: string;
-    plan1Item1: string;
-    plan1Item2: string;
-    plan1Item3: string;
-    plan1Cta: string;
-    plan2Badge: string;
-    plan2Title: string;
-    plan2Desc: string;
-    plan2Item1: string;
-    plan2Item2: string;
-    plan2Item3: string;
-    plan2Cta: string;
+    clinicName: string;
+    description1: string;
+    description2: string;
+    locationCardTitle: string;
+    locationCardCity: string;
+    locationCardAddress: string;
+    hoursCardTitle: string;
+    hoursCardDays: string;
+    hoursCardTime: string;
+    phoneCardTitle: string;
+    phoneCardNumber: string;
+    openMaps: string;
+    openWaze: string;
   };
   faq: {
     title: string;
@@ -234,10 +232,10 @@ export const translations: Record<Language, TranslationKeys> = {
     },
     heroBridge: {
       category1: 'Medicina',
-      title1: 'NATURISTA',
-      category2: 'Medicina',
-      title2: 'FUNCIONAL',
-      category3: 'Medicina',
+      title1: 'FUNCIONAL',
+      category2: 'Medicina del',
+      title2: 'ESTILO DE VIDA',
+      category3: 'Medicina de',
       title3: 'PRECISIÓN',
       approachTitle: 'Un enfoque más completo',
       approachP1: 'Buscamos comprender a fondo el estado de cada persona para crear planes más precisos y personalizados. Evaluamos factores físicos, emocionales, nutricionales, ambientales y de estilo de vida que pueden influir en la salud, la prevención o la recuperación.',
@@ -298,23 +296,21 @@ export const translations: Record<Language, TranslationKeys> = {
       heartTitle: 'Salud Cardiovascular',
       heartText: 'Colesterol alto, hipertensión, inflamación, riesgo cardiovascular.',
     },
-    pricing: {
-      title: 'Experimenta la diferencia',
-      subtitle: 'Elige el programa que mejor se adapte a tus necesidades.',
-      plan1Badge: 'CONSULTA ÚNICA',
-      plan1Title: 'Revisión de Laboratorio',
-      plan1Desc: 'Consulta con un clínico para revisar tus resultados de laboratorio.',
-      plan1Item1: 'Consulta de 60 minutos',
-      plan1Item2: 'Revisión completa de laboratorio',
-      plan1Item3: 'Plan de acción personalizado',
-      plan1Cta: 'Agendar Consulta',
-      plan2Badge: 'CUIDADO CONTINUO',
-      plan2Title: 'Atención Integral',
-      plan2Desc: 'Programa completo con equipo de salud dedicado y plan personalizado.',
-      plan2Item1: 'Equipo de salud de 5 personas',
-      plan2Item2: 'Laboratorios avanzados incluidos',
-      plan2Item3: 'Seguimiento continuo',
-      plan2Cta: 'Unirse Ahora',
+    location: {
+      title: 'Nuestra Ubicación',
+      clinicName: 'Guayabo, Bagaces',
+      description1: 'Nuestro consultorio se encuentra ubicado dentro de las instalaciones de Clínica Monserrat, brindando un entorno médico cálido, profesional y de confianza.',
+      description2: 'La atención se brinda exclusivamente con cita previa para garantizarte un espacio privado, puntual y dedicado a tu salud integral.',
+      locationCardTitle: 'Ubicación',
+      locationCardCity: 'Guayabo, Bagaces',
+      locationCardAddress: '25 m Sur del Banco de Costa Rica',
+      hoursCardTitle: 'Horario',
+      hoursCardDays: 'Lunes a Viernes',
+      hoursCardTime: '5:00 p. m. a 8:00 p. m.',
+      phoneCardTitle: 'Teléfono',
+      phoneCardNumber: '+506 8877 5126',
+      openMaps: 'Abrir en Maps',
+      openWaze: 'Abrir en Waze',
     },
     faq: {
       title: 'Preguntas Frecuentes',
@@ -476,9 +472,9 @@ export const translations: Record<Language, TranslationKeys> = {
     },
     heroBridge: {
       category1: 'Medicine',
-      title1: 'NATUROPATHIC',
-      category2: 'Medicine',
-      title2: 'FUNCTIONAL',
+      title1: 'FUNCTIONAL',
+      category2: 'Lifestyle',
+      title2: 'MEDICINE',
       category3: 'Medicine',
       title3: 'PRECISION',
       approachTitle: 'A more comprehensive approach',
@@ -540,23 +536,21 @@ export const translations: Record<Language, TranslationKeys> = {
       heartTitle: 'Heart Health',
       heartText: 'High cholesterol, hypertension, inflammation, cardiovascular risk.',
     },
-    pricing: {
-      title: 'Experience the difference',
-      subtitle: 'Choose the program that best fits your needs.',
-      plan1Badge: 'ONE-TIME VISIT',
-      plan1Title: 'Clinical Lab Review',
-      plan1Desc: 'Meet with a clinician to review your lab results in context.',
-      plan1Item1: '60-minute consultation',
-      plan1Item2: 'Comprehensive lab review',
-      plan1Item3: 'Personalized action plan',
-      plan1Cta: 'Book a Visit',
-      plan2Badge: 'ONGOING CARE',
-      plan2Title: 'Complete Care',
-      plan2Desc: 'Full program with dedicated care team and personalized plan.',
-      plan2Item1: '5-person care team',
-      plan2Item2: 'Advanced labs included',
-      plan2Item3: 'Ongoing follow-up',
-      plan2Cta: 'Join Now',
+    location: {
+      title: 'Our Location',
+      clinicName: 'Guayabo, Bagaces',
+      description1: 'Our practice is located inside Clínica Monserrat facilities, providing a warm, professional, and trusted medical environment.',
+      description2: 'Care is provided exclusively by prior appointment to guarantee a private, punctual space dedicated to your holistic health.',
+      locationCardTitle: 'Location',
+      locationCardCity: 'Guayabo, Bagaces',
+      locationCardAddress: '25 m South of Banco de Costa Rica',
+      hoursCardTitle: 'Office Hours',
+      hoursCardDays: 'Monday to Friday',
+      hoursCardTime: '5:00 p.m. to 8:00 p.m.',
+      phoneCardTitle: 'Phone',
+      phoneCardNumber: '+506 8877 5126',
+      openMaps: 'Open in Maps',
+      openWaze: 'Open in Waze',
     },
     faq: {
       title: 'Frequently Asked Questions',

@@ -1,4 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
+import { useScrollReveal } from './hooks/useScrollReveal';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/hero/hero';
 import HeroBridge from './components/herobridge/herobridge';
@@ -6,7 +7,7 @@ import Stats from './components/stats/stats';
 import Approach from './components/approach/approach';
 import Team from './components/team/team';
 import Conditions from './components/conditions/conditions';
-import Pricing from './components/pricing/pricing';
+import Location from './components/location/location';
 import FAQ from './components/faq/faq';
 import Footer from './components/footer/footer';
 
@@ -19,6 +20,7 @@ const AdminPage = lazy(() => import('./components/Admin/AdminPage'));
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  useScrollReveal();
 
   useEffect(() => {
     const handlePopState = () => setCurrentPath(window.location.pathname);
@@ -61,7 +63,7 @@ function App() {
       <Approach />
       <Team />
       <Conditions />
-      <Pricing />
+      <Location />
       <FAQ />
       <Footer />
       <Suspense fallback={null}>

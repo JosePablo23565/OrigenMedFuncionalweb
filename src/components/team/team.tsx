@@ -7,11 +7,11 @@ const Team = () => {
   return (
     <section id="equipo" className={styles.teamSection}>
       <div className={styles.container}>
-        <h2 className={styles.title}>{t.team.title}</h2>
+        <h2 className={`${styles.title} reveal-on-scroll`}>{t.team.title}</h2>
 
         <div className={styles.cardsList}>
           {/* Tarjeta 1: Doctor / Médico (Foto vacía / Placeholder a la izquierda, Info a la derecha) */}
-          <div className={`${styles.card} ${styles.cardDoctor}`}>
+          <div className={`${styles.card} ${styles.cardDoctor} reveal-scale`}>
             <div className={styles.photoCol}></div>
 
             <div className={styles.infoCol}>
@@ -27,7 +27,7 @@ const Team = () => {
           </div>
 
           {/* Tarjeta 2: Enfermera (Info a la izquierda, Foto de la enfermera a la derecha) */}
-          <div className={`${styles.card} ${styles.cardNurse}`}>
+          <div className={`${styles.card} ${styles.cardNurse} reveal-scale reveal-delay-2`}>
             <div className={styles.infoCol}>
               <h3 className={styles.memberName}>{t.team.card2Name}</h3>
               <p className={styles.memberSpecialty}>{t.team.card2Specialty}</p>

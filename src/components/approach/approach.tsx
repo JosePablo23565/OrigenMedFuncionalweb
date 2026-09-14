@@ -23,7 +23,7 @@ const Approach = () => {
       <div className={styles.approachContainer}>
         <div className={styles.approachGrid}>
           {/* Left Column: Title, Paragraph */}
-          <div className={styles.approachLeft}>
+          <div className={`${styles.approachLeft} reveal-on-scroll`}>
             <h2 className={styles.approachHeading}>{t.heroBridge.approachTitle}</h2>
             <p className={styles.approachParagraph}>{t.heroBridge.approachP1}</p>
           </div>
@@ -31,7 +31,12 @@ const Approach = () => {
           {/* Right Column: 4 Stages with custom Check SVG */}
           <div className={styles.approachRight}>
             {APPROACH_ITEMS.map((item, idx) => (
-              <div key={idx} className={styles.approachItem}>
+              <div
+                key={idx}
+                className={`${styles.approachItem} reveal-on-scroll ${
+                  idx === 1 ? 'reveal-delay-1' : idx === 2 ? 'reveal-delay-2' : idx === 3 ? 'reveal-delay-3' : ''
+                }`}
+              >
                 <div className={styles.checkWrapper}>
                   <CheckIcon />
                 </div>

@@ -68,13 +68,16 @@
 }
 
 .title {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: #302E2E;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   font-family: "Exo 2", var(--font-family);
   margin: 0;
+  line-height: 1.25;
+  text-wrap: balance;
+  max-width: 260px;
 }
 
 /* ============================================

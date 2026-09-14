@@ -18,7 +18,7 @@ const Hero = () => {
 
   return (
     <section id="inicio" className={styles.hero}>
-      <div className={styles.heroImage}>
+      <div className={`${styles.heroImage} reveal-fade`}>
         <picture>
           <source media="(max-width: 768px)" srcSet="/Hero-mobile.webp" type="image/webp" />
           <img
@@ -31,15 +31,17 @@ const Hero = () => {
         </picture>
       </div>
       <div className={styles.content}>
-        <h1 className={styles.title}>
+        <h1 className={`${styles.title} reveal-on-scroll`}>
           <span className={`${styles.line} ${styles.lineMedium}`}>{t.hero.title}</span>
           <span className={styles.accentGroup}>
             <span className={`${styles.line} ${styles.lineBold}`}>{t.hero.accent}</span>
             <div className={styles.accentBar}></div>
           </span>
         </h1>
-        <p className={styles.subtitle}>{t.hero.subtitle}</p>
-        <button onClick={handleCtaClick} className={styles.cta}>{t.hero.cta1}</button>
+        <p className={`${styles.subtitle} reveal-on-scroll reveal-delay-1`}>{t.hero.subtitle}</p>
+        <button onClick={handleCtaClick} className={`${styles.cta} reveal-on-scroll reveal-delay-2`}>
+          {t.hero.cta1}
+        </button>
       </div>
     </section>
   );

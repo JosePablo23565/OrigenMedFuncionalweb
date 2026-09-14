@@ -1,0 +1,78 @@
+/* ============================================
+   SCROLL REVEAL ANIMATIONS - ORIGEN MED
+   Smooth, hardware-accelerated, high-end motion
+   ============================================ */
+
+/* Base reveal: smooth fade up */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* Soft Fade In without translate */
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.reveal-fade.is-revealed {
+  opacity: 1;
+  will-change: auto;
+}
+
+/* Scale & lift (ideal for cards and photos) */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.97) translateY(20px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-scale.is-revealed {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* Stagger Delays for child sequences */
+.reveal-delay-1 {
+  transition-delay: 100ms;
+}
+
+.reveal-delay-2 {
+  transition-delay: 200ms;
+}
+
+.reveal-delay-3 {
+  transition-delay: 300ms;
+}
+
+.reveal-delay-4 {
+  transition-delay: 400ms;
+}
+
+.reveal-delay-5 {
+  transition-delay: 500ms;
+}
+
+/* Respect user's accessibility reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll,
+  .reveal-fade,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
