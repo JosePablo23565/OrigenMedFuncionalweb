@@ -19,7 +19,7 @@ const Approach = () => {
   const { t } = useLanguage();
 
   return (
-    <section className={styles.approachWrapper}>
+    <section id="servicios" className={styles.approachWrapper}>
       <div className={styles.approachContainer}>
         <div className={styles.approachGrid}>
           {/* Left Column: Title, Paragraph */}

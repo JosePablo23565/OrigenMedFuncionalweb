@@ -6,7 +6,6 @@ import HeroBridge from './components/herobridge/herobridge';
 import Stats from './components/stats/stats';
 import Approach from './components/approach/approach';
 import Team from './components/team/team';
-import Conditions from './components/conditions/conditions';
 import Location from './components/location/location';
 import FAQ from './components/faq/faq';
 import Footer from './components/footer/footer';
@@ -62,7 +61,6 @@ function App() {
       <Stats />
       <Approach />
       <Team />
-      <Conditions />
       <Location />
       <FAQ />
       <Footer />

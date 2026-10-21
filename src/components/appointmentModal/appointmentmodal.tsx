@@ -98,7 +98,9 @@ const AppointmentModal = () => {
   const { user, signIn, signUp, signInWithGoogle, signInWithGoogleIdToken } = useAuth();
   const { t, language } = useLanguage();
 
-  const GOOGLE_CLIENT_ID = "852961616818-vmbehrd844lkh1kn9v801q7dufmun8e2.apps.googleusercontent.com";
+  const GOOGLE_CLIENT_ID =
+    import.meta.env.VITE_GOOGLE_CLIENT_ID ||
+    "852961616818-vmbehrd844lkh1kn9v801q7dufmun8e2.apps.googleusercontent.com";
 
   useEffect(() => {
     if (isModalOpen && user) {

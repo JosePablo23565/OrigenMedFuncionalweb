@@ -1,15 +1,10 @@
 import React from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { CLINIC_CONFIG } from '../../config/clinic';
 import styles from './location.module.css';
 
 const Location: React.FC = () => {
   const { t } = useLanguage();
-
-  const googleMapsUrl =
-    'https://www.google.com/maps/search/?api=1&query=Farmacia+Monserrat+Guayabo+Guanacaste';
-  const wazeUrl = 'https://waze.com/ul?q=Farmacia%20Monserrat%20Guayabo';
-  const embedMapsUrl =
-    'https://maps.google.com/maps?q=Farmacia+Monserrat,+Guayabo,+Guanacaste,+Costa+Rica&t=&z=16&ie=UTF8&iwloc=&output=embed';
 
   return (
     <section id="ubicacion" className={styles.locationSection}>
@@ -89,11 +84,11 @@ const Location: React.FC = () => {
 
               {/* Teléfono */}
               <a
-                href="https://wa.me/50688775126"
+                href={CLINIC_CONFIG.whatsapp.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${styles.infoItem} ${styles.interactiveItem}`}
-                title="Escribir por WhatsApp o Llamar"
+                title={t.location.whatsappTitle}
               >
                 <div className={styles.iconCircle}>
                   <svg
@@ -114,7 +109,7 @@ const Location: React.FC = () => {
                 </div>
                 <div className={styles.infoContent}>
                   <span className={styles.infoValue}>{t.location.phoneCardNumber}</span>
-                  <span className={styles.infoSub}>WhatsApp / Llamadas</span>
+                  <span className={styles.infoSub}>{t.location.whatsappLabel}</span>
                 </div>
               </a>
             </div>
@@ -124,7 +119,7 @@ const Location: React.FC = () => {
               <div className={styles.mapWrapper}>
                 <iframe
                   title="Ubicación Clínica Monserrat - Origen Medicina Funcional"
-                  src={embedMapsUrl}
+                  src={CLINIC_CONFIG.maps.embedUrl}
                   className={styles.mapFrame}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -135,7 +130,7 @@ const Location: React.FC = () => {
               {/* Botones de Navegación Externa */}
               <div className={styles.mapActions}>
                 <a
-                  href={googleMapsUrl}
+                  href={CLINIC_CONFIG.maps.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.mapBtn}
@@ -153,7 +148,7 @@ const Location: React.FC = () => {
                   {t.location.openMaps}
                 </a>
                 <a
-                  href={wazeUrl}
+                  href={CLINIC_CONFIG.maps.wazeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`${styles.mapBtn} ${styles.wazeBtn}`}

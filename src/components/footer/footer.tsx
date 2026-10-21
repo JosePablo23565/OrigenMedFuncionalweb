@@ -1,4 +1,5 @@
 import { useLanguage } from '../../i18n/LanguageContext';
+import { CLINIC_CONFIG } from '../../config/clinic';
 import logo from '../../assets/logo.png';
 import styles from './footer.module.css';
 
@@ -32,14 +33,16 @@ const Footer = () => {
 
           <div className={`${styles.links} ${styles.contact}`}>
             <h4 className={styles.heading}>{t.footer.contactTitle}</h4>
-            <a href="mailto:origen.medfuncional@gmail.com" className={styles.contactLink}>origen.medfuncional@gmail.com</a>
+            <a href={`mailto:${CLINIC_CONFIG.email}`} className={styles.contactLink}>
+              {CLINIC_CONFIG.email}
+            </a>
             <a
-              href="https://wa.me/50688775126"
+              href={CLINIC_CONFIG.whatsapp.url}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.contactLink}
             >
-              +506 8877 5126
+              {CLINIC_CONFIG.phone.display}
             </a>
           </div>
         </div>

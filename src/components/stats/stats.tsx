@@ -1,8 +1,20 @@
 import { useLanguage } from '../../i18n/LanguageContext';
+import { useModal } from '../../context/ModalContext';
+import { useAuth } from '../../context/AuthContext';
 import styles from './stats.module.css';
 
 const Stats = () => {
   const { t } = useLanguage();
+  const { openModal, openBookingModal } = useModal();
+  const { user } = useAuth();
+
+  const handleCtaClick = () => {
+    if (user) {
+      openBookingModal();
+    } else {
+      openModal('signup');
+    }
+  };
 
   return (
     <section className={styles.stats}>
@@ -10,9 +22,13 @@ const Stats = () => {
         <div className={styles.content}>
           <h2 className={`${styles.title} reveal-on-scroll`}>{t.stats.title}</h2>
           <p className={`${styles.subtitle} reveal-on-scroll reveal-delay-1`}>{t.stats.subtitle}</p>
-          <a href="#cita" className={`${styles.cta} reveal-on-scroll reveal-delay-2`}>
+          <button
+            type="button"
+            onClick={handleCtaClick}
+            className={`${styles.cta} reveal-on-scroll reveal-delay-2`}
+          >
             {t.stats.cta}
-          </a>
+          </button>
         </div>
       </div>
     </section>

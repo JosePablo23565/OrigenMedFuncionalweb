@@ -15,11 +15,6 @@ export interface TranslationKeys {
     officeHoursLine1: string;
     officeHoursLine2: string;
   };
-  highlights: {
-    item1: string;
-    item2: string;
-    item3: string;
-  };
   heroBridge: {
     category1: string;
     title1: string;
@@ -29,8 +24,6 @@ export interface TranslationKeys {
     title3: string;
     approachTitle: string;
     approachP1: string;
-    approachP2: string;
-    approachCta: string;
     item1Title: string;
     item1Desc: string;
     item2Title: string;
@@ -44,22 +37,6 @@ export interface TranslationKeys {
     title: string;
     subtitle: string;
     cta: string;
-    stat1: string;
-    quote: string;
-    author: string;
-  };
-  experience: {
-    title: string;
-    step1Title: string;
-    step1Text: string;
-    step2Title: string;
-    step2Text: string;
-    step3Title: string;
-    step3Text: string;
-    step4Title: string;
-    step4Text: string;
-    step5Title: string;
-    step5Text: string;
   };
   team: {
     title: string;
@@ -69,28 +46,10 @@ export interface TranslationKeys {
     card2Name: string;
     card2Specialty: string;
   };
-  conditions: {
-    title: string;
-    subtitle: string;
-    cta: string;
-    gutTitle: string;
-    gutText: string;
-    hormonesTitle: string;
-    hormonesText: string;
-    autoimmuneTitle: string;
-    autoimmuneText: string;
-    metabolicTitle: string;
-    metabolicText: string;
-    mentalTitle: string;
-    mentalText: string;
-    heartTitle: string;
-    heartText: string;
-  };
   location: {
     title: string;
     clinicName: string;
     description1: string;
-    description2: string;
     locationCardTitle: string;
     locationCardCity: string;
     locationCardAddress: string;
@@ -99,6 +58,8 @@ export interface TranslationKeys {
     hoursCardTime: string;
     phoneCardTitle: string;
     phoneCardNumber: string;
+    whatsappLabel: string;
+    whatsappTitle: string;
     openMaps: string;
     openWaze: string;
   };
@@ -109,26 +70,26 @@ export interface TranslationKeys {
     q2Question: string;
     q2Answer: string;
   };
-footer: {
-      tagline: string;
-      navTitle: string;
-      servicesTitle: string;
-      service1: string;
-      service2: string;
-      service3: string;
-      consultasTitle: string;
-      procedimientosTitle: string;
-      consulta1: string;
-      consulta2: string;
-      procedimiento1: string;
-      procedimiento2: string;
-      procedimiento3: string;
-      procedimiento4: string;
-      procedimiento5: string;
-      procedimiento6: string;
-      contactTitle: string;
-      rights: string;
-    };
+  footer: {
+    tagline: string;
+    navTitle: string;
+    servicesTitle: string;
+    service1: string;
+    service2: string;
+    service3: string;
+    consultasTitle: string;
+    procedimientosTitle: string;
+    consulta1: string;
+    consulta2: string;
+    procedimiento1: string;
+    procedimiento2: string;
+    procedimiento3: string;
+    procedimiento4: string;
+    procedimiento5: string;
+    procedimiento6: string;
+    contactTitle: string;
+    rights: string;
+  };
   modal: {
     signupTitle: string;
     loginTitle: string;
@@ -225,11 +186,6 @@ export const translations: Record<Language, TranslationKeys> = {
       officeHoursLine1: 'Horario de atención',
       officeHoursLine2: 'Lun–Vie · 5:00 p. m. – 8:00 p. m.',
     },
-    highlights: {
-      item1: 'Atención Personalizada',
-      item2: 'Basado en Evidencia',
-      item3: 'Enfoque Integral',
-    },
     heroBridge: {
       category1: 'Medicina',
       title1: 'FUNCIONAL',
@@ -239,8 +195,6 @@ export const translations: Record<Language, TranslationKeys> = {
       title3: 'PRECISIÓN',
       approachTitle: 'Un enfoque más completo',
       approachP1: 'Buscamos comprender a fondo el estado de cada persona para crear planes más precisos y personalizados. Evaluamos factores físicos, emocionales, nutricionales, ambientales y de estilo de vida que pueden influir en la salud, la prevención o la recuperación.',
-      approachP2: 'Para mantener y recuperar la salud, el cuerpo necesita recibir lo que le ayuda a funcionar mejor y eliminar aquello que puede estar afectando su equilibrio. Por eso combinamos diagnóstico, criterio médico, terapias complementarias y seguimiento integral.',
-      approachCta: 'Conocer Más',
       item1Title: 'Diagnóstico',
       item1Desc: 'Evaluación clínica profunda y herramientas de laboratorio especializadas para analizar el perfil metabólico, digestivo, hormonal, inmunológico y nutricional.',
       item2Title: 'Plan personalizado',
@@ -253,23 +207,7 @@ export const translations: Record<Language, TranslationKeys> = {
     stats: {
       title: '¿Qué es la medicina funcional?',
       subtitle: 'La medicina funcional es un modelo médico que identifica y resuelve el origen profundo de los desequilibrios de salud mediante intervenciones personalizadas basadas en el metabolismo, la nutrición y el estilo de vida.',
-      cta: 'Conocer Más',
-      stat1: 'de nuestros pacientes mejoran o eliminan sus síntomas en el primer año',
-      quote: 'Llevaba años buscando respuestas. Origen Med Funcional me dio un plan claro y por fin me siento como yo misma.',
-      author: 'María G.',
-    },
-    experience: {
-      title: 'Tu Experiencia con Origen Med',
-      step1Title: 'Agenda tu Consulta',
-      step1Text: 'Reserva tu primera cita online o presencial en minutos.',
-      step2Title: 'Evaluación Integral',
-      step2Text: 'Analizamos tu historia completa de salud y síntomas.',
-      step3Title: 'Laboratorios Avanzados',
-      step3Text: 'Realizamos estudios profundos para identificar la causa raíz.',
-      step4Title: 'Plan Personalizado',
-      step4Text: 'Diseñamos un plan de tratamiento único para ti.',
-      step5Title: 'Seguimiento Continuo',
-      step5Text: 'Te acompañamos en cada paso de tu proceso de sanación.',
+      cta: 'Agendar Cita',
     },
     team: {
       title: 'Nuestro equipo',
@@ -279,28 +217,10 @@ export const translations: Record<Language, TranslationKeys> = {
       card2Name: 'Enf. Daniela Sequeira',
       card2Specialty: 'Enfermera',
     },
-    conditions: {
-      title: 'Síntomas y condiciones que tratamos',
-      subtitle: 'Buscamos la causa raíz de cada condición para restaurar tu salud de forma natural y sostenible.',
-      cta: 'Comenzar a Sentirte Mejor',
-      gutTitle: 'Salud Digestiva',
-      gutText: 'SII, reflujo, SIBO, estreñimiento, hinchazón, intolerancias alimentarias.',
-      hormonesTitle: 'Salud Hormonal',
-      hormonesText: 'Fatiga, cambios de peso, SOP, ciclos irregulares, resistencia a la insulina.',
-      autoimmuneTitle: 'Autoinmunidad',
-      autoimmuneText: 'Hashimoto, artritis reumatoide, psoriasis, lupus, inflamación crónica.',
-      metabolicTitle: 'Salud Metabólica',
-      metabolicText: 'Diabetes tipo 2, síndrome metabólico, resistencia a la insulina, obesidad.',
-      mentalTitle: 'Salud Mental',
-      mentalText: 'Ansiedad, niebla mental, insomnio, fatiga crónica, bajo estado de ánimo.',
-      heartTitle: 'Salud Cardiovascular',
-      heartText: 'Colesterol alto, hipertensión, inflamación, riesgo cardiovascular.',
-    },
     location: {
       title: 'Nuestra Ubicación',
       clinicName: 'Guayabo, Bagaces',
       description1: 'Nuestro consultorio se encuentra ubicado dentro de las instalaciones de Clínica Monserrat, brindando un entorno médico cálido, profesional y de confianza.',
-      description2: 'La atención se brinda exclusivamente con cita previa para garantizarte un espacio privado, puntual y dedicado a tu salud integral.',
       locationCardTitle: 'Ubicación',
       locationCardCity: 'Guayabo, Bagaces',
       locationCardAddress: '25 m Sur del Banco de Costa Rica',
@@ -309,6 +229,8 @@ export const translations: Record<Language, TranslationKeys> = {
       hoursCardTime: '5:00 p. m. a 8:00 p. m.',
       phoneCardTitle: 'Teléfono',
       phoneCardNumber: '+506 8877 5126',
+      whatsappLabel: 'WhatsApp / Llamadas',
+      whatsappTitle: 'Escribir por WhatsApp o Llamar',
       openMaps: 'Abrir en Maps',
       openWaze: 'Abrir en Waze',
     },
@@ -465,11 +387,6 @@ export const translations: Record<Language, TranslationKeys> = {
       officeHoursLine1: 'Office hours',
       officeHoursLine2: 'Mon–Fri · 5:00 p.m. – 8:00 p.m.',
     },
-    highlights: {
-      item1: 'Personalized Care',
-      item2: 'Evidence-Based',
-      item3: 'Holistic Approach',
-    },
     heroBridge: {
       category1: 'Medicine',
       title1: 'FUNCTIONAL',
@@ -479,8 +396,6 @@ export const translations: Record<Language, TranslationKeys> = {
       title3: 'PRECISION',
       approachTitle: 'A more comprehensive approach',
       approachP1: 'We seek to thoroughly understand each person’s overall health state to create more precise, personalized plans. We evaluate physical, emotional, nutritional, environmental, and lifestyle factors that influence wellness, prevention, and healing.',
-      approachP2: 'To restore and maintain vibrant health, the body needs what supports its optimal function and must eliminate what disrupts its balance. That is why we combine deep diagnostic tools, medical criteria, complementary therapies, and continuous guidance.',
-      approachCta: 'Learn More',
       item1Title: 'Diagnosis',
       item1Desc: 'In-depth clinical evaluation and specialized laboratory testing to analyze metabolic, digestive, hormonal, immunological, and nutritional profiles.',
       item2Title: 'Personalized Plan',
@@ -493,23 +408,7 @@ export const translations: Record<Language, TranslationKeys> = {
     stats: {
       title: 'What is functional medicine?',
       subtitle: 'Functional medicine is a medical model that identifies and resolves the root causes of health imbalances through personalized interventions based on metabolism, nutrition, and lifestyle.',
-      cta: 'Learn More',
-      stat1: 'of our patients improve or eliminate their symptoms within the first year',
-      quote: 'I had been searching for answers for years. Origen Med Functional gave me a clear plan and I finally feel like myself again.',
-      author: 'María G.',
-    },
-    experience: {
-      title: 'Your Experience with Origen Med',
-      step1Title: 'Book Your Visit',
-      step1Text: 'Schedule your first in-person or online appointment in minutes.',
-      step2Title: 'Comprehensive Evaluation',
-      step2Text: 'We analyze your complete health history and symptoms.',
-      step3Title: 'Advanced Labs',
-      step3Text: 'We run deep tests to identify the root cause.',
-      step4Title: 'Personalized Plan',
-      step4Text: 'We design a unique treatment plan for you.',
-      step5Title: 'Ongoing Support',
-      step5Text: 'We guide you through every step of your healing process.',
+      cta: 'Book Appointment',
     },
     team: {
       title: 'Our team',
@@ -519,28 +418,10 @@ export const translations: Record<Language, TranslationKeys> = {
       card2Name: 'Enf. Daniela Sequeira',
       card2Specialty: 'Nurse',
     },
-    conditions: {
-      title: 'Symptoms and conditions we treat',
-      subtitle: 'We seek the root cause of each condition to restore your health naturally and sustainably.',
-      cta: 'Start Feeling Better',
-      gutTitle: 'Gut Health',
-      gutText: 'IBS, acid reflux, SIBO, constipation, bloating, food intolerances.',
-      hormonesTitle: 'Hormone Health',
-      hormonesText: 'Fatigue, weight changes, PCOS, irregular cycles, insulin resistance.',
-      autoimmuneTitle: 'Autoimmunity',
-      autoimmuneText: 'Hashimoto\'s, rheumatoid arthritis, psoriasis, lupus, chronic inflammation.',
-      metabolicTitle: 'Metabolic Health',
-      metabolicText: 'Type 2 diabetes, metabolic syndrome, insulin resistance, obesity.',
-      mentalTitle: 'Mental Health',
-      mentalText: 'Anxiety, brain fog, insomnia, chronic fatigue, low mood.',
-      heartTitle: 'Heart Health',
-      heartText: 'High cholesterol, hypertension, inflammation, cardiovascular risk.',
-    },
     location: {
       title: 'Our Location',
       clinicName: 'Guayabo, Bagaces',
       description1: 'Our practice is located inside Clínica Monserrat facilities, providing a warm, professional, and trusted medical environment.',
-      description2: 'Care is provided exclusively by prior appointment to guarantee a private, punctual space dedicated to your holistic health.',
       locationCardTitle: 'Location',
       locationCardCity: 'Guayabo, Bagaces',
       locationCardAddress: '25 m South of Banco de Costa Rica',
@@ -549,6 +430,8 @@ export const translations: Record<Language, TranslationKeys> = {
       hoursCardTime: '5:00 p.m. to 8:00 p.m.',
       phoneCardTitle: 'Phone',
       phoneCardNumber: '+506 8877 5126',
+      whatsappLabel: 'WhatsApp / Calls',
+      whatsappTitle: 'Message on WhatsApp or Call',
       openMaps: 'Open in Maps',
       openWaze: 'Open in Waze',
     },
