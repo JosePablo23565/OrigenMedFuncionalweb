@@ -27,10 +27,10 @@ const SLIDES: Slide[] = [
     alt: 'Nutrición funcional, salud metabólica y longevidad',
   },
   {
-    id: 'fitness',
-    desktop: '/hero-fitness.webp',
-    mobile: '/hero-fitness-mobile.webp',
-    alt: 'Medicina de estilo de vida, masa muscular y fuerza metabólica',
+    id: 'longevidad',
+    desktop: '/hero-longevity.webp',
+    mobile: '/hero-longevity-mobile.webp',
+    alt: 'Longevidad activa, bienestar integral y salud preventiva',
   },
 ];
 
