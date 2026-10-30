@@ -7,6 +7,7 @@ import {
   Save,
   CheckCircle2,
   AlertCircle,
+  Menu,
 } from 'lucide-react';
 import { Calendar } from '../Calendar/Calendar';
 import {
@@ -20,7 +21,7 @@ interface AdminScheduleProps {
   onOpenMobileMenu?: () => void;
 }
 
-const AdminSchedule = ({ onOpenMobileMenu: _onOpenMobileMenu }: AdminScheduleProps) => {
+const AdminSchedule = ({ onOpenMobileMenu }: AdminScheduleProps) => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [isClosed, setIsClosed] = useState(false);
   const [slots, setSlots] = useState<string[]>(DEFAULT_SLOTS);
@@ -135,11 +136,24 @@ const AdminSchedule = ({ onOpenMobileMenu: _onOpenMobileMenu }: AdminSchedulePro
   return (
     <div className={styles.container}>
       {/* Top Header */}
-      <div className={styles.header}>
-        <h1 className={styles.title}>Gestión de Horarios y Disponibilidad</h1>
-        <p className={styles.subtitle}>
-          Selecciona una fecha en el calendario para habilitar, deshabilitar o crear horarios de atención médica.
-        </p>
+      <div className={styles.headerRow}>
+        {onOpenMobileMenu && (
+          <button
+            type="button"
+            className={styles.mobileHamburgerBtn}
+            onClick={onOpenMobileMenu}
+            aria-label="Abrir Menú"
+            title="Abrir Menú"
+          >
+            <Menu size={20} />
+          </button>
+        )}
+        <div className={styles.header}>
+          <h1 className={styles.title}>Gestión de Horarios y Disponibilidad</h1>
+          <p className={styles.subtitle}>
+            Selecciona una fecha en el calendario para habilitar, deshabilitar o crear horarios de atención médica.
+          </p>
+        </div>
       </div>
 
       {/* Feedback Alerts */}

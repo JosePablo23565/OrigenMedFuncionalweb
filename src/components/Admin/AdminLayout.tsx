@@ -1,5 +1,5 @@
 import { useState, useEffect, type ReactNode } from 'react';
-import { LogOut } from 'lucide-react';
+import { LogOut, X } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import fullLogo from '../../assets/logo.png';
 import styles from './AdminLayout.module.css';
@@ -138,6 +138,14 @@ const AdminLayout = ({
             <div className={styles.brand}>
               <img src={fullLogo} alt="Origen Med" className={styles.brandLogo} />
             </div>
+            <button
+              type="button"
+              className={styles.closeSidebarBtn}
+              onClick={() => setMobileOpen(false)}
+              aria-label="Cerrar menú lateral"
+            >
+              <X size={20} />
+            </button>
           </div>
 
           <nav className={styles.nav}>
