@@ -23,3 +23,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# AI / Assistant skills and local artifacts
+.gemini/
+.agent/
+.agents/
+skills/
+scratch/
