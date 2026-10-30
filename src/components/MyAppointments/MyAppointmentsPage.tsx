@@ -243,7 +243,22 @@ const MyAppointmentsPage = () => {
     setIsClearingHistory(true);
     setClearHistoryError(null);
 
-    const { error } = await clearPastAppointments(user.id, user.email);
+    // Identificar los IDs exactos de las citas pasadas en pantalla
+    const pastAppts = appointments.filter((appt) => {
+      const isPast = appt.appointment_date < todayStr;
+      const isFinished = appt.status === 'completed' || appt.status === 'cancelled';
+      return isPast || isFinished;
+    });
+
+    const pastApptIds = pastAppts.map((a) => a.id);
+
+    if (pastApptIds.length === 0) {
+      setIsClearingHistory(false);
+      setIsClearHistoryModalOpen(false);
+      return;
+    }
+
+    const { error } = await clearPastAppointments(user.id, user.email, pastApptIds);
 
     if (error) {
       setClearHistoryError(error);
@@ -253,11 +268,7 @@ const MyAppointmentsPage = () => {
 
     // Actualizar estado local: eliminar citas pasadas
     setAppointments((prev) =>
-      prev.filter((appt) => {
-        const isPast = appt.appointment_date < todayStr;
-        const isFinished = appt.status === 'completed' || appt.status === 'cancelled';
-        return !isPast && !isFinished;
-      })
+      prev.filter((appt) => !pastApptIds.includes(appt.id))
     );
 
     setIsClearingHistory(false);

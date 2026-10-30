@@ -13,8 +13,11 @@ import {
   History,
   Copy,
   Menu,
+  Download,
+  Trash2,
+  RotateCw,
 } from 'lucide-react';
-import { getAllAppointments } from '../../lib/admin';
+import { getAllAppointments, updateAppointmentStatus, deleteAppointment } from '../../lib/admin';
 import type { Appointment } from '../../lib/appointments';
 import styles from './AdminDashboard.module.css';
 
@@ -67,6 +70,10 @@ const AdminDashboard = ({
   const [loading, setLoading] = useState(true);
   const [selectedAppt, setSelectedAppt] = useState<Appointment | null>(null);
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  const [statusUpdating, setStatusUpdating] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
   const handleCopy = (text: string, field: string) => {
     if (navigator?.clipboard?.writeText) {
@@ -84,8 +91,13 @@ const AdminDashboard = ({
 
   const fetchAppointments = useCallback(async () => {
     setLoading(true);
-    const { data } = await getAllAppointments();
-    setAppointments(data);
+    setFetchError(null);
+    const { data, error } = await getAllAppointments();
+    if (error) {
+      console.error('AdminDashboard failed to load appointments:', error);
+      setFetchError(error);
+    }
+    setAppointments(data || []);
     setLoading(false);
   }, []);
 
@@ -229,6 +241,72 @@ const AdminDashboard = ({
     }
   };
 
+  const handleStatusChange = async (newStatus: 'confirmed' | 'pending' | 'cancelled' | 'completed') => {
+    if (!selectedAppt || selectedAppt.status === newStatus || statusUpdating) return;
+    setStatusUpdating(true);
+    const prevStatus = selectedAppt.status;
+
+    // Actualización optimista inmediata
+    const updated = { ...selectedAppt, status: newStatus };
+    setSelectedAppt(updated);
+    setAppointments((prev) =>
+      prev.map((a) => (a.id === selectedAppt.id ? { ...a, status: newStatus } : a))
+    );
+
+    const { error } = await updateAppointmentStatus(selectedAppt.id, newStatus);
+    if (error) {
+      // Revertir en caso de error
+      setSelectedAppt({ ...selectedAppt, status: prevStatus });
+      setAppointments((prev) =>
+        prev.map((a) => (a.id === selectedAppt.id ? { ...a, status: prevStatus } : a))
+      );
+    }
+    setStatusUpdating(false);
+  };
+
+  const handleDeleteAppointment = async () => {
+    if (!selectedAppt || isDeleting) return;
+    setIsDeleting(true);
+    const targetId = selectedAppt.id;
+
+    const { error } = await deleteAppointment(targetId);
+    if (error) {
+      setIsDeleting(false);
+      return;
+    }
+
+    setAppointments((prev) => prev.filter((a) => a.id !== targetId));
+    setIsDeleting(false);
+    setShowDeleteConfirm(false);
+    setSelectedAppt(null);
+  };
+
+  const handleExportCsv = () => {
+    if (filteredAppointments.length === 0) return;
+    const headers = ['Referencia', 'Paciente', 'Fecha', 'Hora', 'Servicio', 'Telefono', 'Correo', 'Estado', 'Notas'];
+    const rows = filteredAppointments.map((appt) => [
+      `"${appt.booking_ref || ''}"`,
+      `"${(appt.patient_name || '').replace(/"/g, '""')}"`,
+      `"${appt.appointment_date || ''}"`,
+      `"${appt.appointment_time || ''}"`,
+      `"${(appt.service_name || '').replace(/"/g, '""')}"`,
+      `"${appt.patient_phone || ''}"`,
+      `"${appt.patient_email || ''}"`,
+      `"${getStatusLabel(appt.status)}"`,
+      `"${(appt.notes || '').replace(/"/g, '""')}"`,
+    ]);
+    const csvContent = '\uFEFF' + [headers.join(','), ...rows.map((r) => r.join(','))].join('\r\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `citas_origen_${todayStr}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className={styles.dashboard}>
       {/* SEARCH AND FILTERS CONTROLS ROW */}
@@ -357,6 +435,31 @@ const AdminDashboard = ({
             </div>
           )}
         </div>
+
+        {/* REFRESH BUTTON */}
+        <button
+          type="button"
+          className={styles.refreshBtn}
+          onClick={fetchAppointments}
+          disabled={loading}
+          title="Actualizar agenda de citas"
+          aria-label="Actualizar agenda de citas"
+        >
+          <RotateCw size={16} className={loading ? styles.spinIcon : ''} />
+        </button>
+
+        {/* EXPORT CSV BUTTON */}
+        <button
+          type="button"
+          className={styles.exportBtn}
+          onClick={handleExportCsv}
+          disabled={filteredAppointments.length === 0}
+          title="Exportar citas filtradas a archivo CSV"
+          aria-label="Exportar citas filtradas a archivo CSV"
+        >
+          <Download size={16} />
+          <span className={styles.exportBtnText}>Exportar CSV</span>
+        </button>
       </div>
 
       {/* DASHBOARD BODY */}
@@ -367,6 +470,19 @@ const AdminDashboard = ({
             <div className={styles.emptyState}>
               <div className={styles.spinner} />
               <p>Cargando agenda de citas...</p>
+            </div>
+          ) : fetchError ? (
+            <div className={styles.emptyState}>
+              <p style={{ color: '#dc2626', fontWeight: 600 }}>Error al consultar citas de Supabase:</p>
+              <p style={{ fontSize: '0.85rem', color: '#6A6950', maxWidth: '400px' }}>{fetchError}</p>
+              <button
+                type="button"
+                className={styles.exportBtn}
+                style={{ marginTop: '0.75rem' }}
+                onClick={fetchAppointments}
+              >
+                Reintentar
+              </button>
             </div>
           ) : filteredAppointments.length === 0 ? (
             <div className={styles.emptyState}>
@@ -539,6 +655,41 @@ const AdminDashboard = ({
                     </button>
                   )}
                 </div>
+
+                {/* Notas del Paciente */}
+                {selectedAppt.notes && (
+                  <div className={styles.notesRow}>
+                    <span className={styles.detailLabel}>Notas del Paciente</span>
+                    <p className={styles.notesContent}>{selectedAppt.notes}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Actualizar Estado */}
+              <div className={styles.modalStatusBlock}>
+                <span className={styles.detailLabel}>Cambiar Estado</span>
+                <div className={styles.statusButtonGroup}>
+                  {[
+                    { id: 'confirmed', label: 'Confirmada', icon: <CircleCheck size={13} /> },
+                    { id: 'completed', label: 'Completada', icon: <CircleCheck size={13} /> },
+                    { id: 'cancelled', label: 'Cancelada', icon: <CircleX size={13} /> },
+                    { id: 'pending', label: 'Pendiente', icon: <CircleDashed size={13} /> },
+                  ].map((st) => {
+                    const isActive = selectedAppt.status === st.id;
+                    return (
+                      <button
+                        key={st.id}
+                        type="button"
+                        disabled={statusUpdating}
+                        onClick={() => handleStatusChange(st.id as 'confirmed' | 'pending' | 'cancelled' | 'completed')}
+                        className={`${styles.statusOptionBtn} ${styles[`statusBtn_${st.id}`]} ${isActive ? styles.statusOptionActive : ''}`}
+                      >
+                        {st.icon}
+                        <span>{st.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Balanced Action Footer: WhatsApp & Correo */}
@@ -560,6 +711,42 @@ const AdminDashboard = ({
                   >
                     <GmailIcon size={16} /> Correo
                   </a>
+                )}
+              </div>
+
+              {/* Zona de peligro: Eliminar cita */}
+              <div className={styles.dangerZone}>
+                {!showDeleteConfirm ? (
+                  <button
+                    type="button"
+                    className={styles.deletePromptBtn}
+                    onClick={() => setShowDeleteConfirm(true)}
+                  >
+                    <Trash2 size={13} />
+                    <span>Eliminar cita</span>
+                  </button>
+                ) : (
+                  <div className={styles.deleteConfirmBox}>
+                    <span className={styles.deleteConfirmPrompt}>¿Eliminar permanentemente?</span>
+                    <div className={styles.deleteConfirmButtons}>
+                      <button
+                        type="button"
+                        className={styles.deleteCancelBtn}
+                        onClick={() => setShowDeleteConfirm(false)}
+                        disabled={isDeleting}
+                      >
+                        Cancelar
+                      </button>
+                      <button
+                        type="button"
+                        className={styles.deleteExecuteBtn}
+                        onClick={handleDeleteAppointment}
+                        disabled={isDeleting}
+                      >
+                        {isDeleting ? 'Eliminando...' : 'Sí, eliminar'}
+                      </button>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>

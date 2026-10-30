@@ -149,10 +149,11 @@ export const cancelAppointment = async (
 
 export const clearPastAppointments = async (
   userId?: string | null,
-  email?: string | null
+  email?: string | null,
+  appointmentIds?: string[]
 ): Promise<{ error: string | null }> => {
-  if (!userId && !email) {
-    return { error: 'No se especificó usuario' };
+  if (!userId && !email && (!appointmentIds || appointmentIds.length === 0)) {
+    return { error: 'No se especificó usuario ni citas a eliminar.' };
   }
 
   try {
@@ -164,13 +165,18 @@ export const clearPastAppointments = async (
 
     let query = supabase.from('appointments').delete();
 
-    if (userId) {
-      query = query.eq('user_id', userId);
-    } else if (email) {
-      query = query.eq('patient_email', email);
+    // Si se proporcionan los IDs exactos de las citas pasadas
+    if (appointmentIds && appointmentIds.length > 0) {
+      query = query.in('id', appointmentIds);
+    } else {
+      // Filtro estándar por usuario o email
+      if (userId) {
+        query = query.eq('user_id', userId);
+      } else if (email) {
+        query = query.eq('patient_email', email);
+      }
+      query = query.or(`appointment_date.lt.${today},status.eq.completed,status.eq.cancelled`);
     }
-
-    query = query.or(`appointment_date.lt.${today},status.in.(completed,cancelled)`);
 
     const { error } = await query;
 

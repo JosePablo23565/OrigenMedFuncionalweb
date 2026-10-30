@@ -29,12 +29,15 @@ export const getAllAppointments = async (): Promise<{
       .order('appointment_time', { ascending: true });
 
     if (error) {
+      console.error('Error fetching appointments in getAllAppointments:', error);
       return { data: [], error: error.message };
     }
 
     return { data: (data as Appointment[]) || [], error: null };
-  } catch {
-    return { data: [], error: 'Error al consultar las citas administrativas.' };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Error al consultar las citas administrativas.';
+    console.error('Unexpected error in getAllAppointments:', err);
+    return { data: [], error: message };
   }
 };
 

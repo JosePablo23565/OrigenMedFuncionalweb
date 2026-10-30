@@ -435,6 +435,12 @@ const BookingModal = () => {
 
     if (error) {
       console.error('Error creating appointment in database:', error);
+      alert(
+        language === 'es'
+          ? `No fue posible guardar la cita: ${error}`
+          : `Could not save appointment: ${error}`
+      );
+      return;
     }
 
     setBookingRef(ref);
