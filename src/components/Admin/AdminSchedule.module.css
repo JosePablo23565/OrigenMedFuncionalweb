@@ -144,7 +144,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #3B8595;
+  background-color: #6A6950;
 }
 
 .legendDotClosed {
@@ -206,8 +206,8 @@
 }
 
 .badgeOpen {
-  background-color: rgba(59, 133, 149, 0.12);
-  color: #2b6774;
+  background-color: rgba(106, 105, 80, 0.12);
+  color: #4E5038;
 }
 
 .badgeClosed {
@@ -289,8 +289,8 @@
   justify-content: space-between;
   padding: 0.65rem 0.85rem;
   background: #faf6ef;
-  border: 1.5px solid #3B8595;
-  color: #1a3c40;
+  border: 1.5px solid #6A6950;
+  color: #302E2E;
   border-radius: 10px;
   font-size: 0.92rem;
   font-weight: 700;
@@ -300,7 +300,7 @@
 }
 
 .slotChip:hover {
-  background-color: #f0fdfa;
+  background-color: #f7f6f0;
 }
 
 .slotDeleteBtn {
@@ -351,8 +351,8 @@
 }
 
 .addSlotInput:focus {
-  border-color: #3B8595;
-  box-shadow: 0 0 0 2px rgba(59, 133, 149, 0.15);
+  border-color: #6A6950;
+  box-shadow: 0 0 0 2px rgba(106, 105, 80, 0.15);
 }
 
 .addSlotSelect {
@@ -371,7 +371,7 @@
   align-items: center;
   gap: 0.35rem;
   padding: 0.55rem 1rem;
-  background-color: #3B8595;
+  background-color: #6A6950;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -382,7 +382,7 @@
 }
 
 .addSlotBtn:hover {
-  background-color: #2F6F7E;
+  background-color: #55543f;
 }
 
 /* Preset Quick Buttons */
@@ -460,8 +460,8 @@
   gap: 0.4rem;
   padding: 0.65rem 1.15rem;
   background: #ffffff;
-  color: #3B8595;
-  border: 1px solid rgba(59, 133, 149, 0.35);
+  color: #6A6950;
+  border: 1px solid rgba(106, 105, 80, 0.35);
   border-radius: 8px;
   font-size: 0.88rem;
   font-weight: 600;
@@ -470,8 +470,8 @@
 }
 
 .weeklyApplyBtn:hover {
-  background-color: rgba(59, 133, 149, 0.08);
-  border-color: #3B8595;
+  background-color: rgba(106, 105, 80, 0.08);
+  border-color: #6A6950;
 }
 
 /* Mobile Responsiveness */

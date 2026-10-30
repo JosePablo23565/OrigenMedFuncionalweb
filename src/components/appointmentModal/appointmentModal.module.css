@@ -263,7 +263,7 @@
 .toggleLink {
   background: none;
   border: none;
-  color: #3B8595;
+  color: #6A6950;
   font-weight: 600;
   cursor: pointer;
   font-size: 0.8rem;
@@ -273,7 +273,7 @@
 }
 
 .toggleLink:hover {
-  color: #2f6d7a;
+  color: #4E5038;
 }
 
 .toggleLink:disabled {
@@ -378,12 +378,12 @@
 }
 
 .termsLink {
-  color: #3B8595;
+  color: #6A6950;
   text-decoration: underline;
 }
 
 .termsLink:hover {
-  color: #2f6d7a;
+  color: #4E5038;
 }
 
 /* ============================================

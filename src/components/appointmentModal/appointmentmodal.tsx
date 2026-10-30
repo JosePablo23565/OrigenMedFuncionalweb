@@ -329,7 +329,7 @@ const AppointmentModal = () => {
               role="status"
               style={{
                 margin: 0,
-                color: "#2f6d7a",
+                color: "#4E5038",
                 fontSize: "0.8rem",
                 lineHeight: 1.4,
               }}
