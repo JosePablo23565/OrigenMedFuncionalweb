@@ -92,7 +92,7 @@ const Hero = () => {
       <div className={styles.content}>
         <h1 className={styles.title}>
           <span className={styles.titleLine}>{t.hero.title}</span>
-          <span className={styles.accentItalic}>{t.hero.accent}.</span>
+          <span className={styles.accentItalic}>{t.hero.accent}</span>
         </h1>
 
         <p className={styles.subtitle}>

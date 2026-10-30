@@ -40,6 +40,14 @@
   margin: 0;
 }
 
+.titleFull {
+  display: inline;
+}
+
+.titleMobile {
+  display: none;
+}
+
 .subtitle {
   font-size: 0.95rem;
   color: #73715e;
@@ -476,6 +484,11 @@
 
 /* Mobile Responsiveness */
 @media (max-width: 900px) {
+  .headerRow {
+    align-items: center;
+    gap: 0.75rem;
+  }
+
   .mobileHamburgerBtn {
     display: inline-flex;
     align-items: center;
@@ -490,15 +503,24 @@
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
     flex-shrink: 0;
-    margin-top: 2px;
+    margin-top: 0;
+  }
+
+  .titleFull {
+    display: none;
+  }
+
+  .titleMobile {
+    display: inline;
   }
 
   .title {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
+    line-height: 1.2;
   }
 
   .subtitle {
-    font-size: 0.88rem;
+    display: none;
   }
 
   .container {

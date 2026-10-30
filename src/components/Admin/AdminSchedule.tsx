@@ -149,7 +149,10 @@ const AdminSchedule = ({ onOpenMobileMenu }: AdminScheduleProps) => {
           </button>
         )}
         <div className={styles.header}>
-          <h1 className={styles.title}>Gestión de Horarios y Disponibilidad</h1>
+          <h1 className={styles.title}>
+            <span className={styles.titleFull}>Gestión de Horarios y Disponibilidad</span>
+            <span className={styles.titleMobile}>Gestión de Horarios</span>
+          </h1>
           <p className={styles.subtitle}>
             Selecciona una fecha en el calendario para habilitar, deshabilitar o crear horarios de atención médica.
           </p>
