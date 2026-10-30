@@ -15,38 +15,42 @@ const FAQ = () => {
   return (
     <section className={styles.faq}>
       <div className={styles.container}>
-        <h2 className={styles.title}>{t.faq.title}</h2>
+        <div className={`${styles.header} reveal-on-scroll`}>
+          <h2 className={styles.title}>
+            {t.faq.title}
+          </h2>
+        </div>
 
         <div className={styles.list}>
-          {faqKeys.map((key, i) => (
-            <div key={key} className={styles.item}>
-              <button
-                className={styles.question}
-                onClick={() => toggle(i)}
+          {faqKeys.map((key, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <div
+                key={key}
+                className={`${styles.item} reveal-on-scroll ${i === 1 ? 'reveal-delay-1' : ''}`}
               >
-                <span>{t.faq[`${key}Question` as keyof typeof t.faq]}</span>
-                <svg
-                  className={`${styles.arrow} ${openIndex === i ? styles.open : ''}`}
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
+                <button
+                  type="button"
+                  className={styles.question}
+                  onClick={() => toggle(i)}
+                  aria-expanded={isOpen}
                 >
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-              </button>
-              {openIndex === i && (
-                <div className={styles.answer}>
-                  <p>{t.faq[`${key}Answer` as keyof typeof t.faq]}</p>
+                  <span>{t.faq[`${key}Question` as keyof typeof t.faq]}</span>
+                  <span className={`${styles.arrowIconWrap} ${isOpen ? styles.arrowOpen : ''}`} aria-hidden="true">
+                    +
+                  </span>
+                </button>
+
+                <div className={`${styles.answerWrapper} ${isOpen ? styles.answerWrapperOpen : ''}`}>
+                  <div className={styles.answerInner}>
+                    <p className={styles.answerContent}>
+                      {t.faq[`${key}Answer` as keyof typeof t.faq]}
+                    </p>
+                  </div>
                 </div>
-              )}
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

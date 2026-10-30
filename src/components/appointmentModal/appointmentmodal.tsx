@@ -95,12 +95,8 @@ const GoogleIcon = () => (
 
 const AppointmentModal = () => {
   const { isModalOpen, closeModal, modalMode } = useModal();
-  const { user, signIn, signUp, signInWithGoogle, signInWithGoogleIdToken } = useAuth();
+  const { user, signIn, signUp, signInWithGoogle } = useAuth();
   const { t, language } = useLanguage();
-
-  const GOOGLE_CLIENT_ID =
-    import.meta.env.VITE_GOOGLE_CLIENT_ID ||
-    "852961616818-vmbehrd844lkh1kn9v801q7dufmun8e2.apps.googleusercontent.com";
 
   useEffect(() => {
     if (isModalOpen && user) {
@@ -115,65 +111,6 @@ const AppointmentModal = () => {
       setMode(modalMode);
     }
   }, [isModalOpen, modalMode]);
-
-  useEffect(() => {
-    if (!isModalOpen) return;
-
-    const initGsi = () => {
-      if (typeof window !== "undefined" && (window as any).google?.accounts?.id) {
-        try {
-          (window as any).google.accounts.id.initialize({
-            client_id: GOOGLE_CLIENT_ID,
-            callback: async (response: { credential?: string }) => {
-              if (!response.credential) {
-                setErrorMessage("No se recibió la credencial de Google.");
-                setLoading(false);
-                return;
-              }
-
-              setLoading(true);
-              try {
-                const { error } = await signInWithGoogleIdToken(response.credential);
-                if (error) {
-                  setErrorMessage(getAuthErrorMessage(error));
-                  setLoading(false);
-                } else {
-                  handleClose();
-                }
-              } catch {
-                setErrorMessage("No fue posible conectar con Google.");
-                setLoading(false);
-              }
-            },
-          });
-
-          const container = document.getElementById("google-signin-btn");
-          if (container) {
-            container.innerHTML = "";
-            (window as any).google.accounts.id.renderButton(container, {
-              type: "standard",
-              theme: "outline",
-              size: "large",
-              width: 360,
-            });
-          }
-        } catch {
-          // Ignore initialization error
-        }
-      }
-    };
-
-    initGsi();
-
-    const interval = setInterval(() => {
-      if ((window as any).google?.accounts?.id) {
-        initGsi();
-        clearInterval(interval);
-      }
-    }, 200);
-
-    return () => clearInterval(interval);
-  }, [isModalOpen, signInWithGoogleIdToken]);
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -273,28 +210,15 @@ const AppointmentModal = () => {
     setSuccessMessage("");
     setLoading(true);
 
-    if (typeof window !== "undefined" && (window as any).google?.accounts?.id) {
-      try {
-        (window as any).google.accounts.id.prompt((notification: any) => {
-          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-            setLoading(false);
-          }
-        });
-      } catch {
+    try {
+      const { error } = await signInWithGoogle();
+      if (error) {
+        setErrorMessage(getAuthErrorMessage(error));
         setLoading(false);
       }
-    } else {
-      // Fallback a OAuth tradicional si el script de Google no carga
-      try {
-        const { error } = await signInWithGoogle();
-        if (error) {
-          setErrorMessage(getAuthErrorMessage(error));
-          setLoading(false);
-        }
-      } catch {
-        setErrorMessage("No fue posible conectar con Google.");
-        setLoading(false);
-      }
+    } catch {
+      setErrorMessage("No fue posible conectar con Google.");
+      setLoading(false);
     }
   };
 
@@ -471,12 +395,6 @@ const AppointmentModal = () => {
             <GoogleIcon />
             {loading ? (language === "es" ? "Conectando..." : "Connecting...") : t.modal.googleBtn}
           </button>
-
-          <div
-            id="google-signin-btn"
-            className={styles.googleBtnOverlay}
-            title={t.modal.googleBtn}
-          />
         </div>
 
         {mode === "signup" && (

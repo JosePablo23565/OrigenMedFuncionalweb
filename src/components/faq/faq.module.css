@@ -1,112 +1,167 @@
 /* ============================================
-   FAQ SECTION
+   FAQ SECTION (ESTILO HELLO ALMA)
+   Líneas finas de 1px sobre el fondo, sin cajas
    ============================================ */
+
 .faq {
-  background: #F4F5F1;
-  padding: 80px 0;
+  background-color: var(--bg-warm, #FAF8F5);
+  padding: 120px 0;
+  border-top: 1px solid var(--divider-light, rgba(30, 30, 26, 0.12));
 }
 
 .container {
-  max-width: 800px;
+  max-width: var(--container-narrow, 840px);
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 24px;
+}
+
+.header {
+  text-align: left;
+  margin-bottom: 56px;
+}
+
+.tagline {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-olive, #4E5038);
+  margin-bottom: 20px;
+  display: block;
 }
 
 .title {
-  color: #6A6950;
-  font-size: 2.2rem;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 48px;
+  color: var(--color-text-main, #1E1E1A);
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: clamp(2.4rem, 4.4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.titleItalic {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-olive, #4E5038);
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  border-top: 1px solid var(--divider-light, rgba(30, 30, 26, 0.14));
 }
 
 .item {
-  border-bottom: 1px solid rgba(106, 105, 80, 0.15);
-}
-
-.item:first-child {
-  border-top: 1px solid rgba(106, 105, 80, 0.15);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid var(--divider-light, rgba(30, 30, 26, 0.14));
 }
 
 /* ============================================
-   QUESTION BUTTON
+   BOTÓN PREGUNTA
    ============================================ */
+
 .question {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
   background: none;
   border: none;
-  padding: 20px 0;
+  padding: 28px 0;
   cursor: pointer;
   text-align: left;
-  color: #38392E;
-  font-size: 1.05rem;
-  font-weight: 500;
-  font-family: inherit;
-  transition: color 0.2s;
+  color: var(--color-text-main, #1E1E1A);
+  font-family: var(--font-family);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+  transition: color 0.2s ease;
 }
 
 .question:hover {
-  color: #6A6950;
+  color: var(--color-olive, #4E5038);
 }
 
-.arrow {
-  color: #3B8595;
-  width: 20px;
-  height: 20px;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  flex-shrink: 0;
-  margin-left: 16px;
-  display: inline-flex;
+.arrowIconWrap {
+  display: flex;
   align-items: center;
   justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--color-text-main, #1E1E1A);
+  flex-shrink: 0;
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.2s ease;
 }
 
-.arrow.open {
-  transform: rotate(90deg);
+.arrowOpen {
+  transform: rotate(45deg);
+  color: var(--color-olive, #4E5038);
 }
 
 /* ============================================
-   ANSWER
+   RESPUESTA CON GRID ANIMADO
    ============================================ */
-.answer {
-  padding: 0 0 20px;
+
+.answerWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.answer p {
-  color: #5a5c4a;
-  font-size: 0.95rem;
-  line-height: 1.7;
+.answerWrapperOpen {
+  grid-template-rows: 1fr;
+}
+
+.answerInner {
+  overflow: hidden;
+}
+
+.answerContent {
+  padding: 0 0 28px;
+  color: var(--color-text-muted, #5C5A52);
+  font-size: 1.05rem;
+  line-height: 1.75;
   margin: 0;
+  max-width: 720px;
 }
 
 /* ============================================
-   MÓVIL
+   MÓVIL (≤768px)
    ============================================ */
+
 @media (max-width: 768px) {
   .faq {
-    padding: 56px 0;
+    padding: 72px 0;
   }
 
   .container {
-    padding: 0 24px;
+    padding: 0 20px;
+  }
+
+  .header {
+    margin-bottom: 36px;
   }
 
   .title {
-    font-size: 1.6rem;
-    margin-bottom: 32px;
+    font-size: clamp(2rem, 8vw, 2.6rem);
   }
 
   .question {
-    font-size: 0.95rem;
-    padding: 16px 0;
+    padding: 22px 0;
+    font-size: 1.1rem;
+  }
+
+  .answerContent {
+    padding-bottom: 22px;
+    font-size: 0.98rem;
   }
 }

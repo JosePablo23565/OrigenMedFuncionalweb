@@ -20,12 +20,18 @@ const Stats = () => {
     <section className={styles.stats}>
       <div className={styles.container}>
         <div className={styles.content}>
-          <h2 className={`${styles.title} reveal-on-scroll`}>{t.stats.title}</h2>
-          <p className={`${styles.subtitle} reveal-on-scroll reveal-delay-1`}>{t.stats.subtitle}</p>
+          <h2 className={`${styles.title} reveal-on-scroll reveal-delay-1`}>
+            {t.stats.title}
+          </h2>
+
+          <p className={`${styles.subtitle} reveal-on-scroll reveal-delay-2`}>
+            {t.stats.subtitle}
+          </p>
+
           <button
             type="button"
             onClick={handleCtaClick}
-            className={`${styles.cta} reveal-on-scroll reveal-delay-2`}
+            className={`${styles.cta} reveal-on-scroll reveal-delay-3`}
           >
             {t.stats.cta}
           </button>

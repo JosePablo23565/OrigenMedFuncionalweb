@@ -13,6 +13,9 @@ export const CLINIC_CONFIG = {
   whatsapp: {
     url: 'https://wa.me/50688775126',
   },
+  social: {
+    instagram: 'https://www.instagram.com/origenmedfuncional/',
+  },
   maps: {
     googleMapsUrl:
       'https://www.google.com/maps/search/?api=1&query=Farmacia+Monserrat+Guayabo+Guanacaste',

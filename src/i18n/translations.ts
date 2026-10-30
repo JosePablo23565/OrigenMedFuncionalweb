@@ -89,6 +89,11 @@ export interface TranslationKeys {
     procedimiento6: string;
     contactTitle: string;
     rights: string;
+    disclaimer: string;
+    faq: string;
+    hours: string;
+    terms: string;
+    privacy: string;
   };
   modal: {
     signupTitle: string;
@@ -260,6 +265,11 @@ export const translations: Record<Language, TranslationKeys> = {
       procedimiento6: 'Cirugía Menor',
       contactTitle: 'Contacto',
       rights: 'Todos los derechos reservados.',
+      disclaimer: 'La información proporcionada en este sitio web tiene fines educativos y de optimización del bienestar, y no reemplaza el criterio médico individualizado ni la consulta de urgencias.',
+      faq: 'Preguntas Frecuentes',
+      hours: 'Lun–Vie · 5:00 pm – 8:00 pm',
+      terms: 'Términos y condiciones',
+      privacy: 'Política de privacidad',
     },
     modal: {
       signupTitle: 'Crear Cuenta',
@@ -461,6 +471,11 @@ export const translations: Record<Language, TranslationKeys> = {
       procedimiento6: 'Minor Surgery',
       contactTitle: 'Contact',
       rights: 'All rights reserved.',
+      disclaimer: 'The information provided on this website is for educational and wellness purposes only, and does not replace individualized medical advice or emergency care.',
+      faq: 'Frequently Asked Questions',
+      hours: 'Mon–Fri · 5:00 pm – 8:00 pm',
+      terms: 'Terms and Conditions',
+      privacy: 'Privacy Policy',
     },
     modal: {
       signupTitle: 'Create Account',

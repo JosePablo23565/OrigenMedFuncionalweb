@@ -1,30 +1,39 @@
 /* ============================================
-   FOOTER
+   FOOTER — ORIGEN MEDICINA FUNCIONAL
+   Cierre sobrio y sereno en carbón orgánico
    ============================================ */
+
 .footer {
-  background: #2D2E24;
-  padding: 64px 0 32px;
+  background: var(--bg-dark, #141412);
+  color: #FFFFFF;
+  padding: 96px 0 44px;
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .container {
-  max-width: 1200px;
+  max-width: var(--container-max, 1200px);
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 28px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.2fr;
-  gap: 48px;
-  margin-bottom: 48px;
+  grid-template-columns: 2fr 1.1fr 1.4fr;
+  gap: 68px;
+  margin-bottom: 64px;
 }
 
 /* ============================================
    BRAND
    ============================================ */
+
 .brand {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
   gap: 14px;
 }
 
@@ -41,84 +50,152 @@
 .logoImg {
   display: block;
   width: auto;
-  height: 34px;
-  max-width: 165px;
+  height: 38px;
+  max-width: 175px;
   object-fit: contain;
 }
 
-.tagline {
-  color: rgba(255, 255, 255, 0.65);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  max-width: 280px;
+.locationBadge {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
 }
 
 /* ============================================
-   LINKS
+   COLUMNAS
    ============================================ */
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.colTitle {
+  color: rgba(255, 255, 255, 0.45);
+  font-family: var(--font-family);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 24px;
+}
+
 .links {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
-.heading {
-  color: #FFFFFF;
-  font-size: 0.82rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 4px;
-}
-
-.links a {
-  color: rgba(255, 255, 255, 0.65);
+.link {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition: color 0.2s ease;
+  line-height: 1.4;
   width: fit-content;
-  display: inline-block;
 }
 
-.links a:hover {
+.link:hover {
   color: #FFFFFF;
-  transform: translateX(2px);
-}
-
-.contactLink {
-  word-break: break-all;
 }
 
 /* ============================================
-   BOTTOM
+   CONTACTO
    ============================================ */
+
+.contactCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contactItem {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  line-height: 1.4;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.contactItem:hover {
+  color: #FFFFFF;
+}
+
+.hoursItem {
+  display: flex;
+  align-items: center;
+}
+
+.hoursText {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.90rem;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* ============================================
+   CIERRE INFERIOR
+   ============================================ */
+
 .bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .copy {
+  margin: 0;
+  font-size: 0.84rem;
   color: rgba(255, 255, 255, 0.45);
-  font-size: 0.8rem;
-  text-align: center;
+}
+
+.legalLinks {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.legalLink {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.82rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.legalLink:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.legalDot {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.82rem;
+  user-select: none;
 }
 
 /* ============================================
-   TABLET
+   RESPONSIVE
    ============================================ */
+
 @media (max-width: 1024px) {
   .grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 36px 32px;
+    grid-template-columns: 1.5fr 1fr 1.3fr;
+    gap: 48px;
+    margin-bottom: 52px;
   }
 }
 
-/* ============================================
-   MÓVIL (≤768px)
-   ============================================ */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .footer {
-    padding: 48px 0 24px;
+    padding: 64px 0 84px;
   }
 
   .container {
@@ -126,35 +203,95 @@
   }
 
   .grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 32px 20px;
-    margin-bottom: 36px;
+    grid-template-columns: minmax(110px, auto) 1fr;
+    gap: 40px 24px;
+    margin-bottom: 44px;
   }
 
   .brand {
     grid-column: 1 / -1;
-    gap: 0;
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    align-items: flex-start;
+    text-align: left;
+    gap: 12px;
+    margin-bottom: 4px;
   }
 
   .logoImg {
     height: 34px;
-    max-width: 155px;
+    max-width: 165px;
   }
 
-  .tagline {
-    display: none;
+  .colTitle {
+    font-size: 0.78rem;
+    margin-bottom: 18px;
   }
 
-  .links a {
+  .links,
+  .contactList {
+    gap: 15px;
+  }
+
+  .contactItem {
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  .link {
     font-size: 0.88rem;
-    padding: 4px 0;
   }
 
-  .contact {
-    grid-column: 1 / -1;
-    padding-top: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  .hoursText {
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-top: 28px;
+    text-align: left;
+    max-width: calc(100% - 64px);
+  }
+
+  .legalLinks {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .container {
+    padding: 0 18px;
+  }
+
+  .grid {
+    gap: 36px 18px;
+    margin-bottom: 38px;
+  }
+
+  .colTitle {
+    font-size: 0.75rem;
+    margin-bottom: 14px;
+  }
+
+  .links,
+  .contactList {
+    gap: 13px;
+  }
+
+  .link {
+    font-size: 0.84rem;
+  }
+
+  .contactItem {
+    font-size: 0.77rem;
+    white-space: nowrap;
+  }
+
+  .copy,
+  .legalLink {
+    font-size: 0.78rem;
   }
 }

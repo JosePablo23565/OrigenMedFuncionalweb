@@ -12,8 +12,6 @@ interface SidePanelProps {
   mobileLogo?: string;
 }
 
-type GroupKey = 'consultas' | 'procedimientos' | null;
-
 const UserProfileIcon = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -27,9 +25,11 @@ const UserProfileIcon = ({ className }: { className?: string }) => (
 );
 
 const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
-  const [openGroup, setOpenGroup] = useState<GroupKey>(null);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isProceduresOpen, setIsProceduresOpen] = useState(false);
   const [appointmentsCount, setAppointmentsCount] = useState<number>(0);
-  const { t, language } = useLanguage();
+
+  const { t, language, setLanguage } = useLanguage();
   const { openModal, openBookingModal } = useModal();
   const { user, signOut } = useAuth();
 
@@ -41,25 +41,53 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
     }
   }, [isOpen, user]);
 
-  const consultas = [
-    { label: t.footer.consulta1, href: '#medicina-general' },
-    { label: t.footer.consulta2, href: '#medicina-funcional' },
+  // Servicios principales dentro de "Servicios" (Sentence case en español, Title Case en inglés)
+  const serviciosDirectos = [
+    {
+      label: language === 'en' ? 'Functional Medicine' : 'Medicina funcional',
+      href: '#servicios',
+    },
+    {
+      label: language === 'en' ? 'Metabolic & Hormonal Health' : 'Salud metabólica y hormonal',
+      href: '#servicios',
+    },
+    {
+      label: language === 'en' ? 'Lifestyle Medicine' : 'Medicina del estilo de vida',
+      href: '#servicios',
+    },
+    {
+      label: language === 'en' ? 'Intravenous Therapy' : 'Terapia intravenosa',
+      href: '#servicios',
+    },
+    {
+      label: language === 'en' ? "Driver's License Medical Exam" : 'Dictamen de licencia',
+      href: '#servicios',
+    },
   ];
 
-  const procedimientos = [
-    { label: t.footer.procedimiento1, href: '#lavado-oido' },
-    { label: t.footer.procedimiento2, href: '#retiro-puntos' },
-    { label: t.footer.procedimiento3, href: '#implanon' },
-    { label: t.footer.procedimiento4, href: '#sueroterapia' },
-    { label: t.footer.procedimiento5, href: '#cauterizacion' },
-    { label: t.footer.procedimiento6, href: '#cirugia-menor' },
+  // Procedimientos anidados dentro del sub-acordeón
+  const procedimientosList = [
+    {
+      label: language === 'en' ? 'Minor Surgery' : 'Cirugía menor',
+      href: '#servicios',
+    },
+    {
+      label: language === 'en' ? 'Implanon Insertion & Removal' : 'Colocación y retiro de Implanon',
+      href: '#servicios',
+    },
+    {
+      label: language === 'en' ? 'Cauterization' : 'Cauterización',
+      href: '#servicios',
+    },
+    {
+      label: language === 'en' ? 'Suture Removal' : 'Retiro de puntos',
+      href: '#servicios',
+    },
+    {
+      label: language === 'en' ? 'Onychoplasty' : 'Onicoplastia',
+      href: '#servicios',
+    },
   ];
-
-  const toggleGroup = (group: 'consultas' | 'procedimientos') => {
-    setOpenGroup((prev) => (prev === group ? null : group));
-  };
-
-  const isGroupOpen = (group: 'consultas' | 'procedimientos') => openGroup === group;
 
   const getDisplayName = () => {
     if (user?.user_metadata?.full_name) return user.user_metadata.full_name;
@@ -115,7 +143,7 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
       {/* Header del panel (Perfil / Cuenta) */}
       <div className={styles.sidePanelHeader}>
         <div className={styles.profileRow}>
-          {/* Avatar con ícono SVG solicitado */}
+          {/* Avatar con ícono SVG */}
           <div className={styles.avatarWrap}>
             <div className={styles.avatarLogo}>
               <UserProfileIcon className={styles.userIconSvg} />
@@ -149,10 +177,10 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
         </div>
       </div>
 
-      {/* Navegación organizada por secciones con espaciado */}
+      {/* Navegación organizada por orden jerárquico UX/UI */}
       <nav className={styles.sideNav}>
-        {/* Sección 1: General */}
         <div className={styles.navSection}>
+          {/* 1. Inicio */}
           <a
             href="/#inicio"
             onClick={(e) => handleNavAnchor(e, '#inicio')}
@@ -161,6 +189,7 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
             {t.nav.inicio}
           </a>
 
+          {/* Mis Citas (si está autenticado) */}
           {user && (
             <a
               href="/mis-citas"
@@ -174,33 +203,29 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
               }}
               className={`${styles.sideNavLink} ${window.location.pathname.startsWith('/mis-citas') ? styles.activeLink : ''}`}
             >
-              <span>{language === 'en' ? 'Mis Citas' : 'Mis Citas'}</span>
+              <span>{language === 'en' ? 'My Appointments' : 'Mis Citas'}</span>
               {appointmentsCount > 0 && (
                 <span className={styles.appointmentBadge}>{appointmentsCount}</span>
               )}
             </a>
           )}
-        </div>
 
-        {/* Espacio entre secciones */}
-        <div className={styles.sectionSpacer} />
-
-        {/* Sección 2: Servicios Médicos */}
-        <div className={styles.navSection}>
-          {/* Consultas Médicas Accordion */}
-          <div className={`${styles.menuGroup} ${isGroupOpen('consultas') ? styles.groupOpen : ''}`}>
+          {/* 2. Acordeón Principal: Servicios */}
+          <div className={`${styles.menuGroup} ${isServicesOpen ? styles.groupOpen : ''}`}>
             <button
               type="button"
               className={styles.menuGroupTitle}
-              onClick={() => toggleGroup('consultas')}
-              aria-expanded={isGroupOpen('consultas')}
+              onClick={() => setIsServicesOpen((prev) => !prev)}
+              aria-expanded={isServicesOpen}
             >
-              <span className={styles.navLabel}>{t.footer.consultasTitle}</span>
+              <span className={styles.navLabel}>{t.nav.servicios}</span>
               <ChevronRight size={16} className={styles.menuArrow} />
             </button>
+
             <div className={styles.menuGroupItems}>
               <div className={styles.menuGroupItemsInner}>
-                {consultas.map((item, i) => (
+                {/* Servicios directos */}
+                {serviciosDirectos.map((item, i) => (
                   <a
                     key={i}
                     href={item.href}
@@ -210,43 +235,39 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
                     {item.label}
                   </a>
                 ))}
-              </div>
-            </div>
-          </div>
 
-          {/* Procedimientos Médicos Accordion */}
-          <div className={`${styles.menuGroup} ${isGroupOpen('procedimientos') ? styles.groupOpen : ''}`}>
-            <button
-              type="button"
-              className={styles.menuGroupTitle}
-              onClick={() => toggleGroup('procedimientos')}
-              aria-expanded={isGroupOpen('procedimientos')}
-            >
-              <span className={styles.navLabel}>{t.footer.procedimientosTitle}</span>
-              <ChevronRight size={16} className={styles.menuArrow} />
-            </button>
-            <div className={styles.menuGroupItems}>
-              <div className={styles.menuGroupItemsInner}>
-                {procedimientos.map((item, i) => (
-                  <a
-                    key={i}
-                    href={item.href}
-                    onClick={(e) => handleNavAnchor(e, item.href)}
-                    className={styles.menuGroupItem}
+                {/* Sub-acordeón: Procedimientos */}
+                <div className={`${styles.subMenuGroup} ${isProceduresOpen ? styles.subGroupOpen : ''}`}>
+                  <button
+                    type="button"
+                    className={styles.subMenuGroupTitle}
+                    onClick={() => setIsProceduresOpen((prev) => !prev)}
+                    aria-expanded={isProceduresOpen}
                   >
-                    {item.label}
-                  </a>
-                ))}
+                    <span>{language === 'en' ? 'Procedures' : 'Procedimientos'}</span>
+                    <ChevronRight size={15} className={styles.subChevron} />
+                  </button>
+
+                  <div className={styles.subMenuGroupItems}>
+                    <div className={styles.subMenuGroupItemsInner}>
+                      {procedimientosList.map((item, i) => (
+                        <a
+                          key={i}
+                          href={item.href}
+                          onClick={(e) => handleNavAnchor(e, item.href)}
+                          className={styles.subMenuItem}
+                        >
+                          {item.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Espacio entre secciones */}
-        <div className={styles.sectionSpacer} />
-
-        {/* Sección 3: Institucional y Ubicación */}
-        <div className={styles.navSection}>
+          {/* 3. Nuestro Equipo */}
           <a
             href="/#equipo"
             onClick={(e) => handleNavAnchor(e, '#equipo')}
@@ -255,6 +276,7 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
             {t.nav.nuestroEquipo}
           </a>
 
+          {/* 4. Ubicación */}
           <a
             href="/#ubicacion"
             onClick={(e) => handleNavAnchor(e, '#ubicacion')}
@@ -264,7 +286,7 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
           </a>
         </div>
 
-        {/* Zona de Acción Principal (Agendar Cita y Cerrar sesión / Iniciar Sesión) */}
+        {/* Zona de Acción Principal (Agendar Cita, Cerrar/Iniciar Sesión e Idioma) */}
         <div className={styles.mainCtaSection}>
           {user ? (
             <>
@@ -315,6 +337,27 @@ const SidePanel = ({ isOpen, onClose }: SidePanelProps) => {
               </button>
             </>
           )}
+
+          {/* Selector de idioma ES / EN ultra discreto */}
+          <div className={styles.languageMinimal}>
+            <button
+              type="button"
+              className={`${styles.langBtnMinimal} ${language === 'es' ? styles.langActiveMinimal : ''}`}
+              onClick={() => setLanguage('es')}
+              aria-label="Cambiar a Español"
+            >
+              ES
+            </button>
+            <span className={styles.langSepMinimal}>/</span>
+            <button
+              type="button"
+              className={`${styles.langBtnMinimal} ${language === 'en' ? styles.langActiveMinimal : ''}`}
+              onClick={() => setLanguage('en')}
+              aria-label="Switch to English"
+            >
+              EN
+            </button>
+          </div>
         </div>
       </nav>
     </aside>

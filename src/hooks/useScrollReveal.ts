@@ -25,10 +25,12 @@ export const useScrollReveal = () => {
       });
     };
 
+    const isMobile = window.innerWidth <= 768;
     const observer = new IntersectionObserver(observerCallback, {
       root: null,
-      rootMargin: '0px 0px -40px 0px',
-      threshold: 0.12,
+      // En móvil anticipamos la carga 40px antes de entrar para evitar pantallas en blanco durante scroll con pulgar
+      rootMargin: isMobile ? '0px 0px 40px 0px' : '0px 0px -30px 0px',
+      threshold: isMobile ? 0.02 : 0.1,
     });
 
     const observeElements = () => {

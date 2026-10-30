@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <!-- Favicon & App Icons -->
@@ -8,21 +8,67 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(regs) {
+          for (var i = 0; i < regs.length; i++) regs[i].unregister();
+        });
+      }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <meta name="theme-color" content="#6A6950" />
+    <meta name="theme-color" content="#4E5038" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <title>Origen Med Funcional</title>
-    <!-- Preload Inter font to prevent FOUT -->
+
+    <!-- SEO Principal -->
+    <title>Origen Medicina Funcional | Guanacaste, Costa Rica</title>
+    <meta name="description" content="Evaluación médica de raíz para desequilibrios metabólicos, hormonales y digestivos. Planes de salud personalizados y medicina preventiva en Costa Rica." />
+    <link rel="canonical" href="https://origenmedfuncional.com/" />
+
+    <!-- Open Graph / Redes Sociales y WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://origenmedfuncional.com/" />
+    <meta property="og:title" content="Origen Medicina Funcional | Guanacaste, Costa Rica" />
+    <meta property="og:description" content="Evaluación médica de raíz para desequilibrios metabólicos, hormonales y digestivos. Planes de salud personalizados y medicina preventiva en Costa Rica." />
+    <meta property="og:image" content="https://origenmedfuncional.com/hero-running.webp" />
+    <meta property="og:locale" content="es_CR" />
+    <meta property="og:site_name" content="Origen Medicina Funcional" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Origen Medicina Funcional | Guanacaste, Costa Rica" />
+    <meta name="twitter:description" content="Evaluación médica de raíz para desequilibrios metabólicos, hormonales y digestivos. Planes de salud personalizados y medicina preventiva en Costa Rica." />
+    <meta name="twitter:image" content="https://origenmedfuncional.com/hero-running.webp" />
+
+    <!-- Datos Estructurados JSON-LD (Google Search / Schema.org) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MedicalClinic",
+        "name": "Origen Medicina Funcional",
+        "image": "https://origenmedfuncional.com/hero-running.webp",
+        "url": "https://origenmedfuncional.com",
+        "telephone": "+50688775126",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "25 m Sur del Banco de Costa Rica, Farmacia Monserrat",
+          "addressLocality": "Guayabo",
+          "addressRegion": "Guanacaste",
+          "addressCountry": "CR"
+        },
+        "description": "Evaluación médica de raíz para desequilibrios metabólicos, hormonales y digestivos. Planes de salud personalizados y medicina preventiva en Costa Rica."
+      }
+    </script>
+
+    <!-- Preconnect to Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" />
+    <!-- Editorial Font Pairing: Fraunces (Variable Soft-Serif) + Plus Jakarta Sans (Variable Clean Geometric) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
     <!-- Preload Hero image adaptively for instant LCP -->
-    <link rel="preload" as="image" href="/Hero-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high" />
-    <link rel="preload" as="image" href="/Hero.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high" />
-    <!-- ===== GOOGLE IDENTITY SERVICES (GSI) ===== -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="preload" as="image" href="/hero-running-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/hero-running.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high" />
   </head>
-  <body style="background-color: #302E2E;">
+  <body style="background-color: #191916;">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

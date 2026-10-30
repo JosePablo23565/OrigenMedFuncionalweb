@@ -9,12 +9,11 @@
   width: 100%;
   z-index: 1000;
   padding-top: env(safe-area-inset-top, 0px);
-  background-color: rgba(106, 105, 80, 0.82);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: rgba(28, 27, 24, 0.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .container {
@@ -23,6 +22,7 @@
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
 
   box-sizing: border-box;
@@ -88,7 +88,8 @@
 
   transition:
     top 300ms 50ms ease,
-    transform 300ms 350ms ease;
+    transform 300ms 350ms ease,
+    background-color 300ms ease;
 }
 
 .hamburger.open .bar:nth-child(2) {
@@ -102,7 +103,8 @@
 
   transition:
     top 300ms 50ms ease,
-    transform 300ms 350ms ease;
+    transform 300ms 350ms ease,
+    background-color 300ms ease;
 }
 
 /* ============================================
@@ -120,57 +122,9 @@
 .logoImg {
   display: block;
   width: auto;
-  height: 36px;
-  max-width: 165px;
+  height: 26px;
+  max-width: 170px;
   object-fit: contain;
-}
-
-/* ============================================
-   IDIOMA
-   ============================================ */
-
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-left: auto;
-  flex-shrink: 0;
-}
-
-.idioma {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  color: white;
-  font-size: 0.75rem;
-  background: rgba(255, 255, 255, 0.12);
-  padding: 5px 10px;
-  border-radius: 6px;
-}
-
-.idiomaBtn {
-  background: none;
-  border: none;
-  color: #D4DDE2;
-  font-size: 0.75rem;
-  cursor: pointer;
-  padding: 2px 5px;
-  transition: color 0.2s;
-  font-family: inherit;
-}
-
-.idiomaBtn:hover {
-  color: white;
-}
-
-.idiomaBtn.active {
-  color: white;
-  font-weight: 600;
-}
-
-.separador {
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 0.7rem;
 }
 
 /* ============================================
@@ -247,22 +201,8 @@
 
   .logoImg {
     width: auto;
-    height: 38px;
-    max-width: 175px;
-  }
-
-  .actions {
-    gap: 12px;
-  }
-
-  .idioma {
-    font-size: 0.75rem;
-    padding: 6px 12px;
-    border-radius: 6px;
-  }
-
-  .idiomaBtn {
-    font-size: 0.75rem;
+    height: 28px;
+    max-width: 180px;
   }
 }
 
@@ -307,17 +247,8 @@
 
   .logoImg {
     width: auto;
-    height: 33px;
-    max-width: 145px;
-  }
-
-  .idioma {
-    font-size: 0.7rem;
-    padding: 4px 8px;
-  }
-
-  .idiomaBtn {
-    font-size: 0.7rem;
+    height: 23px;
+    max-width: 150px;
   }
 }
 
@@ -334,8 +265,8 @@
 
   .logoImg {
     width: auto;
-    height: 29px;
-    max-width: 125px;
+    height: 20px;
+    max-width: 130px;
   }
 
   .hamburger {
@@ -364,14 +295,5 @@
   .hamburger.open .bar:nth-child(1),
   .hamburger.open .bar:nth-child(3) {
     top: 18px;
-  }
-
-  .idioma {
-    font-size: 0.65rem;
-    padding: 3px 6px;
-  }
-
-  .idiomaBtn {
-    font-size: 0.65rem;
   }
 }

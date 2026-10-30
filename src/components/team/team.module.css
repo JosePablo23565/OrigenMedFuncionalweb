@@ -1,256 +1,179 @@
 /* ============================================
-   NUESTRO EQUIPO (TEAM SECTION)
+   NUESTRO EQUIPO (ESTILO HELLO ALMA)
+   Retratos limpios, tipografía editorial, cero cajas
    ============================================ */
 
 .teamSection {
-  background-color: #f7f6f0;
-  padding: 80px 24px;
+  background-color: var(--bg-warm, #FAF8F5);
+  padding: 120px 24px;
   position: relative;
   z-index: 3;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: var(--container-max, 1200px);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
+}
+
+.header {
+  margin-bottom: 64px;
+  max-width: 720px;
 }
 
 .title {
-  font-family: "Exo 2", var(--font-family);
-  font-size: clamp(2.2rem, 3.5vw, 2.75rem);
-  font-weight: 700;
-  color: #6A6950;
-  text-align: center;
-  margin: 0 0 54px;
-  letter-spacing: -0.01em;
+  font-family: var(--font-serif, 'Fraunces', Georgia, serif);
+  font-size: clamp(2.4rem, 4.4vw, 3.4rem);
+  font-weight: 500;
+  color: var(--color-text-main, #1E1E1A);
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-wrap: balance;
 }
+
+/* ============================================
+   GRID DE PERFILES (2 COLUMNAS ABIERTAS)
+   ============================================ */
 
 .cardsList {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 64px;
   width: 100%;
 }
 
-/* ============================================
-   TEAM CARD BASE
-   ============================================ */
-
 .card {
-  background-color: #faf6ef;
-  border-radius: 32px;
-  border: 1px solid rgba(106, 105, 80, 0.14);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  min-height: 410px;
-  overflow: hidden;
-  box-shadow: 0 4px 24px rgba(56, 57, 46, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 36px rgba(106, 105, 80, 0.14);
-}
-
-/* ============================================
-   CARD CONTENT
-   ============================================ */
-
-.infoCol {
-  padding: 44px 36px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-  z-index: 2;
-}
-
-.memberName {
-  font-family: "Exo 2", var(--font-family);
-  font-size: clamp(1.35rem, 1.7vw, 1.65rem);
-  font-weight: 700;
-  color: #302E2E;
-  margin: 0;
-  line-height: 1.25;
-  white-space: nowrap;
-}
-
-.memberSpecialty {
-  font-size: 1rem;
-  line-height: 1.55;
-  color: #5a5c4a;
-  margin: 0;
-}
-
-.viewProfileLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 8px;
-  color: #3B8595;
-  font-family: "Exo 2", var(--font-family);
-  font-size: 1.05rem;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  background: none;
+  background: transparent;
+  border-radius: 0;
   border: none;
+  box-shadow: none;
   padding: 0;
-  transition: color 0.2s ease, transform 0.2s ease;
-  width: fit-content;
 }
-
-.viewProfileLink:hover {
-  color: #2F6F7E;
-  transform: translateX(3px);
-}
-
-.profileIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 1.5px solid currentColor;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-/* ============================================
-   PHOTO COLUMNS
-   ============================================ */
 
 .photoCol {
-  height: 100%;
-  min-height: 410px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
   position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3.8;
+  border-radius: 12px;
   overflow: hidden;
+  background-color: var(--bg-warm-tint, #F3EFEA);
+  margin-bottom: 24px;
 }
 
 .memberImg {
   width: 100%;
   height: 100%;
-  max-width: 520px;
-  max-height: 520px;
-  object-fit: contain;
-  object-position: bottom center;
+  object-fit: cover;
+  object-position: center top;
   display: block;
-  transform: scale(1.85) translateY(5%);
-  transform-origin: bottom center;
 }
 
-.emptyPlaceholder {
+.doctorPlaceholder {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
   width: 100%;
   height: 100%;
-  min-height: 240px;
-  color: #a3a18a;
-  border: 2px dashed rgba(106, 105, 80, 0.25);
-  border-radius: 20px;
-  margin: 16px;
-  box-sizing: border-box;
+  color: var(--color-olive, #4E5038);
+  opacity: 0.5;
 }
 
-.emptyIcon {
-  opacity: 0.6;
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0;
 }
 
-.emptyText {
-  font-size: 0.85rem;
+.memberName {
+  font-family: var(--font-serif, 'Fraunces', Georgia, serif);
+  font-size: 1.65rem;
   font-weight: 500;
-  color: #8a8870;
+  color: var(--color-text-main, #1E1E1A);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.memberSpecialty {
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--color-text-muted, #5C5A52);
+  margin: 0 0 16px;
+}
+
+/* Botón píldora sobrio, sin subrayados escolares */
+.viewProfileLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  color: var(--color-text-main, #1E1E1A);
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  background-color: transparent;
+  border: 1px solid var(--divider-light, rgba(30, 30, 26, 0.22));
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  width: fit-content;
+}
+
+.viewProfileLink:hover {
+  background-color: var(--color-text-main, #1E1E1A);
+  color: var(--bg-warm, #FAF8F5);
+  border-color: var(--color-text-main, #1E1E1A);
+  transform: translateY(-1px);
+}
+
+.viewProfileLink:active {
+  transform: scale(0.975);
 }
 
 /* ============================================
-   RESPONSIVE (MOBILE & TABLET)
+   TABLET (≤1024px)
    ============================================ */
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
+  .teamSection {
+    padding: 80px 20px;
+  }
+
   .cardsList {
-    grid-template-columns: 1fr;
-    max-width: 560px;
-    gap: 28px;
-  }
-
-  .card {
-    min-height: 320px;
-  }
-
-  .photoCol {
-    min-height: 320px;
-  }
-
-  .memberImg {
-    transform: scale(1.85) translateY(7%);
+    gap: 40px;
   }
 }
 
-@media (max-width: 600px) {
+/* ============================================
+   MÓVIL (≤767px)
+   ============================================ */
+
+@media (max-width: 767px) {
   .teamSection {
-    padding: 56px 16px;
+    padding: 60px 20px;
+  }
+
+  .header {
+    margin-bottom: 40px;
   }
 
   .title {
-    margin-bottom: 32px;
+    font-size: clamp(2rem, 8vw, 2.6rem);
   }
 
-  .card {
-    grid-template-columns: 1fr 1fr;
-    min-height: 285px;
-    border-radius: 26px;
-  }
-
-  .infoCol {
-    padding: 24px 14px 24px 18px;
-    gap: 8px;
-  }
-
-  .memberName {
-    font-size: clamp(1.08rem, 4.2vw, 1.35rem);
-    white-space: nowrap;
-  }
-
-  .memberSpecialty {
-    font-size: 0.92rem;
-    line-height: 1.45;
-  }
-
-  .viewProfileLink {
-    font-size: 0.95rem;
-    margin-top: 6px;
-  }
-
-  .profileIcon {
-    width: 19px;
-    height: 19px;
-    font-size: 12px;
+  .cardsList {
+    grid-template-columns: 1fr;
+    gap: 48px;
   }
 
   .photoCol {
-    min-height: 285px;
-  }
-
-  .memberImg {
-    transform: scale(1.92) translateY(5.5%);
-  }
-
-  .emptyPlaceholder {
-    min-height: 200px;
-    margin: 12px;
+    aspect-ratio: 4 / 3.4;
   }
 }

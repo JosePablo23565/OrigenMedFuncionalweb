@@ -9,6 +9,7 @@ import Team from './components/team/team';
 import Location from './components/location/location';
 import FAQ from './components/faq/faq';
 import Footer from './components/footer/footer';
+import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton';
 
 // Lazy-loaded routes & modals (loaded on demand, keeping initial bundle tiny)
 const AppointmentModal = lazy(() => import('./components/appointmentModal/appointmentmodal'));
@@ -49,6 +50,7 @@ function App() {
           <BookingModal />
         </Suspense>
         <Footer />
+        <WhatsAppButton />
       </>
     );
   }
@@ -64,6 +66,7 @@ function App() {
       <Location />
       <FAQ />
       <Footer />
+      <WhatsAppButton />
       <Suspense fallback={null}>
         <AppointmentModal />
         <BookingModal />

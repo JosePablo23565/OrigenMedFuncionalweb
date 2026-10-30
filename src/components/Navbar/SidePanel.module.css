@@ -1,14 +1,15 @@
 /* ============================================
-   PANEL LATERAL
+   PANEL LATERAL (DRAWER DERECHO)
    ============================================ */
 
 .sidePanel {
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
+  left: auto;
   z-index: 1002;
 
-  width: 320px;
+  width: min(340px, 88vw);
   height: 100vh;
   height: 100dvh;
   max-height: 100dvh;
@@ -16,52 +17,52 @@
   display: flex;
   flex-direction: column;
 
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  /* El panel permanece fijo; sólo navega/scrollea internamente .sideNav */
+  overflow: hidden;
+  box-sizing: border-box;
 
   color: #302e2e;
   background: #ffffff;
+  box-shadow: none;
 
-  transform: translate3d(-100%, 0, 0);
-  will-change: transform;
+  /* Oculto totalmente cuando está cerrado para eliminar cualquier sangrado o sombra en el borde derecho */
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate3d(105%, 0, 0);
+  will-change: transform, visibility;
   backface-visibility: hidden;
-  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
-
-  box-sizing: border-box;
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 320ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sidePanel.active {
+  visibility: visible;
+  pointer-events: auto;
   transform: translate3d(0, 0, 0);
+  box-shadow: -6px 0 32px rgba(0, 0, 0, 0.16);
 }
 
 /* ============================================
-   MÓVIL: Animación más fluida
-   ============================================ */
-
-@media (max-width: 767px) {
-  .sidePanel {
-    transition-duration: 300ms;
-    transition-timing-function: cubic-bezier(0.33, 0.66, 0.66, 1);
-  }
-}
-
-/* ============================================
-   HEADER DEL PANEL (PERFIL / CUENTA)
+   HEADER DEL PANEL (PERFIL / CUENTA PINNED)
    ============================================ */
 
 .sidePanelHeader {
   display: flex;
   flex-direction: column;
-  padding: 32px 20px 18px;
+  padding: max(16px, calc(10px + env(safe-area-inset-top, 0px))) 16px 12px;
   border-bottom: 1px solid rgba(106, 105, 80, 0.12);
   flex-shrink: 0;
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
   box-sizing: border-box;
 }
 
 .profileRow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
 }
 
@@ -73,8 +74,8 @@
 }
 
 .avatarLogo {
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: rgba(106, 105, 80, 0.1);
   display: flex;
@@ -87,8 +88,8 @@
 }
 
 .userIconSvg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   color: #6A6950;
   display: block;
 }
@@ -103,18 +104,18 @@
 }
 
 .profileName {
-  font-family: 'Exo 2', var(--font-family);
-  font-size: 0.95rem;
+  font-family: 'Exo 2', var(--font-family, sans-serif);
+  font-size: 0.9rem;
   font-weight: 700;
   color: #302E2E;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
 .profileSub {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 500;
   color: #6A6950;
   white-space: nowrap;
@@ -122,14 +123,11 @@
   text-overflow: ellipsis;
 }
 
-/* ============================================
-   BOTÓN CERRAR
-   ============================================ */
-
+/* Botón cerrar */
 .panelClose {
   position: relative;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   margin: 0;
   padding: 0;
   display: flex;
@@ -140,7 +138,7 @@
   border-radius: 8px;
   cursor: pointer;
   flex-shrink: 0;
-  transition: background 200ms ease;
+  transition: background 180ms ease;
 }
 
 .panelClose:hover {
@@ -149,7 +147,7 @@
 
 .panelClose span {
   position: absolute;
-  width: 18px;
+  width: 16px;
   height: 1.5px;
   background: #302e2e;
   border-radius: 1px;
@@ -164,73 +162,63 @@
 }
 
 /* ============================================
-   NAVEGACIÓN DEL PANEL
+   NAVEGACIÓN DEL PANEL (SCROLL INTERNO)
    ============================================ */
 
 .sideNav {
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 18px 16px 24px;
+  padding: 10px 14px 18px;
   box-sizing: border-box;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Scrollbar suave */
+.sideNav::-webkit-scrollbar {
+  width: 4px;
+}
+.sideNav::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sideNav::-webkit-scrollbar-thumb {
+  background: rgba(106, 105, 80, 0.2);
+  border-radius: 4px;
 }
 
 .navSection {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
-.sectionSpacer {
-  height: 22px;
-  width: 100%;
-  flex-shrink: 0;
-}
-
+/* Enlace Nivel 1 (Inicio, Nuestro equipo, Ubicación, Mis Citas) */
 .sideNavLink {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-height: 48px;
-  padding: 0 16px;
+  min-height: 38px;
+  padding: 0 12px;
   color: #302e2e;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 500;
   font-family: inherit;
   text-decoration: none;
   text-align: left;
   background: transparent;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
   box-sizing: border-box;
-  transition: background 200ms ease, color 200ms ease;
+  transition: background 180ms ease, color 180ms ease;
 }
 
 .sideNavLink:hover {
   background: rgba(106, 105, 80, 0.06);
-}
-
-.navLabel {
-  flex: 1;
-  text-align: left;
-  font-size: 0.95rem;
-}
-
-.appointmentBadge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 20px;
-  height: 20px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #ffffff;
-  background: #6A6950;
-  border-radius: 10px;
-  padding: 0 6px;
+  color: #1f1e1e;
 }
 
 .activeLink {
@@ -238,8 +226,28 @@
   font-weight: 600;
 }
 
+.navLabel {
+  flex: 1;
+  text-align: left;
+  font-size: 0.92rem;
+}
+
+.appointmentBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: #6A6950;
+  border-radius: 9px;
+  padding: 0 5px;
+}
+
 /* ============================================
-   ACORDEÓN: SERVICIOS
+   NIVEL 1: ACORDEÓN PRINCIPAL (SERVICIOS)
    ============================================ */
 
 .menuGroup {
@@ -249,22 +257,22 @@
 
 .menuGroupTitle {
   width: 100%;
-  min-height: 48px;
-  padding: 0 16px;
+  min-height: 38px;
+  padding: 0 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: #302e2e;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 500;
   font-family: inherit;
   text-align: left;
   background: transparent;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
   box-sizing: border-box;
-  transition: background 200ms ease, color 200ms ease;
+  transition: background 180ms ease, color 180ms ease;
 }
 
 .menuGroupTitle:hover {
@@ -274,7 +282,7 @@
 .menuArrow {
   flex-shrink: 0;
   color: #6A6950;
-  transition: transform 250ms ease;
+  transition: transform 220ms ease;
 }
 
 .groupOpen .menuArrow {
@@ -284,7 +292,7 @@
 .menuGroupItems {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: grid-template-rows 220ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .groupOpen .menuGroupItems {
@@ -295,20 +303,26 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 4px 0 6px 14px;
+  padding: 2px 0 4px 10px;
+  border-left: 1.5px solid rgba(106, 105, 80, 0.15);
+  margin-left: 12px;
+  gap: 1px;
 }
 
+/* Item Nivel 2 (Servicios directos y Dictamen) */
 .menuGroupItem {
   display: flex;
   align-items: center;
-  padding: 10px 14px;
-  color: #6A6950;
-  font-size: 0.9rem;
+  min-height: 32px;
+  padding: 5px 10px;
+  color: #555340;
+  font-size: 0.86rem;
   font-weight: 500;
   font-family: inherit;
   text-decoration: none;
-  border-radius: 10px;
-  transition: background 200ms ease, color 200ms ease;
+  border-radius: 6px;
+  line-height: 1.25;
+  transition: background 180ms ease, color 180ms ease;
 }
 
 .menuGroupItem:hover {
@@ -317,28 +331,100 @@
 }
 
 /* ============================================
-   SEPARADOR
+   NIVEL 2 & 3: SUB-ACORDEÓN (PROCEDIMIENTOS)
    ============================================ */
 
-.menuDivider {
+.subMenuGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.subMenuGroupTitle {
   width: 100%;
-  max-width: calc(100% - 24px);
-  height: 1px;
-  margin: 10px 12px;
-  padding: 0;
-  background: rgba(106, 105, 80, 0.12);
+  min-height: 32px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #302e2e;
+  font-size: 0.86rem;
+  font-weight: 600;
+  font-family: inherit;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.subMenuGroupTitle:hover {
+  background: rgba(106, 105, 80, 0.06);
+}
+
+.subChevron {
+  flex-shrink: 0;
+  color: #6A6950;
+  transition: transform 220ms ease;
+}
+
+.subGroupOpen .subChevron {
+  transform: rotate(90deg);
+}
+
+.subMenuGroupItems {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.subGroupOpen .subMenuGroupItems {
+  grid-template-rows: 1fr;
+}
+
+.subMenuGroupItemsInner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0 4px 8px;
+  border-left: 1.5px solid rgba(106, 105, 80, 0.14);
+  margin-left: 8px;
+  gap: 1px;
+}
+
+/* Item Nivel 3 (Procedimientos específicos compactos) */
+.subMenuItem {
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 8px;
+  color: #6A6950;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: inherit;
+  text-decoration: none;
+  border-radius: 5px;
+  line-height: 1.25;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.subMenuItem:hover {
+  background: rgba(106, 105, 80, 0.06);
+  color: #302e2e;
 }
 
 /* ============================================
-   ZONA PRINCIPAL DE ACCIÓN (CTA)
+   ZONA PRINCIPAL DE ACCIÓN (CTA & IDIOMA)
    ============================================ */
 
 .mainCtaSection {
   margin-top: auto;
-  padding-top: 24px;
+  padding-top: 14px;
+  padding-bottom: 4px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .sideNavCta {
@@ -346,28 +432,28 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 48px;
+  min-height: 42px;
   margin: 0;
   padding: 0 14px;
   color: #ffffff;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  font-family: var(--font-family);
+  font-family: var(--font-family, sans-serif);
   text-decoration: none;
   background: #302e2e;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   box-sizing: border-box;
   cursor: pointer;
   transition:
-    background 200ms ease,
-    transform 200ms ease,
-    box-shadow 200ms ease;
+    background 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .sideNavCta:hover {
   background: #1f1e1e;
-  box-shadow: 0 8px 20px -6px rgba(48, 46, 46, 0.5);
+  box-shadow: 0 6px 16px -4px rgba(48, 46, 46, 0.4);
   transform: translateY(-1px);
 }
 
@@ -377,16 +463,16 @@
   justify-content: center;
   gap: 8px;
   width: 100%;
-  min-height: 46px;
+  min-height: 40px;
   margin: 0;
   padding: 0 14px;
   background: transparent;
   border: 1px solid rgba(106, 105, 80, 0.25);
-  border-radius: 12px;
+  border-radius: 10px;
   color: #6A6950;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  font-family: var(--font-family);
+  font-family: var(--font-family, sans-serif);
   cursor: pointer;
   box-sizing: border-box;
   transition: all 0.2s ease;
@@ -404,16 +490,16 @@
   justify-content: center;
   gap: 8px;
   width: 100%;
-  min-height: 46px;
+  min-height: 40px;
   margin: 0;
   padding: 0 14px;
   background: transparent;
   border: 1px solid rgba(192, 57, 43, 0.25);
-  border-radius: 12px;
+  border-radius: 10px;
   color: #c0392b;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  font-family: var(--font-family);
+  font-family: var(--font-family, sans-serif);
   cursor: pointer;
   box-sizing: border-box;
   transition: all 0.2s ease;
@@ -425,71 +511,86 @@
   color: #a93226;
 }
 
-.btnIcon {
-  flex-shrink: 0;
+/* ============================================
+   SELECTOR DE IDIOMA MINIMALISTA
+   ============================================ */
+
+.languageMinimal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 0 2px;
+}
+
+.langBtnMinimal {
+  background: transparent;
+  border: none;
+  padding: 4px 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 0.06em;
+  color: #8c8b73;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 150ms ease;
+}
+
+.langBtnMinimal:hover {
+  color: #302e2e;
+}
+
+.langActiveMinimal {
+  color: #302e2e;
+  font-weight: 700;
+}
+
+.langSepMinimal {
+  font-size: 0.72rem;
+  color: rgba(106, 105, 80, 0.35);
+  user-select: none;
 }
 
 /* ============================================
-   DESKTOP: PANEL MÁS ESTRECHO
+   RESPONSIVE & MEDIA QUERIES
    ============================================ */
 
 @media (min-width: 768px) {
   .sidePanel {
-    width: 325px;
+    width: 320px;
   }
 }
-
-/* ============================================
-   MÓVIL
-   ============================================ */
 
 @media (max-width: 767px) {
   .sidePanel {
-    width: min(320px, 86vw);
+    width: min(340px, 88vw);
     height: 100dvh;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.33, 0.66, 0.66, 1);
   }
 
   .sidePanelHeader {
-    padding: max(24px, calc(16px + env(safe-area-inset-top, 0px))) 18px 14px;
-  }
-
-  .sideLogo img {
-    height: 34px;
-    width: auto;
+    padding: max(14px, calc(10px + env(safe-area-inset-top, 0px))) 16px 10px;
   }
 
   .sideNav {
-    padding: 8px 16px calc(24px + env(safe-area-inset-bottom, 0px));
+    padding: 8px 12px calc(14px + env(safe-area-inset-bottom, 0px));
   }
 
   .mainCtaSection {
-    padding-top: 16px;
-    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
-    gap: 10px;
+    padding-top: 10px;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    gap: 8px;
   }
 }
 
-/* ============================================
-   MÓVIL PEQUEÑO
-   ============================================ */
-
 @media (max-width: 400px) {
   .sidePanel {
-    width: 88vw;
-    height: 100dvh;
-  }
-
-  .sidePanelHeader {
-    padding: max(22px, calc(14px + env(safe-area-inset-top, 0px))) 16px 12px;
+    width: 90vw;
   }
 
   .sideNav {
-    padding: 8px 14px calc(20px + env(safe-area-inset-bottom, 0px));
-  }
-
-  .mainCtaSection {
-    padding-top: 14px;
-    padding-bottom: calc(50px + env(safe-area-inset-bottom, 0px));
-    gap: 8px;
+    padding: 6px 10px calc(12px + env(safe-area-inset-bottom, 0px));
   }
 }
