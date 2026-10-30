@@ -14,6 +14,7 @@
   overflow: hidden;
   background-color: #121210;
   box-sizing: border-box;
+  touch-action: pan-y;
 }
 
 /* ============================================
@@ -27,6 +28,7 @@
   height: 100%;
   z-index: 0;
   overflow: hidden;
+  touch-action: pan-y;
 }
 
 .slide {
@@ -245,9 +247,18 @@
 @media (max-width: 767px) {
   .hero {
     min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 100svh;
     padding-top: 76px;
     padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .slidePicture {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .slide.active .slidePicture {
+    transform: none !important;
   }
 
   .image {
