@@ -17,10 +17,9 @@ export const CLINIC_CONFIG = {
     instagram: 'https://www.instagram.com/origenmedfuncional/',
   },
   maps: {
-    googleMapsUrl:
-      'https://www.google.com/maps/search/?api=1&query=Farmacia+Monserrat+Guayabo+Guanacaste',
+    googleMapsUrl: 'https://maps.app.goo.gl/oYh6vqAxQ7SCYPAZA',
     wazeUrl: 'https://waze.com/ul?q=Farmacia%20Monserrat%20Guayabo',
     embedUrl:
-      'https://maps.google.com/maps?q=Farmacia+Monserrat,+Guayabo,+Guanacaste,+Costa+Rica&t=&z=16&ie=UTF8&iwloc=&output=embed',
+      'https://maps.google.com/maps?q=Origen+Medicina+Funcional,+Guayabo,+Guanacaste,+Costa+Rica&t=&z=16&ie=UTF8&iwloc=&output=embed',
   },
 } as const;
