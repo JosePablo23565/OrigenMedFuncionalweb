@@ -17,12 +17,12 @@ const Team = () => {
           {/* Perfil 1: Doctor */}
           <div className={`${styles.card} reveal-scale`}>
             <div className={styles.photoCol}>
-              <div className={styles.doctorPlaceholder} aria-hidden="true">
-                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-              </div>
+              <img
+                src="/team/doctor.webp"
+                alt={t.team.card1Name}
+                className={styles.memberImg}
+                loading="lazy"
+              />
             </div>
 
             <div className={styles.infoCol}>
